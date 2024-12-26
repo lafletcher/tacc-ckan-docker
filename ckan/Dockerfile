@@ -9,6 +9,15 @@ RUN apt-get install -y python3-dev libxml2-dev libxslt1-dev libgeos-c1v5 \
 
 RUN chown -R ckan: /srv/app
 
+RUN groupmod -g 826671 ckan-sys && echo "Modified group ID for ckan-sys to 826671"
+
+RUN find /var/lib/ckan -gid 502 ! -type l -exec chgrp 826671 {} \;
+RUN find ${APP_DIR} -gid 502 ! -type l -exec chgrp 826671 {} \;
+RUN find /docker-entrypoint.d -gid 502 ! -type l -exec chgrp 826671 {} \;
+RUN find /usr/local -gid 502 ! -type l -exec chgrp 826671 {} \;
+RUN find ${CKAN_STORAGE_PATH} -gid 502 ! -type l -exec chgrp 826671 {} \;
+RUN find /srv/app -gid 502 ! -type l -exec chgrp 826671 {} \;
+
 USER ckan
 
 RUN pip install ckanext-geoview
