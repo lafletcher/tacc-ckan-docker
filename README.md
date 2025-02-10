@@ -7,6 +7,10 @@ To run CKAN in development mode, use the `docker-compose.dev.yml` file.
 Copy the included `.env.dev.example` and rename it to `.env`.
 
 ```bash
+cp .env.dev.example .env
+```
+
+```bash
 docker compose -f docker-compose.dev.yml up
 ```
 
