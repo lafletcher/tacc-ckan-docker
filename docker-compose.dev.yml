@@ -14,6 +14,8 @@ services:
       dockerfile: Dockerfile.dev
       args:
         - TZ=${TZ}
+    env_file:
+      - .env
     links:
       - db
       - solr
