@@ -64,3 +64,15 @@ Set the correct permissions for the ckan user:
 sudo chown -R 503:502 ckan_storage
 ```
 ````
+
+### Development mode
+
+To run CKAN in development mode, use the `docker-compose.dev.yml` file.
+
+Copy the included `.env.dev.example` and rename it to `.env`.
+
+```bash
+docker compose -f docker-compose.dev.yml up
+```
+
+To edit the theme, you can edit the files in the `src/ckanext-tacc_theme` directory.
