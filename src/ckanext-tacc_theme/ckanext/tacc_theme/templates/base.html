@@ -1,5 +1,10 @@
 {% ckan_extends %}
 
 {% block styles %}
+  {{ super() }}
   {% asset 'tacc_theme/styles' %}
 {% endblock %}
+
+{%- block title -%}
+  {{ g.site_title }}
+{%- endblock -%}

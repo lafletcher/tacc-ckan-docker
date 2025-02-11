@@ -13,7 +13,6 @@ ckanext/tacc_theme/templates/base.html
 ckanext/tacc_theme/templates/footer.html
 ckanext/tacc_theme/templates/header.html
 ckanext/tacc_theme/templates/home/layout1.html
-ckanext/tacc_theme/templates/home/layout2.html
 ckanext/tacc_theme/templates/home/snippets/promoted.html
 ckanext/tacc_theme/templates/home/snippets/stats.html
 ckanext/tacc_theme/templates/package/read.html
