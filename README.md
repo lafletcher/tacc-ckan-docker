@@ -13,13 +13,13 @@ cp .env.dev.example .env
 Build the images and run the containers:
 
 ```bash
-./bin/compose build
+docker compose -f docker-compose.dev.yml  build
 ```
 
 Run the CKAN development server:
 
 ```bash
-./bin/compose up -d
+docker compose -f docker-compose.dev.yml  up -d
 ```
 
 To edit the theme, you can edit the files in the `src/ckanext-tacc_theme` directory.
