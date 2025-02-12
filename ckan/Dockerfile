@@ -25,10 +25,12 @@ ADD ckan/requirements/ckanext-spatial.txt /tmp/
 RUN pip3 install -r /tmp/ckanext-spatial.txt
 RUN pip3 install -e "git+https://github.com/ckan/ckanext-spatial.git#egg=ckanext-spatial"
 RUN pip3 install -e 'git+https://github.com/mosoriob/ckanext-oauth2.git@0.8.1#egg=ckanext-oauth2'
-RUN pip3 install -e 'git+https://github.com/mosoriob/ckanext-tacc_theme.git@74ca927ddc5eba8c6d176e44e5d9fb08ec3e351c#egg=ckanext-tacc_theme'
-
+#RUN pip3 install -e 'git+https://github.com/mosoriob/ckanext-tacc_theme.git@74ca927ddc5eba8c6d176e44e5d9fb08ec3e351c#egg=ckanext-tacc_theme'
+#COPY src/ckanext-tacc_theme ${APP_DIR}/src/ckanext-tacc_theme
+#RUN chown -R ckan:ckan-sys /srv/app/.local
+#RUN cd ${APP_DIR}/src/ckanext-tacc_theme && python3 setup.py develop --user
 # Copy custom initialization scripts
-COPY ckan/docker-entrypoint.d/* /docker-entrypoint.d/
+#COPY ckan/docker-entrypoint.d/* /docker-entrypoint.d/
 
 # Apply any patches needed to CKAN core or any of the built extensions (not the
 # runtime mounted ones)
