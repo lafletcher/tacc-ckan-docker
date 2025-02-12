@@ -21,18 +21,18 @@ RUN find /srv/app -gid 502 ! -type l -exec chgrp 826671 {} \;
 USER ckan
 
 RUN pip install ckanext-geoview
-ADD requirements/ckanext-spatial.txt /tmp/
+ADD ckan/requirements/ckanext-spatial.txt /tmp/
 RUN pip3 install -r /tmp/ckanext-spatial.txt
 RUN pip3 install -e "git+https://github.com/ckan/ckanext-spatial.git#egg=ckanext-spatial"
 RUN pip3 install -e 'git+https://github.com/mosoriob/ckanext-oauth2.git@0.8.1#egg=ckanext-oauth2'
 RUN pip3 install -e 'git+https://github.com/mosoriob/ckanext-tacc_theme.git@74ca927ddc5eba8c6d176e44e5d9fb08ec3e351c#egg=ckanext-tacc_theme'
 
 # Copy custom initialization scripts
-COPY docker-entrypoint.d/* /docker-entrypoint.d/
+COPY ckan/docker-entrypoint.d/* /docker-entrypoint.d/
 
 # Apply any patches needed to CKAN core or any of the built extensions (not the
 # runtime mounted ones)
-COPY patches ${APP_DIR}/patches
+COPY ckan/patches ${APP_DIR}/patches
 
 RUN for d in $APP_DIR/patches/*; do \
     if [ -d $d ]; then \

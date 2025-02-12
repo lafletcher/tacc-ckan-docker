@@ -12,8 +12,7 @@ volumes:
 services:
   ckan:
     build:
-      context: ckan/
-      dockerfile: Dockerfile
+      dockerfile: ckan/Dockerfile
       args:
         - TZ=${TZ}
     networks:
