@@ -12,9 +12,11 @@ ckanext/tacc_theme/assets/webassets.yml
 ckanext/tacc_theme/templates/base.html
 ckanext/tacc_theme/templates/footer.html
 ckanext/tacc_theme/templates/header.html
+ckanext/tacc_theme/templates/group/snippets/helper.html
 ckanext/tacc_theme/templates/home/layout1.html
 ckanext/tacc_theme/templates/home/snippets/promoted.html
 ckanext/tacc_theme/templates/home/snippets/stats.html
+ckanext/tacc_theme/templates/organization/snippets/helper.html
 ckanext/tacc_theme/templates/package/read.html
 ckanext/tacc_theme/templates/package/search.html
 ckanext/tacc_theme/tests/__init__.py
