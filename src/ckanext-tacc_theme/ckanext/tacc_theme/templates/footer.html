@@ -9,13 +9,12 @@
               <li><a href="https://in-for-disaster-analytics.github.io/DSO">About DSO</a></li>
             {% endblock %}
           </ul>
-          <ul class="list-unstyled">
+          <!-- <ul class="list-unstyled">
             {% block footer_links_ckan %}
 
               <li></li>
-              <li><a href="http://www.opendefinition.org/okd/"><img src="{{ h.url_for_static('/base/images/od_80x15_blue.png') }}" alt="Open Data"></a></li>
             {% endblock %}
-          </ul>
+          </ul> -->
         {% endblock %}
       </div>
       <div class="col-md-4 attribution">
@@ -24,7 +23,9 @@
         {% endblock %}        
         {% block footer_attribution %}
           {% set api_url = 'http://docs.ckan.org/en/{0}/api/'.format(g.ckan_doc_version) %}
-          <p>{% trans %}Powered by <a href="http://www.ckan.org/">CKAN Association</a> [<a href="{{ api_url }}">API Documentation</a>]{% endtrans %}</p>              
+          <p>{% trans %}Powered by <a href="http://www.ckan.org/">CKAN Association</a> 
+            <!-- [<a href="{{ api_url }}">API Documentation</a>] -->
+            {% endtrans %}</p>              
         {% endblock %}
       </div>
     </div>
