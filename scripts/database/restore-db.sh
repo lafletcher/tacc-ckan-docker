@@ -30,6 +30,8 @@ fi
 source ./.env
 POSTGRES_USER=${POSTGRES_USER:-ckan}
 POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-ckan}
+CKAN_DB=${CKAN_DB:-ckan}
+DATASTORE_DB=${DATASTORE_DB:-datastore}
 
 echo "Starting database restore process..."
 
@@ -46,11 +48,11 @@ docker compose stop ckan datapusher
 echo "Restoring main CKAN database..."
 docker compose exec db bash -c "
   # Drop and recreate database
-  dropdb -U $POSTGRES_USER --if-exists ckan
-  createdb -U $POSTGRES_USER -O $POSTGRES_USER ckan -E utf-8
+  dropdb -U $POSTGRES_USER --if-exists $CKAN_DB
+  createdb -U $POSTGRES_USER -O $POSTGRES_USER $CKAN_DB -E utf-8
 
   # Restore from backup
-  pg_restore -U $POSTGRES_USER -d ckan -v '/tmp/$CKAN_FILENAME'
+  pg_restore -U $POSTGRES_USER -d $CKAN_DB -v '/tmp/$CKAN_FILENAME'
 "
 
 # Restore datastore if backup provided
@@ -62,11 +64,11 @@ if [ ! -z "$DATASTORE_BACKUP_FILE" ]; then
   echo "Restoring datastore database..."
   docker compose exec db bash -c "
     # Drop and recreate database
-    dropdb -U $POSTGRES_USER --if-exists datastore
-    createdb -U $POSTGRES_USER -O $POSTGRES_USER datastore -E utf-8
+    dropdb -U $POSTGRES_USER --if-exists $DATASTORE_DB
+    createdb -U $POSTGRES_USER -O $POSTGRES_USER $DATASTORE_DB -E utf-8
 
     # Restore from backup
-    pg_restore -U $POSTGRES_USER -d datastore -v '/tmp/$DATASTORE_FILENAME'
+    pg_restore -U $POSTGRES_USER -d $DATASTORE_DB -v '/tmp/$DATASTORE_FILENAME'
 
     # Clean up
     rm -f '/tmp/$DATASTORE_FILENAME'

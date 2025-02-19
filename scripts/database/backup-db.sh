@@ -20,6 +20,7 @@ source ./.env
 POSTGRES_USER=${POSTGRES_USER:-ckan}
 POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-ckan}
 CKAN_DB=${CKAN_DB:-ckan}
+DATASTORE_DB=${DATASTORE_DB:-datastore}
 
 # Perform database dump using docker compose exec
 echo "Backing up main CKAN database..."
@@ -33,7 +34,7 @@ docker compose cp "db:/tmp/${BACKUP_FILENAME}" "${OUTPUT_DIR}/${BACKUP_FILENAME}
 if grep -q "CKAN__PLUGINS.*datastore" .env; then
   DATASTORE_BACKUP_FILENAME="ckan_datastore_backup_${TIMESTAMP}.dump"
   echo "Backing up datastore database..."
-  docker compose exec db pg_dump -U ${POSTGRES_USER} -F c -b -v -f "/tmp/${DATASTORE_BACKUP_FILENAME}" datastore
+  docker compose exec db pg_dump -U ${POSTGRES_USER} -F c -b -v -f "/tmp/${DATASTORE_BACKUP_FILENAME}" ${DATASTORE_DB}
   docker compose cp "db:/tmp/${DATASTORE_BACKUP_FILENAME}" "${OUTPUT_DIR}/${DATASTORE_BACKUP_FILENAME}"
 fi
 
@@ -53,7 +54,7 @@ fi
 # Print restore instructions
 echo ""
 echo "To restore this backup, use:"
-echo "  docker compose exec db pg_restore -U ${POSTGRES_USER} -d ckan -c -v /path/to/${BACKUP_FILENAME}"
+echo "  docker compose exec db pg_restore -U ${POSTGRES_USER} -d ${CKAN_DB} -c -v /path/to/${BACKUP_FILENAME}"
 if grep -q "CKAN__PLUGINS.*datastore" .env; then
-  echo "  docker compose exec db pg_restore -U ${POSTGRES_USER} -d datastore -c -v /path/to/${DATASTORE_BACKUP_FILENAME}"
+  echo "  docker compose exec db pg_restore -U ${POSTGRES_USER} -d ${DATASTORE_DB} -c -v /path/to/${DATASTORE_BACKUP_FILENAME}"
 fi
