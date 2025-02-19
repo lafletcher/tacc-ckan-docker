@@ -19,10 +19,11 @@ echo "Using container name from docker-compose: ckan-docker-db-1"
 source ./.env
 POSTGRES_USER=${POSTGRES_USER:-ckan}
 POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-ckan}
+CKAN_DB=${CKAN_DB:-ckan}
 
 # Perform database dump using docker compose exec
 echo "Backing up main CKAN database..."
-docker compose exec db pg_dump -U ${POSTGRES_USER} -F c -b -v -f "/tmp/${BACKUP_FILENAME}" ckan
+docker compose exec db pg_dump -U ${POSTGRES_USER} -F c -b -v -f "/tmp/${BACKUP_FILENAME}" ${CKAN_DB}
 
 # Copy the dump file from the container to the host
 echo "Copying backup file from container to host..."
