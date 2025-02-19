@@ -44,12 +44,20 @@ if grep -q "CKAN__PLUGINS.*datastore" .env; then
   docker compose exec db rm -f "/tmp/${DATASTORE_BACKUP_FILENAME}"
 fi
 
+# Backup PostgreSQL roles/users
+echo "Backing up PostgreSQL roles/users..."
+ROLES_BACKUP_FILENAME="postgres_roles_${TIMESTAMP}.sql"
+
+# Export all roles with permissions
+docker compose exec db pg_dumpall -U ${POSTGRES_USER} --roles-only > "${OUTPUT_DIR}/${ROLES_BACKUP_FILENAME}"
+
 echo "Backup completed successfully!"
 echo "Backup files saved to: ${OUTPUT_DIR}"
 echo "  - ${OUTPUT_DIR}/${BACKUP_FILENAME}"
 if grep -q "CKAN__PLUGINS.*datastore" .env; then
   echo "  - ${OUTPUT_DIR}/${DATASTORE_BACKUP_FILENAME}"
 fi
+echo "  - ${OUTPUT_DIR}/${ROLES_BACKUP_FILENAME}"
 
 # Print restore instructions
 echo ""

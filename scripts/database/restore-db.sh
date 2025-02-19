@@ -1,18 +1,19 @@
 #!/bin/bash
 # Database restore script for CKAN Docker setup
-# Usage: ./restore-db.sh path/to/ckan_backup.dump [path/to/datastore_backup.dump]
+# Usage: ./restore-db.sh path/to/ckan_backup.dump [path/to/datastore_backup.dump] [path/to/roles_backup.sql]
 
 set -e
 
 # Check if backup file is provided
 if [ -z "$1" ]; then
   echo "Error: No backup file specified"
-  echo "Usage: ./restore-db.sh path/to/ckan_backup.dump [path/to/datastore_backup.dump]"
+  echo "Usage: ./restore-db.sh path/to/ckan_backup.dump [path/to/datastore_backup.dump] [path/to/roles_backup.sql]"
   exit 1
 fi
 
 CKAN_BACKUP_FILE="$1"
 DATASTORE_BACKUP_FILE="$2"
+ROLES_BACKUP_FILE="$3"
 
 # Validate backup file exists
 if [ ! -f "$CKAN_BACKUP_FILE" ]; then
@@ -23,6 +24,12 @@ fi
 # If datastore backup file is provided, validate it exists
 if [ ! -z "$DATASTORE_BACKUP_FILE" ] && [ ! -f "$DATASTORE_BACKUP_FILE" ]; then
   echo "Error: Datastore backup file does not exist: $DATASTORE_BACKUP_FILE"
+  exit 1
+fi
+
+# If roles backup file is provided, validate it exists
+if [ ! -z "$ROLES_BACKUP_FILE" ] && [ ! -f "$ROLES_BACKUP_FILE" ]; then
+  echo "Error: PostgreSQL roles backup file does not exist: $ROLES_BACKUP_FILE"
   exit 1
 fi
 
@@ -43,6 +50,16 @@ docker compose cp "$CKAN_BACKUP_FILE" "db:/tmp/$CKAN_FILENAME"
 # Stop CKAN services to prevent active connections during restore
 echo "Stopping CKAN services..."
 docker compose stop ckan datapusher
+
+# Restore PostgreSQL roles if backup file is provided
+if [ ! -z "$ROLES_BACKUP_FILE" ] && [ -f "$ROLES_BACKUP_FILE" ]; then
+  echo "Restoring PostgreSQL roles from $ROLES_BACKUP_FILE..."
+  cat "$ROLES_BACKUP_FILE" | docker compose exec -T db psql -U $POSTGRES_USER postgres
+  echo "PostgreSQL roles restored."
+else
+  echo "Warning: No roles backup file provided or file not found."
+  echo "Database users/roles will not be restored (using default Docker-created users)."
+fi
 
 # Restore the main CKAN database
 echo "Restoring main CKAN database..."
