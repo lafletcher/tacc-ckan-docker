@@ -36,6 +36,8 @@ jobs:
 
           while [ $attempt -le $max_attempts ]; do
             echo "Attempt $attempt of $max_attempts"
+            # Show json
+            docker compose -f docker-compose.dev.yml ps --format json
 
             # Check if all required containers are running and healthy
             if docker compose -f docker-compose.dev.yml ps --format json | jq -r '.[] | select(.Service == "ckan" or .Service == "db") | .Health' | grep -v "healthy" | wc -l | grep -q "^0$"; then
