@@ -1,0 +1,112 @@
+name: CKAN Docker Containers Health Check
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+  workflow_dispatch:
+
+jobs:
+  test-containers:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Create .env file
+        run: cp .env.dev.example .env
+
+      - name: Build Docker images
+        run: docker compose -f docker-compose.dev.yml build
+
+      - name: Start Docker containers
+        run: docker compose -f docker-compose.dev.yml up -d
+
+      - name: Wait for containers to be ready
+        run: |
+          echo "Waiting for containers to become healthy..."
+          attempt=1
+          max_attempts=10
+
+          while [ $attempt -le $max_attempts ]; do
+            echo "Attempt $attempt of $max_attempts"
+
+            # Check if all required containers are running and healthy
+            if docker compose -f docker-compose.dev.yml ps --format json | jq -r '.[] | select(.Service == "ckan" or .Service == "db") | .Health' | grep -v "healthy" | wc -l | grep -q "^0$"; then
+              echo "All containers are healthy!"
+              break
+            fi
+
+            if [ $attempt -eq $max_attempts ]; then
+              echo "Containers failed to become healthy within the allocated time"
+              docker compose -f docker-compose.dev.yml ps
+              docker compose -f docker-compose.dev.yml logs
+              exit 1
+            fi
+
+            echo "Waiting 30 seconds before next check..."
+            sleep 30
+            ((attempt++))
+          done
+
+      # - name: Check CKAN web access
+      #   run: |
+      #     echo "Checking CKAN web access..."
+      #     attempt=1
+      #     max_attempts=5
+
+      #     while [ $attempt -le $max_attempts ]; do
+      #       echo "Attempt $attempt of $max_attempts"
+
+      #       # Check if CKAN web interface is accessible
+      #       if curl -k -s -o /dev/null -w "%{http_code}" https://localhost:8443 | grep -q "200\|302"; then
+      #         echo "CKAN web interface is accessible!"
+      #         break
+      #       fi
+
+      #       if [ $attempt -eq $max_attempts ]; then
+      #         echo "CKAN web interface failed to respond within the allocated time"
+      #         curl -k -v https://localhost:8443
+      #         docker compose logs ckan
+      #         exit 1
+      #       fi
+
+      #       echo "Waiting 10 seconds before next check..."
+      #       sleep 10
+      #       ((attempt++))
+      #     done
+
+      # - name: Check service API endpoints
+      #   run: |
+      #     echo "Checking CKAN API..."
+      #     # Test CKAN API endpoint
+      #     response_code=$(curl -k -s -o /dev/null -w "%{http_code}" https://localhost:8443/api/3/action/status_show)
+      #     if [[ "$response_code" == "200" ]]; then
+      #       echo "CKAN API is accessible (Status code: $response_code)"
+      #     else
+      #       echo "CKAN API check failed with status code: $response_code"
+      #       curl -k -v https://localhost:8443/api/3/action/status_show
+      #       exit 1
+      #     fi
+
+      - name: Output container status and logs on failure
+        if: failure()
+        run: |
+          echo "==== Container Status ===="
+          docker compose ps
+
+          echo "==== Container Logs ===="
+          for service in ckan db solr redis datapusher; do
+            echo "==== $service logs ===="
+            docker compose logs $service
+          done
+
+      - name: Stop containers
+        if: always()
+        run: docker compose down -v
