@@ -30,6 +30,7 @@ jobs:
 
       - name: Wait for containers to be ready
         run: |
+          set -e
           echo "Waiting for containers to become healthy..."
           attempt=1
           max_attempts=10
@@ -40,8 +41,8 @@ jobs:
             docker compose -f docker-compose.dev.yml ps --format json
 
             # Check if all required containers are running and healthy
-            if docker compose -f docker-compose.dev.yml ps --format json | jq -r '.[] | select(.Service == "ckan" or .Service == "db") | .Health' | grep -v "healthy" | wc -l | grep -q "^0$"; then
-              echo "All containers are healthy!"
+            if docker compose -f docker-compose.dev.yml ps ckan-dev --format json | jq -r '.Health' | grep -v "healthy" | wc -l | grep -q "^0$"; then
+              echo "CKAN container is healthy!"
               break
             fi
 
