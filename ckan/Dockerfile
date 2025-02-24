@@ -25,6 +25,8 @@ ADD ckan/requirements/ckanext-spatial.txt /tmp/
 RUN pip3 install -r /tmp/ckanext-spatial.txt
 RUN pip3 install -e "git+https://github.com/ckan/ckanext-spatial.git#egg=ckanext-spatial"
 RUN pip3 install -e 'git+https://github.com/mosoriob/ckanext-oauth2.git@0.8.1#egg=ckanext-oauth2'
+RUN pip3 install -e "git+https://github.com/ckan/ckanext-showcase.git#egg=ckanext-showcase"
+RUN pip3 install -e "git+https://github.com/ckan/ckanext-pages.git#egg=ckanext-pages"
 
 COPY --chown=ckan:ckan-sys src/ckanext-tacc_theme ${APP_DIR}/src/ckanext-tacc_theme
 RUN cd ${APP_DIR}/src/ckanext-tacc_theme && python3 setup.py develop --user
