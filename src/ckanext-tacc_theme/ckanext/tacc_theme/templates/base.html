@@ -1,6 +1,8 @@
 {% ckan_extends %}
 
-{% block styles %}
+{% block styles %}  
+  {{ super() }}
   {% asset 'tacc_theme/styles' %}
+  <link rel="stylesheet" href="/dso_theme.css" />
 {% endblock %}
 
