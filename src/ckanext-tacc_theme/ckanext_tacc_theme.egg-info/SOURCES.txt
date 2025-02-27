@@ -9,9 +9,11 @@ ckanext/tacc_theme/__init__.py
 ckanext/tacc_theme/plugin.py
 ckanext/tacc_theme/assets/tacc_theme.css
 ckanext/tacc_theme/assets/webassets.yml
+ckanext/tacc_theme/public/dso_theme.css
 ckanext/tacc_theme/templates/base.html
 ckanext/tacc_theme/templates/footer.html
 ckanext/tacc_theme/templates/header.html
+ckanext/tacc_theme/templates/group/snippets/group_item.html
 ckanext/tacc_theme/templates/group/snippets/helper.html
 ckanext/tacc_theme/templates/home/layout1.html
 ckanext/tacc_theme/templates/home/snippets/promoted.html
