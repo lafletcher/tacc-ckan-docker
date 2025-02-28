@@ -9,7 +9,7 @@ fi
 USERNAME=$1
 PASSWORD=$2
 CLIENT_NAME=$3
-DEV_FLAG=$4
+CALLBACK_URL=$4
 
 # Get JWT token
 echo "Getting JWT token..."
@@ -20,13 +20,6 @@ JWT=$(curl -s -H "Content-type: application/json" \
 if [ -z "$JWT" ] || [ "$JWT" = "null" ]; then
     echo "Failed to get JWT token. Please check your credentials."
     exit 1
-fi
-
-# Set callback URL based on dev flag
-if [ "$DEV_FLAG" = "true" ]; then
-    CALLBACK_URL="http://ckan.tacc.cloud/oauth2/callback"
-else
-    CALLBACK_URL="ckan.tacc.utexas.edu/oauth2/callback"
 fi
 
 # Create client
