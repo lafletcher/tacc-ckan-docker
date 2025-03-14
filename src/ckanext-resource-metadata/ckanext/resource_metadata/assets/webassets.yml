@@ -1,0 +1,14 @@
+# resource_metadata-js:
+#   filter: rjsmin
+#   output: ckanext-resource_metadata/%(version)s-resource_metadata.js
+#   contents:
+#     - js/resource_metadata.js
+#   extra:
+#     preload:
+#       - base/main
+
+# resource_metadata-css:
+#   filter: cssrewrite
+#   output: ckanext-resource_metadata/%(version)s-resource_metadata.css
+#   contents:
+#     - css/resource_metadata.css
