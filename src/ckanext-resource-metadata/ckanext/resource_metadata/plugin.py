@@ -52,15 +52,9 @@ class ResourceMetadataPlugin(plugins.SingletonPlugin):
         # You can make this configurable via a CKAN config option
         default_fields = [
             {'name': 'format_version', 'label': 'Format Version'},
-            {'name': 'created_by', 'label': 'Created By'},
-            {'name': 'last_modified_by', 'label': 'Last Modified By'},
             {'name': 'temporal_coverage_start', 'label': 'Temporal Coverage Start'},
             {'name': 'temporal_coverage_end', 'label': 'Temporal Coverage End'},
-            {'name': 'update_frequency', 'label': 'Update Frequency'},
-            {'name': 'source_url', 'label': 'Source URL'},
-            {'name': 'methodology', 'label': 'Methodology'},
-            {'name': 'data_quality', 'label': 'Data Quality'},
-            {'name': 'schema', 'label': 'Schema Description'}
+            {'name': 'mint_standard_variables', 'label': 'Mint Standard Variables'}
         ]
 
         # Get custom fields from configuration if they exist
