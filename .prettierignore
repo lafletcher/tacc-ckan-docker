@@ -1,2 +1,3 @@
 ckan/templates/**/*.html
 ckan/ckanext/**/*.html
+src/ckanext-tacc_theme/ckanext/tacc_theme/templates/package/snippets/resource_form.html

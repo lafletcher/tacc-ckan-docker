@@ -1,52 +1,66 @@
-{#
-ckanext-resource-metadata/ckanext/resource_metadata/templates/package/snippets/resource_form.html
-#} {% ckan_extends %} {% block basic_fields_url %} {{ super() }}
-<div class="control-group">
-  <label class="control-label" for="field-resource-metadata"
-    >{{ _('Resource Metadata') }}</label
-  >
-  <div class="controls">
-    <button
-      type="button"
-      class="btn btn-default"
-      data-toggle="collapse"
-      data-target="#resource-metadata-fields"
-    >
-      <i class="fa fa-caret-down"></i> {{ _('Edit Metadata Fields') }}
-    </button>
+{% ckan_extends %}
 
-    <div id="resource-metadata-fields" class="collapse">
-      {% set metadata_fields = h.resource_metadata_fields() %} {% set
-      existing_metadata = h.resource_metadata_parse_json(data.get('metadata',
-      '{}')) %} {% for field in metadata_fields %} {% set field_name =
-      field.name %} {% set field_label = field.label %} {% set field_value =
-      existing_metadata.get(field_name, '') %}
+{% block basic_fields_url %}
+  {{ super() }}
+  <div class="control-group">
+    <label class="control-label" for="field-resource-metadata">{{ _('Resource Metadata') }}</label>
+    <div class="controls">
+      <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#resource-metadata-fields">
+        <i class="fa fa-caret-down"></i> {{ _('Edit Metadata Fields') }}
+      </button>
 
-      <div class="control-group">
-        <label
-          class="control-label"
-          for="field-resource-metadata-{{ field_name }}"
-          >{{ field_label }}</label
-        >
-        <div class="controls">
-          <input
-            type="text"
-            id="field-resource-metadata-{{ field_name }}"
-            name="metadata_{{ field_name }}"
-            value="{{ field_value }}"
-            class="form-control"
-          />
-        </div>
+      <div id="resource-metadata-fields" class="collapse">
+        {% set metadata_fields = h.resource_metadata_fields() %}
+        {% set existing_metadata = h.resource_metadata_parse_json(data.get('metadata', '{}')) %}
+
+        {% for field in metadata_fields %}
+          {% set field_name = field.name %}
+          {% set field_label = field.label %}
+          {% set field_value = existing_metadata.get(field_name, '') %}
+
+          <div class="control-group">
+            <label class="control-label" for="field-resource-metadata-{{ field_name }}">{{ field_label }}</label>
+            <div class="controls">
+              <input type="text" id="field-resource-metadata-{{ field_name }}" name="metadata_{{ field_name }}" value="{{ field_value }}" class="form-control">
+            </div>
+          </div>
+        {% endfor %}
+
+        <input type="hidden" id="field-resource-metadata" name="metadata" value="{{ data.get('metadata', '{}') }}">
       </div>
-      {% endfor %}
-
-      <input
-        type="hidden"
-        id="field-resource-metadata"
-        name="metadata"
-        value="{{ data.get('metadata', '{}') }}"
-      />
     </div>
   </div>
-</div>
+{% endblock %}
+
+{% block scripts %}
+  {{ super() }}
+  <script>
+    // When the form is submitted, collect all the metadata fields and set the hidden input
+    $(document).ready(function() {
+      $('form').submit(function() {
+        var metadata = {};
+        {% for field in h.resource_metadata_fields() %}
+          var value = $('#field-resource-metadata-{{ field.name }}').val();
+          if (value) {
+            metadata['{{ field.name }}'] = value;
+          }
+        {% endfor %}
+        $('#field-resource-metadata').val(JSON.stringify(metadata));
+      });
+
+      // When the form loads, populate the individual fields from the hidden metadata input
+      var metadata = {{ data.get('metadata', '{}') | safe }};
+      if (typeof metadata === 'string') {
+        try {
+          metadata = JSON.parse(metadata);
+        } catch (e) {
+          metadata = {};
+        }
+      }
+
+      $.each(metadata, function(key, value) {
+        $('#field-resource-metadata-' + key).val(value);
+      });
+    });
+  </script>
 {% endblock %}
