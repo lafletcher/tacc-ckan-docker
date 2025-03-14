@@ -11,7 +11,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
     long_description = f.read()
 
 setup(
-    name='''ckanext-resource-metadata''',
+    name='''ckanext-resource_metadata''',
 
     # Versions should comply with PEP440.  For a discussion on single-sourcing
     # the version across setup.py and the project code, see
@@ -23,7 +23,7 @@ setup(
     long_description_content_type="text/markdown",
 
     # The project's main homepage.
-    url='https://github.com/mosoriob/ckanext-resource-metadata',
+    url='https://github.com/mosoriob/ckanext-resource_metadata',
 
     # Author details
     author='''Maximiliano Osorio''',
