@@ -1,3 +1,5 @@
 ckan/templates/**/*.html
 ckan/ckanext/**/*.html
-src/ckanext-tacc_theme/ckanext/tacc_theme/templates/package/snippets/resource_form.html
+ckan/ckanext-tacc_theme/ckanext/tacc_theme/templates/**/*.html
+ckan/ckanext-resource-metadata/ckanext/resource_metadata/templates/package/snippets/resource_form.html
+src/ckanext-resource-metadata/ckanext/resource_metadata/templates/package/snippets/resource_form.html
