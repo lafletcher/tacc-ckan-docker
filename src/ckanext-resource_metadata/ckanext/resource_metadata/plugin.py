@@ -1,4 +1,4 @@
-# ckanext-resource_metadata/ckanext/resource_metadata/plugin.py
+# ckanext-resource-metadata/ckanext/resource_metadata/plugin.py
 
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
