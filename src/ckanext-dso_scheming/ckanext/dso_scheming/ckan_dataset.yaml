@@ -111,7 +111,7 @@ resource_fields:
 
   - field_name: MINT Standard Variables
     label: MINT Standard Variables
-    repeting_label: MINT Standard Variable
-    repeting_fields:
+    repeating_label: MINT Standard Variable
+    repeating_fields:
       - field_name: MINT Standard Variable
         label: MINT Standard Variable
