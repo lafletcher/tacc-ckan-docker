@@ -79,7 +79,7 @@ dataset_fields:
   - field_name: mint_standard_variables
     label: MINT Standard Variables
     help_allow_html: true
-    help_text: Add a MINT Standard Variable <a href="https://api.models.mint.tacc.utexas.edu/v1.8.0/standardvariables?username=mint@isi.edu" target="_blank">List of Standard Variables</a>
+    help_text: List of MINT Standard Variables https://api.models.mint.tacc.utexas.edu/v1.8.0/standardvariables?username=mint@isi.edu
     preset: multiple_text
 
 resource_fields:
@@ -111,5 +111,5 @@ resource_fields:
   - field_name: mint_standard_variables
     label: MINT Standard Variables
     help_allow_html: true
-    help_text: Add a MINT Standard Variable <a href="https://api.models.mint.tacc.utexas.edu/v1.8.0/standardvariables?username=mint@isi.edu" target="_blank">List of Standard Variables</a>
+    help_text: List of MINT Standard Variables https://api.models.mint.tacc.utexas.edu/v1.8.0/standardvariables?username=mint@isi.edu
     preset: multiple_text
