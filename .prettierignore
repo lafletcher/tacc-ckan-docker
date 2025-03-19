@@ -1,2 +1,4 @@
 ckan/templates/**/*.html
 ckan/ckanext/**/*.html
+src/ckanext-tacc_theme/ckanext/tacc_theme/templates/**/*.html
+src/ckanext-dso_scheming/ckanext/dso_scheming/templates/**/*.html
