@@ -30,6 +30,9 @@ RUN pip3 install -e "git+https://github.com/ckan/ckanext-pages.git#egg=ckanext-p
 
 COPY --chown=ckan:ckan-sys src/ckanext-tacc_theme ${APP_DIR}/src/ckanext-tacc_theme
 RUN cd ${APP_DIR}/src/ckanext-tacc_theme && python3 setup.py develop --user
+
+COPY --chown=ckan:ckan-sys src/ckanext-dso_scheming ${APP_DIR}/src/ckanext-dso_scheming
+RUN cd ${APP_DIR}/src/ckanext-dso_scheming && python3 setup.py develop --user
 # Copy custom initialization scripts
 #COPY ckan/docker-entrypoint.d/* /docker-entrypoint.d/
 
