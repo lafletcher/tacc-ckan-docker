@@ -1,0 +1,14 @@
+# dso_scheming-js:
+#   filter: rjsmin
+#   output: ckanext-dso_scheming/%(version)s-dso_scheming.js
+#   contents:
+#     - js/dso_scheming.js
+#   extra:
+#     preload:
+#       - base/main
+
+# dso_scheming-css:
+#   filter: cssrewrite
+#   output: ckanext-dso_scheming/%(version)s-dso_scheming.css
+#   contents:
+#     - css/dso_scheming.css
