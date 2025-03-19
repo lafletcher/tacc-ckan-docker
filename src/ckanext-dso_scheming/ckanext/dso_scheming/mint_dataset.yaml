@@ -1,6 +1,6 @@
 scheming_version: 2
-dataset_type: dataset
-about: A reimplementation of the default CKAN dataset schema
+dataset_type: mint_dataset
+about: A dataset schema for MINT
 about_url: http://github.com/ckan/ckanext-scheming
 
 dataset_fields:
