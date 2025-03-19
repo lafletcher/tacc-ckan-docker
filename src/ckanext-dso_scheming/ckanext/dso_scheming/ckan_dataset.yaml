@@ -78,12 +78,11 @@ dataset_fields:
 
   - field_name: MINT Standard Variables
     label: MINT Standard Variables
-    repeating_label: MINT Standard Variable
     help_allow_html: true
     help_text: Add a MINT Standard Variable <a href="https://api.models.mint.tacc.utexas.edu/v1.8.0/standardvariables?username=mint@isi.edu" target="_blank">List of Standard Variables</a>
     repeating_subfields:
-      - field_name: MINT Standard Variable
-        label: MINT Standard Variable
+      - field_name: Standard Variable Label
+        label: Standard Variable Label
         form_placeholder: air__daily_max_of_temperature
 
 resource_fields:
