@@ -1,8 +1,9 @@
 {% ckan_extends %}
 
-{% block styles %}  
+{% block styles %}
   {{ super() }}
   {% asset 'tacc_theme/styles' %}
+  {% include 'scheming/snippets/scheming_asset.html' %}
   <link rel="stylesheet" href="/dso_theme.css" />
 {% endblock %}
 
