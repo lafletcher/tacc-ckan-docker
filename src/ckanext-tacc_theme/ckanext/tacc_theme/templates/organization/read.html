@@ -6,7 +6,7 @@
 {% block page_primary_action %}
   {% if h.check_access('package_create', {'owner_org': group_dict.id}) %}
     {% for schema_type in schemas %}
-        {% set schema = h.scheming_get_action('dataset', schema_type) %}
+        {% set schema = h.scheming_get_schema_show('dataset', schema_type) %}
         {% snippet 'snippets/add_dataset.html', group=group_dict.id, dataset_type_name=schema.name %}
     {% endfor %}
   {% endif %}
