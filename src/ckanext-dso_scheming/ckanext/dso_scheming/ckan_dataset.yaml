@@ -85,3 +85,11 @@ resource_fields:
   - field_name: format
     label: Format
     preset: resource_format_autocomplete
+
+  - field_name: Temporal Coverage Start
+    label: Temporal Coverage Start
+    preset: date
+
+  - field_name: Temporal Coverage End
+    label: Temporal Coverage End
+    preset: date
