@@ -68,22 +68,19 @@ dataset_fields:
     display_snippet: email.html
     display_email_name_field: maintainer
 
-  - field_name: Temporal Coverage Start
+  - field_name: temporal_coverage_start
     label: Temporal Coverage Start
     preset: date
 
-  - field_name: Temporal Coverage End
+  - field_name: temporal_coverage_end
     label: Temporal Coverage End
     preset: date
 
-  - field_name: MINT Standard Variables
+  - field_name: mint_standard_variables
     label: MINT Standard Variables
     help_allow_html: true
-    help_text: Add a MINT Standard Variable <a href="https://api.models.mint.tacc.utexas.edu/v1.8.0/standardvariables?username=mint@isi.edu" target="_blank">List of Standard Variables</a>
-    repeating_subfields:
-      - field_name: Standard Variable Label
-        label: Standard Variable Label
-        form_placeholder: air__daily_max_of_temperature
+    help_text: List of MINT Standard Variables https://api.models.mint.tacc.utexas.edu/v1.8.0/standardvariables?username=mint@isi.edu
+    preset: multiple_text
 
 resource_fields:
   - field_name: url
@@ -103,19 +100,16 @@ resource_fields:
     label: Format
     preset: resource_format_autocomplete
 
-  - field_name: Temporal Coverage Start
+  - field_name: temporal_coverage_start
     label: Temporal Coverage Start
     preset: date
 
-  - field_name: Temporal Coverage End
+  - field_name: temporal_coverage_end
     label: Temporal Coverage End
     preset: date
 
-  - field_name: MINT Standard Variables
+  - field_name: mint_standard_variables
     label: MINT Standard Variables
     help_allow_html: true
-    help_text: Add a MINT Standard Variable <a href="https://api.models.mint.tacc.utexas.edu/v1.8.0/standardvariables?username=mint@isi.edu" target="_blank">List of Standard Variables</a>
-    repeating_subfields:
-      - field_name: Standard Variable Label
-        label: Standard Variable Label
-        form_placeholder: air__daily_max_of_temperature
+    help_text: List of MINT Standard Variables https://api.models.mint.tacc.utexas.edu/v1.8.0/standardvariables?username=mint@isi.edu
+    preset: multiple_text
