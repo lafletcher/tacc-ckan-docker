@@ -1,10 +1,14 @@
 {% extends "organization/read_base.html" %}
 
 
+{% set schemas = h.scheming_dataset_schema_list() %}
 
 {% block page_primary_action %}
   {% if h.check_access('package_create', {'owner_org': group_dict.id}) %}
-    {% snippet 'snippets/add_dataset.html', group=group_dict.id, dataset_type_name='camel-photos' %}
+    {% for schema_type in schemas %}
+        {% set schema = h.scheming_get_schema('dataset', schema_type) %}
+        {% snippet 'snippets/add_dataset.html', group=group_dict.id, dataset_type_name=schema.name %}
+    {% endfor %}
   {% endif %}
 {% endblock %}
 
@@ -38,7 +42,6 @@
 
 {% block organization_facets %}
   <div class="filters">
-    <h1>group_dict.id: {{ group_dict.id }}</h1>
     <div>
       {% for facet in facet_titles %}
         {{ h.snippet('snippets/facet_list.html', title=facet_titles[facet], name=facet, extras={'id':group_dict.id}) }}
