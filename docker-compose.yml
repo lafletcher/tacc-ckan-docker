@@ -11,6 +11,9 @@ volumes:
 
 services:
   ckan:
+    logging:
+      options:
+        max-size: 100m
     build:
       dockerfile: ckan/Dockerfile
       args:
@@ -50,6 +53,9 @@ services:
       retries: 3
 
   datapusher:
+    logging:
+      options:
+        max-size: 100m
     networks:
       - ckannet
       - dbnet
@@ -62,6 +68,9 @@ services:
       retries: 3
 
   db:
+    logging:
+      options:
+        max-size: 100m
     build:
       context: postgresql/
     networks:
@@ -84,6 +93,9 @@ services:
         ['CMD', 'pg_isready', '-U', '${POSTGRES_USER}', '-d', '${POSTGRES_DB}']
 
   solr:
+    logging:
+      options:
+        max-size: 100m
     networks:
       - solrnet
     image: ckan/ckan-solr:2.9-solr9-spatial
@@ -96,6 +108,9 @@ services:
       test: ['CMD', 'wget', '-qO', '/dev/null', 'http://localhost:8983/solr/']
 
   redis:
+    logging:
+      options:
+        max-size: 100m
     image: redis:${REDIS_VERSION}
     networks:
       - redisnet
