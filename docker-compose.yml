@@ -24,8 +24,8 @@ services:
       - solrnet
       - redisnet
     env_file:
-      - .env.config
-      - .env.secrets
+      - .env.prod.config
+      - .env.prod.secrets
     depends_on:
       db:
         condition: service_healthy
@@ -68,8 +68,8 @@ services:
       timeout: 10s
       retries: 3
     env_file:
-      - .env.config
-      - .env.secrets
+      - .env.prod.config
+      - .env.prod.secrets
 
   db:
     logging:
@@ -80,8 +80,8 @@ services:
     networks:
       - dbnet
     env_file:
-      - .env.config
-      - .env.secrets
+      - .env.prod.config
+      - .env.prod.secrets
     volumes:
       - pg_data:/var/lib/postgresql/data
     restart: unless-stopped
