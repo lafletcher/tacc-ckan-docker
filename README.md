@@ -1,14 +1,40 @@
 # Docker Compose setup for CKAN
 
-## Development mode
+## Configuration Management
 
-To run CKAN in development mode, use the `docker-compose.dev.yml` file.
+The project uses separate files for configuration and secrets to ensure better security and version control:
 
-Copy the included `.env.dev.example` and rename it to `.env`.
+### Development Environment
+
+- `.env.dev.config`: Development configuration values (committed to git)
+- `.env.dev.secrets`: Development secrets and sensitive data (not committed)
+
+### Production Environment
+
+- `.env.config`: Production configuration values (committed to git)
+- `.env.secrets`: Production secrets and sensitive data (not committed)
+
+> [!IMPORTANT]
+> Never commit secrets files to git. They are automatically ignored via `.gitignore`.
+> All files ending in `.secrets` are automatically ignored.
+
+### Running the Application
+
+For development:
 
 ```bash
-cp .env.dev.example .env
+docker compose -f docker-compose.dev.yml build
+docker compose -f docker-compose.dev.yml up -d
 ```
+
+For production:
+
+```bash
+docker compose build
+docker compose up -d
+```
+
+## Development mode
 
 Build the images and run the containers:
 
@@ -33,7 +59,7 @@ Use this if you are a maintainer and will not be making code changes to CKAN or 
 Copy the included `.env.example` and rename it to `.env`. Modify it depending on your own needs.
 
 > [!WARNING]
-> There is a sysadmin user created by default with the values defined in `CKAN_SYSADMIN_NAME` and `CKAN_SYSADMIN_PASSWORD` (`ckan_admin` and `test1234` by default). These must be changed before running this setup as a public CKAN instance.
+> There is a sysadmin user created by default with the values defined in `CKAN_SYSADMIN_NAME` and `CKAN_SYSADMIN_PASSWORD` in your `.env.secrets` file. These must be changed before running this setup as a public CKAN instance.
 
 To build the images:
 
@@ -76,7 +102,7 @@ The CKAN data is stored in the `ckan_storage` volume. The `ckan` user needs to h
 
 The ckan user is created with the `ckan` group.
 
-````bash
+```bash
 docker-compose exec  ckan bash
 ckan@dbdd4ea66995:~$ id
 uid=503(ckan) gid=502(ckan-sys) groups=502(ckan-sys)
@@ -87,4 +113,3 @@ Set the correct permissions for the ckan user:
 ```bash
 sudo chown -R 503:502 ckan_storage
 ```
-````
