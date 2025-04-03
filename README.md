@@ -14,9 +14,24 @@ The project uses separate files for configuration and secrets to ensure better s
 - `.env.config`: Production configuration values (committed to git)
 - `.env.secrets`: Production secrets and sensitive data (not committed)
 
+### Setup Instructions
+
+1. For Development:
+
+```bash
+# Copy the development secrets template and edit with your values
+cp .env.secrets.example .env.dev.secrets
+```
+
+2. For Production:
+
+```bash
+# Copy the production secrets template and edit with your values
+cp .env.secrets.example .env.secrets
+```
+
 > [!IMPORTANT]
 > Never commit secrets files to git. They are automatically ignored via `.gitignore`.
-> All files ending in `.secrets` are automatically ignored.
 
 ### Running the Application
 
@@ -35,6 +50,8 @@ docker compose up -d
 ```
 
 ## Development mode
+
+To run CKAN in development mode, use the `docker-compose.dev.yml` file.
 
 Build the images and run the containers:
 
