@@ -15,7 +15,8 @@ services:
       args:
         - TZ=${TZ}
     env_file:
-      - .env
+      - .env.dev.config
+      - .env.dev.secrets
     links:
       - db
       - solr
@@ -38,6 +39,9 @@ services:
 
   datapusher:
     image: ckan/ckan-base-datapusher:${DATAPUSHER_VERSION}
+    env_file:
+      - .env.dev.config
+      - .env.dev.secrets
     restart: unless-stopped
     healthcheck:
       test: ['CMD', 'wget', '-qO', '/dev/null', 'http://localhost:8800']
@@ -48,16 +52,9 @@ services:
   db:
     build:
       context: postgresql/
-    environment:
-      - POSTGRES_USER
-      - POSTGRES_PASSWORD
-      - POSTGRES_DB
-      - CKAN_DB_USER
-      - CKAN_DB_PASSWORD
-      - CKAN_DB
-      - DATASTORE_READONLY_USER
-      - DATASTORE_READONLY_PASSWORD
-      - DATASTORE_DB
+    env_file:
+      - .env.dev.config
+      - .env.dev.secrets
     volumes:
       - pg_data:/var/lib/postgresql/data
     restart: unless-stopped
