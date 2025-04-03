@@ -63,7 +63,7 @@ services:
     image: ckan/ckan-base-datapusher:0.0.20
     restart: unless-stopped
     healthcheck:
-      test: ['CMD', 'wget', '-qO', '/dev/null', 'http://localhost:8800']
+      test: ['CMD', 'wget', '-qO', '-4', '/dev/null', 'http://localhost:8800']
       interval: 60s
       timeout: 10s
       retries: 3
