@@ -24,7 +24,8 @@ services:
       - solrnet
       - redisnet
     env_file:
-      - .env
+      - .env.config
+      - .env.secrets
     depends_on:
       db:
         condition: service_healthy
@@ -59,13 +60,16 @@ services:
     networks:
       - ckannet
       - dbnet
-    image: ckan/ckan-base-datapusher:${DATAPUSHER_VERSION}
+    image: ckan/ckan-base-datapusher:0.0.20
     restart: unless-stopped
     healthcheck:
       test: ['CMD', 'wget', '-qO', '/dev/null', 'http://localhost:8800']
       interval: 60s
       timeout: 10s
       retries: 3
+    env_file:
+      - .env.config
+      - .env.secrets
 
   db:
     logging:
@@ -75,16 +79,9 @@ services:
       context: postgresql/
     networks:
       - dbnet
-    environment:
-      - POSTGRES_USER
-      - POSTGRES_PASSWORD
-      - POSTGRES_DB
-      - CKAN_DB_USER
-      - CKAN_DB_PASSWORD
-      - CKAN_DB
-      - DATASTORE_READONLY_USER
-      - DATASTORE_READONLY_PASSWORD
-      - DATASTORE_DB
+    env_file:
+      - .env.config
+      - .env.secrets
     volumes:
       - pg_data:/var/lib/postgresql/data
     restart: unless-stopped
@@ -111,7 +108,7 @@ services:
     logging:
       options:
         max-size: 100m
-    image: redis:${REDIS_VERSION}
+    image: redis:6
     networks:
       - redisnet
     restart: unless-stopped

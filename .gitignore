@@ -1,3 +1,9 @@
+# Environment files
 .env
 .env.prod
+.env.secrets
+.env.dev.secrets
+.env.*.secrets
+
+# Development files
 lissa-notes.md
