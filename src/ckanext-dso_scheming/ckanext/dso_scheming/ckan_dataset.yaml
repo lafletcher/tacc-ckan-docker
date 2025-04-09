@@ -68,6 +68,14 @@ dataset_fields:
     display_snippet: email.html
     display_email_name_field: maintainer
 
+  - field_name: mint_standard_variables
+    label: MINT Standard Variables
+    preset: multiple_text
+    form_placeholder: 'e.g., air__daily_max_of_temperature'
+    help_allow_html: true
+    help_text: "Enter standardized variable names used in this dataset. See the <a href='https://api.models.mint.tacc.utexas.edu/v1.8.0/standardvariables?username=mint@isi.edu' target='_blank'>list of standard variables</a>."
+    required: false
+
 resource_fields:
   - field_name: url
     label: URL
