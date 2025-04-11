@@ -11,7 +11,7 @@
         "form_attrs": {
           "data-module": "autocomplete",
           "data-module-tags": "",
-          "data-module-source": "/api/2/util/tag/autocomplete?incomplete=?",
+          "data-module-source": "https://api.models.mint.tacc.utexas.edu/v1.8.0/standardvariables?username=mint@isi.edu&label=?",
           "class": ""
         }
       }
