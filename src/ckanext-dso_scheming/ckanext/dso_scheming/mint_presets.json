@@ -8,7 +8,6 @@
       "values": {
         "classes": ["control-full"],
         "form_attrs": {
-          "validators": "if_empty_guess_format ignore_missing clean_format unicode_safe",
           "data-module": "autocomplete",
           "data-module-tags": "",
           "data-module-source": "https://gist.githubusercontent.com/mosoriob/a51a7672069c18c4dd2fa5a28fb2b28b/raw/807e6d087ef47d28923acceeeba17b9d781334f4/mint_sd_formatted.json?label=?",
