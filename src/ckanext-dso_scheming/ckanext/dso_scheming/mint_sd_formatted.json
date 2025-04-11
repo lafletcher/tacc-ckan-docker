@@ -1,0 +1,306 @@
+{
+  "ResultSet": {
+    "Result": [
+      {
+        "Name": "air__daily_max_of_temperature"
+      },
+      {
+        "Name": "air__daily_min_of_temperature"
+      },
+      {
+        "Name": "ammonia-as-nitrogen__average_of_mass_volatilization_rate"
+      },
+      {
+        "Name": "ammonium-as-nitrogen__average_of_mass_leaching_rate"
+      },
+      {
+        "Name": "atmosphere_air_water~vapor__max_of_relative_saturation"
+      },
+      {
+        "Name": "atmosphere_air_water~vapor__min_of_relative_saturation"
+      },
+      {
+        "Name": "atmosphere_air_water~vapor__relative_saturation"
+      },
+      {
+        "Name": "atmosphere_water__time_integral_of_precipitation_leq_volume_flux"
+      },
+      {
+        "Name": "biomass_nitrogen_at-harvest__mass-per-area_accumulation_density"
+      },
+      {
+        "Name": "biomass~microbial-and-soil~stabilized_carbon__decomposition_mass_respiration_rate"
+      },
+      {
+        "Name": "biomass~removed_nitrogen__mass-per-area_density"
+      },
+      {
+        "Name": "channel_water__24-hour_simple_moving_average_of_volume_flow_rate"
+      },
+      {
+        "Name": "crops~legume_nitrogen__mass-per-area_fixation_density"
+      },
+      {
+        "Name": "crop_biomass_nitrogen__mass-per-area_application_density"
+      },
+      {
+        "Name": "crop_biomass__mass-per-area_density"
+      },
+      {
+        "Name": "crop_biomass~microbial-and-soil_carbon__decomposition_respiration_mass"
+      },
+      {
+        "Name": "crop_canopy_radiation~solar__interception_energy_flux_fraction"
+      },
+      {
+        "Name": "crop_canopy_water__transpiration_volume_flux"
+      },
+      {
+        "Name": "crop_from-planting__cumulative_thermal_time"
+      },
+      {
+        "Name": "crop_nitrogen__daily_stress_fraction"
+      },
+      {
+        "Name": "crop_nitrogen__thermal-time-to-maturity_weighted_stress_fraction"
+      },
+      {
+        "Name": "crop_residue_pool_carbon__time_integral_of_decomposition_respiration_mass_flux"
+      },
+      {
+        "Name": "crop_residue_pool_root-and-rhizodeposit_biomass__yearly_time_integral_of_addition_mass_flux"
+      },
+      {
+        "Name": "crop_residue_pool_root-and-rhizodeposit_carbon__yearly_time_integral_of_decomposition_mass_flux"
+      },
+      {
+        "Name": "crop_root_nitrogen_at-harvest__mass-per-area_accumulation_density"
+      },
+      {
+        "Name": "crop_water__daily_stress_fraction"
+      },
+      {
+        "Name": "crop_water__time_integral_of_transpiration_volume_flux"
+      },
+      {
+        "Name": "crop__name"
+      },
+      {
+        "Name": "crop__phenological_stage"
+      },
+      {
+        "Name": "crop__planting_count-per-area_density_fraction"
+      },
+      {
+        "Name": "crop__planting_start_time"
+      },
+      {
+        "Name": "crop__potential_transpiration_volume_flux"
+      },
+      {
+        "Name": "crop__seasonal_production_index"
+      },
+      {
+        "Name": "drawdown"
+      },
+      {
+        "Name": "field_residue~remaining_nitrogen_at-harvest__mass-per-area_density"
+      },
+      {
+        "Name": "forage-or-residue~removed_at-harvest__mass-per-area_yield"
+      },
+      {
+        "Name": "forage-or-residue~removed_nitrogen_at-harvest__mass-per-area_yield"
+      },
+      {
+        "Name": "forage-or-residue~removed_nitrogen__mass_fraction"
+      },
+      {
+        "Name": "grain_nitrogen_at-harvest__mass-per-area_density"
+      },
+      {
+        "Name": "grain~dry__mass-per-area_yield"
+      },
+      {
+        "Name": "ground~above_biomass~harvested_grain__mass_fraction"
+      },
+      {
+        "Name": "ground~above_crop_biomass~dry__mass-per-area_density"
+      },
+      {
+        "Name": "ground~above_crop_nitrogen__mass-per-area_density"
+      },
+      {
+        "Name": "ground~above_crop_nitrogen__mass_fraction"
+      },
+      {
+        "Name": "ground~above_crop_residue-as-carbon__decomposition_mass"
+      },
+      {
+        "Name": "ground~above_crop_residue_pool_carbon__yearly_time_integral_of_decomposition_mass_flux"
+      },
+      {
+        "Name": "ground~above_crop_residue~retained__mass-per-area_density"
+      },
+      {
+        "Name": "ground~above_crop_roots-and-rhizodeposits-as-carbon__decomposition_mass"
+      },
+      {
+        "Name": "ground~above_residue~remaining_at-harvest__mass-per-area_density"
+      },
+      {
+        "Name": "ground~above_soil_residue_pool_crop_residue__mass-per-area_addition_density"
+      },
+      {
+        "Name": "land_crop__production_cost-per-area"
+      },
+      {
+        "Name": "land_crop__simulated_allocated_area"
+      },
+      {
+        "Name": "land_crop__simulated_mass-per-area_yield"
+      },
+      {
+        "Name": "land_fertilizer__applied_mass"
+      },
+      {
+        "Name": "land_surface_snow__sublimation_volume_flux"
+      },
+      {
+        "Name": "land_surface_water__usdanrcs_runoff_curve_number"
+      },
+      {
+        "Name": "land_surface_wind__speed"
+      },
+      {
+        "Name": "land_surface__slope"
+      },
+      {
+        "Name": "land_surface~horizontal_radiation~incoming~shortwave__energy_flux"
+      },
+      {
+        "Name": "model__simulation_end_time"
+      },
+      {
+        "Name": "model__simulation_start_time"
+      },
+      {
+        "Name": "nitrate-as-nitrogen__average_of_mass_leaching_rate"
+      },
+      {
+        "Name": "nitrogen__average_of_gross_mass_immobilization_rate"
+      },
+      {
+        "Name": "nitrogen__average_of_gross_mass_mineralization_rate"
+      },
+      {
+        "Name": "nitrogen__average_of_net_mass_mineralization_rate"
+      },
+      {
+        "Name": "plant_at-grain-or-forage-harvest-or-death__mass-per-area_density"
+      },
+      {
+        "Name": "plant_root_at-grain-or-forage-harvest-or-death__mass-per-area_density"
+      },
+      {
+        "Name": "recharge_volume_flux"
+      },
+      {
+        "Name": "roots-and-rhizodeposits__time_integral_of_mass-per-area_production_rate"
+      },
+      {
+        "Name": "soil_carbon_pool~microbial-and-stabilized_carbon~decomposed__mass_addition_rate"
+      },
+      {
+        "Name": "soil_carbon_pool~stabilized_carbon__change_of_mass"
+      },
+      {
+        "Name": "soil_carbon_pool~stabilized_carbon__final_mass"
+      },
+      {
+        "Name": "soil_carbon_pool~stabilized_carbon__initial_mass"
+      },
+      {
+        "Name": "soil_carbon_pool~stabilized_carbon__one-year_change_of_mass"
+      },
+      {
+        "Name": "soil_carbon_pool~stabilized_carbon__year-end_mass"
+      },
+      {
+        "Name": "soil_carbon_pool~stabilized_carbon__year-start_mass"
+      },
+      {
+        "Name": "soil_clay_particle__volume_fraction"
+      },
+      {
+        "Name": "soil_layer_matter~organic~stabilized_carbon__mass_fraction"
+      },
+      {
+        "Name": "soil_layer__bulk_mass-per-volume_density"
+      },
+      {
+        "Name": "soil_layer__thickness"
+      },
+      {
+        "Name": "soil_matter~organic__mass_fraction"
+      },
+      {
+        "Name": "soil_nitrogen__average_of_mass_denitrification_rate"
+      },
+      {
+        "Name": "soil_nitrogen__average_of_mass_nitrification_rate"
+      },
+      {
+        "Name": "soil_nitrous-oxide-as-nitrogen__average_of_denitrification_mass_emission_rate"
+      },
+      {
+        "Name": "soil_nitrous-oxide-as-nitrogen__average_of_mass_emission_rate"
+      },
+      {
+        "Name": "soil_nitrous-oxide-as-nitrogen__average_of_nitrification_mass_emission_rate"
+      },
+      {
+        "Name": "soil_pool-and-pool~microbial_carbon~decomposed__addition_mass"
+      },
+      {
+        "Name": "soil_pool~stabilized_carbon__change_of_mass"
+      },
+      {
+        "Name": "soil_profile_bottom_water__drainage_volume_flux"
+      },
+      {
+        "Name": "soil_rock__volume_fraction"
+      },
+      {
+        "Name": "soil_surface_residue~standing_carbon-to-nitrogen__mass_ratio"
+      },
+      {
+        "Name": "soil_surface_water__irrigation_volume_flux"
+      },
+      {
+        "Name": "soil_surface_water__time_integral_of_evaporation_volume_flux"
+      },
+      {
+        "Name": "soil_water__infiltration_volume_flux"
+      },
+      {
+        "Name": "soil_water__saturated_hydraulic_conductivity"
+      },
+      {
+        "Name": "soil_water__volume_fraction"
+      },
+      {
+        "Name": "soil__residual_porosity"
+      },
+      {
+        "Name": "soil~no-rock_silt__mass_fraction"
+      },
+      {
+        "Name": "soil~no-rock~dry__mass-per-volume_density"
+      },
+      {
+        "Name": "storage_volume"
+      }
+    ]
+  }
+}

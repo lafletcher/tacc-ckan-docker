@@ -1,0 +1,990 @@
+[
+  {
+    "id": "https://w3id.org/okn/i/mint/AIR__DAILY_MAX_OF_TEMPERATURE",
+    "type": ["StandardVariable"],
+    "label": ["air__daily_max_of_temperature"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#air__one-day_max_of_temperature"
+    ],
+    "description": [
+      "                    air__daily_max_of_temperature\n                        \nThis variable contains the  attribute daily                                                \n                        \nThis variable has the recorded  phenomenon air\nThis variable has the recorded units O.\nThis variable has the recorded property one-day_max_of_temperature\nThis variable has the recorded modified property temperature\nThis variable has the recorded applied operator one-day_max                                                "
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/AIR__DAILY_MIN_OF_TEMPERATURE",
+    "type": ["StandardVariable"],
+    "label": ["air__daily_min_of_temperature"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#air__one-day_min_of_temperature"
+    ],
+    "description": [
+      "                    air__daily_min_of_temperature\n                        \nThis variable contains the  attribute daily                                                \n                        \nThis variable has the recorded  phenomenon air\nThis variable has the recorded units O.\nThis variable has the recorded property one-day_min_of_temperature\nThis variable has the recorded modified property temperature\nThis variable has the recorded applied operator one-day_min                                                "
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/AMMONIA-AS-NITROGEN__AVERAGE_OF_MASS_VOLATILIZATION_RATE",
+    "type": ["StandardVariable"],
+    "label": ["ammonia-as-nitrogen__average_of_mass_volatilization_rate"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#ammonia-as-nitrogen_volatilization__average_of_mass_volatilization_rate"
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/AMMONIUM-AS-NITROGEN__AVERAGE_OF_MASS_LEACHING_RATE",
+    "type": ["StandardVariable"],
+    "label": ["ammonium-as-nitrogen__average_of_mass_leaching_rate"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#ammonium-as-nitrogen_leaching__average_of_mass_leaching_rate"
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/ATMOSPHERE_AIR_WATER~VAPOR__MAX_OF_RELATIVE_SATURATION",
+    "type": ["StandardVariable"],
+    "label": ["atmosphere_air_water~vapor__max_of_relative_saturation"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#atmosphere%40context%7Ein_%28air%40medium_water%7Evapor%29__max_of_saturation_ratio"
+    ],
+    "description": [
+      "                    atmosphere_air_water~vapor__max_of_relative_saturation\n                        \nThis variable contains the  attribute:relativevapor                                                \n                        \nThis variable has the recorded  phenomenon:water~vaporair@medium_water~vaporatmosphere@context~in_(air@medium_water~vapor)\nThis variable has the recorded  matter water~vapor\nThis variable has the recorded medium phenomenon air\nThis variable has the recorded context phenomenon atmosphere\nThis variable has the recorded property max_of_saturation_ratio\nThis variable has the recorded modified property saturation_ratio\nThis variable has the recorded applied operator max                                                "
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/ATMOSPHERE_AIR_WATER~VAPOR__MIN_OF_RELATIVE_SATURATION",
+    "type": ["StandardVariable"],
+    "label": ["atmosphere_air_water~vapor__min_of_relative_saturation"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#atmosphere%40context%7Ein_%28air%40medium_water%7Evapor%29__min_of_saturation_ratio"
+    ],
+    "description": [
+      "                    atmosphere_air_water~vapor__min_of_relative_saturation\n                        \nThis variable contains the  attribute:relativevapor                                                \n                        \nThis variable has the recorded  phenomenon:water~vaporair@medium_water~vaporatmosphere@context~in_(air@medium_water~vapor)\nThis variable has the recorded  matter water~vapor\nThis variable has the recorded medium phenomenon air\nThis variable has the recorded context phenomenon atmosphere\nThis variable has the recorded property min_of_saturation_ratio\nThis variable has the recorded modified property saturation_ratio\nThis variable has the recorded applied operator min                                                "
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/ATMOSPHERE_AIR_WATER~VAPOR__RELATIVE_SATURATION",
+    "type": ["StandardVariable"],
+    "label": ["atmosphere_air_water~vapor__relative_saturation"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#atmosphere%40context%7Ein_%28air%40medium_water%7Evapor%29__saturation_ratio"
+    ],
+    "description": [
+      "                    atmosphere_air_water~vapor__relative_saturation\n                        \nThis variable contains the  attribute:relativevapor                                                \n                        \nThis variable has the recorded  phenomenon:water~vaporair@medium_water~vaporatmosphere@context~in_(air@medium_water~vapor)\nThis variable has the recorded  matter water~vapor\nThis variable has the recorded medium phenomenon air\nThis variable has the recorded context phenomenon atmosphere\nThis variable has the recorded property saturation_ratio                                                "
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/ATMOSPHERE_WATER__TIME_INTEGRAL_OF_PRECIPITATION_LEQ_VOLUME_FLUX",
+    "type": ["StandardVariable"],
+    "label": [
+      "atmosphere_water__time_integral_of_precipitation_leq_volume_flux"
+    ],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#atmosphere%40role%7Esource_water%40role%7Emain_precipitation__time_integral_of_precipitation_leq_volume_flux"
+    ],
+    "description": [
+      "                    atmosphere_water__time_integral_of_precipitation_leq_volume_flux\n                        \nThis variable contains the  attribute leq                                                \n                        \nThis variable has the recorded  phenomenon atmosphere@role~source_water@role~main_precipitation\nThis variable has the recorded  process precipitation\nThis variable has the recorded participant phenomenon:atmospherewater\nThis variable has the recorded units L.\nThis variable has the recorded property time_integral_of_precipitation_leq_volume_flux\nThis variable has the recorded modified property precipitation_leq_volume_flux\nThis variable has the recorded applied operator time_integral                                                "
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/BIOMASS_NITROGEN_AT-HARVEST__MASS-PER-AREA_ACCUMULATION_DENSITY",
+    "type": ["StandardVariable"],
+    "label": [
+      "biomass_nitrogen_at-harvest__mass-per-area_accumulation_density"
+    ],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#%28biomass%40context%7Ein_%28nitrogen_accumulation%29%29_%28crop_harvest%29%40reference%7Eat__mass-per-area_accumulation_density"
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/BIOMASS~MICROBIAL-AND-SOIL~STABILIZED_CARBON__DECOMPOSITION_MASS_RESPIRATION_RATE",
+    "type": ["StandardVariable"],
+    "label": [
+      "biomass~microbial-and-soil~stabilized_carbon__decomposition_mass_respiration_rate"
+    ],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#%28biomass%7Emicrobial_decomposition%29%40role%7Esource_%28soil%7Estabilized_decomposition%29%40role%7Esource_carbon%40role%7Emain_respiration__decomposition_mass_respiration_rate"
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/BIOMASS~REMOVED_NITROGEN__MASS-PER-AREA_DENSITY",
+    "type": ["StandardVariable"],
+    "label": ["biomass~removed_nitrogen__mass-per-area_density"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#biomass%7Eremoved%40context%7Ein_nitrogen__mass-per-area_density"
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/CHANNEL_WATER__24-HOUR_SIMPLE_MOVING_AVERAGE_OF_VOLUME_FLOW_RATE",
+    "type": ["StandardVariable"],
+    "label": [
+      "channel_water__24-hour_simple_moving_average_of_volume_flow_rate"
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/CROPS~LEGUME_NITROGEN__MASS-PER-AREA_FIXATION_DENSITY",
+    "type": ["StandardVariable"],
+    "label": ["crops~legume_nitrogen__mass-per-area_fixation_density"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#crops%7Elegume%40role%7Esink_nitrogen%40role%7Emain_fixation__mass-per-area_fixation_density"
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/CROP_BIOMASS_NITROGEN__MASS-PER-AREA_APPLICATION_DENSITY",
+    "type": ["StandardVariable"],
+    "label": ["crop_biomass_nitrogen__mass-per-area_application_density"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#%28crop%40context%7Ein_biomass%29%40context%7Esink_%28nitrogen_application%29__mass-per-area_application_density"
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/CROP_BIOMASS__MASS-PER-AREA_DENSITY",
+    "type": ["StandardVariable"],
+    "label": ["crop_biomass__mass-per-area_density"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#crop%40context%7Ein_biomass__mass-per-area_density"
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/CROP_BIOMASS~MICROBIAL-AND-SOIL_CARBON__DECOMPOSITION_RESPIRATION_MASS",
+    "type": ["StandardVariable"],
+    "label": [
+      "crop_biomass~microbial-and-soil_carbon__decomposition_respiration_mass"
+    ],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#%28crop%40context%7Ein_%28biomass%7Emicrobial_decomposition%29%29%40role%7Esource_%28soil_decomposition%29%40role%7Esource_carbon%40role%7Emain_respiration__decomposition_respiration_mass"
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/CROP_CANOPY_RADIATION~SOLAR__INTERCEPTION_ENERGY_FLUX_FRACTION",
+    "type": ["StandardVariable"],
+    "label": ["crop_canopy_radiation~solar__interception_energy_flux_fraction"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#%28crop_canopy%29%40role%7Esink_radiation%7Esolar%40role%7Emain_interception__interception_energy_flux_fraction"
+    ],
+    "description": [
+      "                    crop_canopy_radiation~solar__interception_energy_flux_fraction\n                        \nThis variable contains the  attribute solar                                                \n                        \nThis variable has the recorded  phenomenon (crop_canopy)@role~sink_radiation~solar@role~main_interception\nThis variable has the recorded  process interception\nThis variable has the recorded participant phenomenon:crop_canopyradiation~solar\nThis variable has the recorded participant part canopy\nThis variable has the recorded participant role crop\nThis variable has the recorded property interception_energy_flux_fraction                                                "
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/CROP_CANOPY_WATER__TRANSPIRATION_VOLUME_FLUX",
+    "type": ["StandardVariable"],
+    "label": ["crop_canopy_water__transpiration_volume_flux"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#%28crop_canopy%29%40role%7Esource_water%40role%7Emain_transpiration__transpiration_volume_flux"
+    ],
+    "description": [
+      "                    crop_canopy_water__transpiration_volume_flux\n                        \nThis variable has the recorded  phenomenon (crop_canopy)@role~source_water@role~main_transpiration\nThis variable has the recorded  process transpiration\nThis variable has the recorded participant phenomenon:watercrop_canopy\nThis variable has the recorded participant part canopy\nThis variable has the recorded participant role crop\nThis variable has the recorded units L T^-1.\nThis variable has the recorded property transpiration_volume_flux                                                "
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/CROP_FROM-PLANTING__CUMULATIVE_THERMAL_TIME",
+    "type": ["StandardVariable"],
+    "label": ["crop_from-planting__cumulative_thermal_time"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#%28crop_planting%29%40reference%7Efrom_crop__cumulative_thermal_time"
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/CROP_NITROGEN__DAILY_STRESS_FRACTION",
+    "type": ["StandardVariable"],
+    "label": ["crop_nitrogen__daily_stress_fraction"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#crop%40role%7Emain_nitrogen%40role%7Eexchange__daily_stress_fraction"
+    ],
+    "description": [
+      "                    crop_nitrogen__daily_stress_fraction\n                        \nThis variable has the recorded  phenomenon crop@role~main_nitrogen@role~exchange\nThis variable has the recorded participant phenomenon:nitrogencrop\nThis variable has the recorded property daily_stress_fraction                                                "
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/CROP_NITROGEN__THERMAL-TIME-TO-MATURITY_WEIGHTED_STRESS_FRACTION",
+    "type": ["StandardVariable"],
+    "label": [
+      "crop_nitrogen__thermal-time-to-maturity_weighted_stress_fraction"
+    ],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#crop%40role%7Emain_nitrogen%40role%7Eexchange__thermal-time-to-maturity_weighted_stress_fraction"
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/CROP_RESIDUE_POOL_CARBON__TIME_INTEGRAL_OF_DECOMPOSITION_RESPIRATION_MASS_FLUX",
+    "type": ["StandardVariable"],
+    "label": [
+      "crop_residue_pool_carbon__time_integral_of_decomposition_respiration_mass_flux"
+    ],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#%28crop%40context%7Esource_%28residue_pool_decomposition%29%29%40role%7Esource_carbon%40role%7Emain_respiration__time_integral_of_decomposition_respiration_mass_flux"
+    ],
+    "description": [
+      "                    crop_residue_pool_carbon__time_integral_of_decomposition_respiration_mass_flux\n                        \nThis variable has the recorded  phenomenon (crop@context~source_(residue_pool_decomposition))@role~source_carbon@role~main_respiration\nThis variable has the recorded  process respiration\nThis variable has the recorded participant phenomenon:carboncrop@context~source_(residue_pool_decomposition)residue_poolresidue_pool_decompositioncrop\nThis variable has the recorded participant form pool\nThis variable has the recorded participant process decomposition\nThis variable has the recorded participant role residue\nThis variable has the recorded units L^-2 M.\nThis variable has the recorded property time_integral_of_decomposition_respiration_mass_flux\nThis variable has the recorded modified property decomposition_respiration_mass_flux\nThis variable has the recorded applied operator time_integral                                                "
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/CROP_RESIDUE_POOL_ROOT-AND-RHIZODEPOSIT_BIOMASS__YEARLY_TIME_INTEGRAL_OF_ADDITION_MASS_FLUX",
+    "type": ["StandardVariable"],
+    "label": [
+      "crop_residue_pool_root-and-rhizodeposit_biomass__yearly_time_integral_of_addition_mass_flux"
+    ],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#%28crop%40context%7Esource_%28%28residue_pool%29%40context%7Epart_root-and-rhizodeposit%29%29%40role%7Esink_biomass%40role%7Emain_addition__one-year_time_integral_of_addition_mass_flux"
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/CROP_RESIDUE_POOL_ROOT-AND-RHIZODEPOSIT_CARBON__YEARLY_TIME_INTEGRAL_OF_DECOMPOSITION_MASS_FLUX",
+    "type": ["StandardVariable"],
+    "label": [
+      "crop_residue_pool_root-and-rhizodeposit_carbon__yearly_time_integral_of_decomposition_mass_flux"
+    ],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#%28crop%40context%7Esource_%28%28residue_pool%29%40context%7Epart_root-and-rhizodeposit%29%29%40context%7Ein_%28carbon_decomposition%29__one-year_time_integral_of_decomposition_mass_flux"
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/CROP_ROOT_NITROGEN_AT-HARVEST__MASS-PER-AREA_ACCUMULATION_DENSITY",
+    "type": ["StandardVariable"],
+    "label": [
+      "crop_root_nitrogen_at-harvest__mass-per-area_accumulation_density"
+    ],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#%28%28crop%40context%7Epart_root%29%40context%7Ein_%28nitrogen_accumulation%29%29_%28crop_harvest%29%40reference%7Eat__mass-per-area_accumulation_density"
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/CROP_WATER__DAILY_STRESS_FRACTION",
+    "type": ["StandardVariable"],
+    "label": ["crop_water__daily_stress_fraction"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#crop%40role%7Emain_water%40role%7Eexchange__daily_stress_fraction"
+    ],
+    "description": [
+      "                    crop_water__daily_stress_fraction\n                        \nThis variable has the recorded  phenomenon crop@role~main_water@role~exchange\nThis variable has the recorded participant phenomenon:watercrop\nThis variable has the recorded property daily_stress_fraction                                                "
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/CROP_WATER__TIME_INTEGRAL_OF_TRANSPIRATION_VOLUME_FLUX",
+    "type": ["StandardVariable"],
+    "label": ["crop_water__time_integral_of_transpiration_volume_flux"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#crop%40role%7Esource_water%40role%7Emain_transpiration__time_integral_of_transpiration_volume_flux"
+    ],
+    "description": [
+      "                    crop_water__time_integral_of_transpiration_volume_flux\n                        \nThis variable has the recorded  phenomenon crop@role~source_water@role~main_transpiration\nThis variable has the recorded  process transpiration\nThis variable has the recorded participant phenomenon:watercrop\nThis variable has the recorded units L.\nThis variable has the recorded property time_integral_of_transpiration_volume_flux\nThis variable has the recorded modified property transpiration_volume_flux\nThis variable has the recorded applied operator time_integral                                                "
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/CROP__NAME",
+    "type": ["StandardVariable"],
+    "label": ["crop__name"],
+    "sameAs": ["http://www.geoscienceontology.org/svo/svl/variable#crop__name"],
+    "description": [
+      "                    crop__name\n                        \nThis variable has the recorded  phenomenon crop\nThis variable has the recorded property name                                                "
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/CROP__PHENOLOGICAL_STAGE",
+    "type": ["StandardVariable"],
+    "label": ["crop__phenological_stage"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#crop__phenological_stage"
+    ],
+    "description": [
+      "                    crop__phenological_stage\n                        \nThis variable has the recorded  phenomenon crop\nThis variable has the recorded property phenological_stage                                                "
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/CROP__PLANTING_COUNT-PER-AREA_DENSITY_FRACTION",
+    "type": ["StandardVariable"],
+    "label": ["crop__planting_count-per-area_density_fraction"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#crop_planting__planting_count-per-area_density_fraction"
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/CROP__PLANTING_START_TIME",
+    "type": ["StandardVariable"],
+    "label": ["crop__planting_start_time"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#crop_planting__planting_start_time"
+    ],
+    "description": [
+      "                    crop__planting_start_time\n                        \nThis variable has the recorded  phenomenon crop_planting\nThis variable has the recorded  process planting\nThis variable has the recorded  role crop\nThis variable has the recorded units T.\nThis variable has the recorded property planting_start_time                                                "
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/CROP__POTENTIAL_TRANSPIRATION_VOLUME_FLUX",
+    "type": ["StandardVariable"],
+    "label": ["crop__potential_transpiration_volume_flux"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#crop%40role%7Esource_water%40role%7Emain_transpiration__potential_transpiration_volume_flux"
+    ],
+    "description": [
+      "                    crop__potential_transpiration_volume_flux\n                        \nThis variable has the recorded  phenomenon crop@role~source_water@role~main_transpiration\nThis variable has the recorded  process transpiration\nThis variable has the recorded participant phenomenon:watercrop\nThis variable has the recorded units L T^-1.\nThis variable has the recorded property potential_transpiration_volume_flux                                                "
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/CROP__SEASONAL_PRODUCTION_INDEX",
+    "type": ["StandardVariable"],
+    "label": ["crop__seasonal_production_index"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#crop_production__seasonal_production_index"
+    ],
+    "description": [
+      "                    crop__seasonal_production_index\n                        \nThis variable has the recorded  phenomenon crop_production\nThis variable has the recorded  process production\nThis variable has the recorded  role crop\nThis variable has the recorded property seasonal_production_index                                                "
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/DRAWDOWN",
+    "type": ["StandardVariable"],
+    "label": ["drawdown"]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/FIELD_RESIDUE~REMAINING_NITROGEN_AT-HARVEST__MASS-PER-AREA_DENSITY",
+    "type": ["StandardVariable"],
+    "label": [
+      "field_residue~remaining_nitrogen_at-harvest__mass-per-area_density"
+    ],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#field__mass-per-area_density"
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/FORAGE-OR-RESIDUE~REMOVED_AT-HARVEST__MASS-PER-AREA_YIELD",
+    "type": ["StandardVariable"],
+    "label": ["forage-or-residue~removed_at-harvest__mass-per-area_yield"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#forage-or-residue%7Eremoved_%28crop_harvest%29%40reference%7Eat__mass-per-area_yield"
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/FORAGE-OR-RESIDUE~REMOVED_NITROGEN_AT-HARVEST__MASS-PER-AREA_YIELD",
+    "type": ["StandardVariable"],
+    "label": [
+      "forage-or-residue~removed_nitrogen_at-harvest__mass-per-area_yield"
+    ],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#%28forage-or-residue%7Eremoved%40medium_nitrogen%29_%28crop_harvest%29%40reference%7Eat__mass-per-area_yield"
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/FORAGE-OR-RESIDUE~REMOVED_NITROGEN__MASS_FRACTION",
+    "type": ["StandardVariable"],
+    "label": ["forage-or-residue~removed_nitrogen__mass_fraction"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#forage-or-residue%7Eremoved%40medium_nitrogen__mass_fraction"
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/GRAIN_NITROGEN_AT-HARVEST__MASS-PER-AREA_DENSITY",
+    "type": ["StandardVariable"],
+    "label": ["grain_nitrogen_at-harvest__mass-per-area_density"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#%28grain%40context%7Ein_nitrogen%29_%28crop_harvest%29%40reference%7Eat__mass-per-area_density"
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/GRAIN~DRY__MASS-PER-AREA_YIELD",
+    "type": ["StandardVariable"],
+    "label": ["grain~dry__mass-per-area_yield"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#grain%7Edry__mass-per-area_yield"
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/GROUND~ABOVE_BIOMASS~HARVESTED_GRAIN__MASS_FRACTION",
+    "type": ["StandardVariable"],
+    "label": ["ground~above_biomass~harvested_grain__mass_fraction"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#ground%40context%7Eabove_%28biomass%7Eharvested%40medium_grain%29__mass_fraction"
+    ],
+    "description": [
+      "                    ground~above_biomass~harvested_grain__mass_fraction\n                        \nThis variable contains the  attribute harvested                                                \n                        \nThis variable has the recorded  phenomenon:grainbiomass~harvested@medium_grainground@context~above_(biomass~harvested@medium_grain)\nThis variable has the recorded  body grain\nThis variable has the recorded medium phenomenon biomass~harvested\nThis variable has the recorded context phenomenon ground\nThis variable has the recorded property mass_fraction                                                "
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/GROUND~ABOVE_CROP_BIOMASS~DRY__MASS-PER-AREA_DENSITY",
+    "type": ["StandardVariable"],
+    "label": ["ground~above_crop_biomass~dry__mass-per-area_density"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#ground%40context%7Eabove_%28crop%40context%7Ein_biomass%7Edry%29__mass-per-area_density"
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/GROUND~ABOVE_CROP_NITROGEN__MASS-PER-AREA_DENSITY",
+    "type": ["StandardVariable"],
+    "label": ["ground~above_crop_nitrogen__mass-per-area_density"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#ground%40context%7Eabove_%28crop%40context%7Ein_nitrogen%29__mass-per-area_density"
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/GROUND~ABOVE_CROP_NITROGEN__MASS_FRACTION",
+    "type": ["StandardVariable"],
+    "label": ["ground~above_crop_nitrogen__mass_fraction"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#ground%40context%7Eabove_%28crop%40medium_nitrogen%29__mass_fraction"
+    ],
+    "description": [
+      "                    ground~above_crop_nitrogen__mass_fraction\n                        \nThis variable has the recorded  phenomenon:nitrogencrop@medium_nitrogenground@context~above_(crop@medium_nitrogen)\nThis variable has the recorded  matter nitrogen\nThis variable has the recorded medium phenomenon crop\nThis variable has the recorded context phenomenon ground\nThis variable has the recorded property mass_fraction                                                "
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/GROUND~ABOVE_CROP_RESIDUE-AS-CARBON__DECOMPOSITION_MASS",
+    "type": ["StandardVariable"],
+    "label": ["ground~above_crop_residue-as-carbon__decomposition_mass"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#ground%40context%7Eabove_%28crop%40context%7Esource_%28residue-as-carbon_decomposition%29%29__decomposition_mass"
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/GROUND~ABOVE_CROP_RESIDUE_POOL_CARBON__YEARLY_TIME_INTEGRAL_OF_DECOMPOSITION_MASS_FLUX",
+    "type": ["StandardVariable"],
+    "label": [
+      "ground~above_crop_residue_pool_carbon__yearly_time_integral_of_decomposition_mass_flux"
+    ],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#ground%40context%7Eabove_%28crop_residue_pool_decomposition%29%40context%7Esource_carbon__one-year_time_integral_of_decomposition_mass_flux"
+    ],
+    "description": [
+      "                    ground~above_crop_residue_pool_carbon__yearly_time_integral_of_decomposition_mass_flux\n                        \nThis variable contains the  attribute yearly                                                \n                        \nThis variable has the recorded  phenomenon:carbonground@context~above_(crop_residue_pool_decomposition)@context~source_carbon\nThis variable has the recorded  matter carbon\nThis variable has the recorded context phenomenon:groundcrop@context~source_(residue_pool)crop_residue_pool_decomposition\nThis variable has the recorded context process decomposition\nThis variable has the recorded units L^-2 M.\nThis variable has the recorded property one-year_time_integral_of_decomposition_mass_flux\nThis variable has the recorded modified property decomposition_mass_flux\nThis variable has the recorded applied operator one-year_time_integral                                                "
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/GROUND~ABOVE_CROP_RESIDUE~RETAINED__MASS-PER-AREA_DENSITY",
+    "type": ["StandardVariable"],
+    "label": ["ground~above_crop_residue~retained__mass-per-area_density"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#ground%40context%7Eabove_crop%40context%7Esource_residue%7Eretained__mass-per-area_density"
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/GROUND~ABOVE_CROP_ROOTS-AND-RHIZODEPOSITS-AS-CARBON__DECOMPOSITION_MASS",
+    "type": ["StandardVariable"],
+    "label": [
+      "ground~above_crop_roots-and-rhizodeposits-as-carbon__decomposition_mass"
+    ],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#ground%40context%7Eabove_%28crop%40context%7Esource_%28roots-and-rhizodeposits-as-carbon_decomposition%29%29__decomposition_mass"
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/GROUND~ABOVE_RESIDUE~REMAINING_AT-HARVEST__MASS-PER-AREA_DENSITY",
+    "type": ["StandardVariable"],
+    "label": [
+      "ground~above_residue~remaining_at-harvest__mass-per-area_density"
+    ],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#%28ground%40context%7Eabove_residue%7Eremaining%29_%28crop_harvest%29%40reference%7Eat__mass-per-area_density"
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/GROUND~ABOVE_SOIL_RESIDUE_POOL_CROP_RESIDUE__MASS-PER-AREA_ADDITION_DENSITY",
+    "type": ["StandardVariable"],
+    "label": [
+      "ground~above_soil_residue_pool_crop_residue__mass-per-area_addition_density"
+    ],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#ground%40context%7Eabove_%28%28soil%40context%7Ein_%28residue_pool%29%29%40role%7Esink_%28crop%40context%7Esource_residue%29%40role%7Emain_addition%29__mass-per-area_addition_density"
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/LAND_CROP__PRODUCTION_COST-PER-AREA",
+    "type": ["StandardVariable"],
+    "label": ["land_crop__production_cost-per-area"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#land%40medium_%28crop_production%29__production_cost-per-area"
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/LAND_CROP__SIMULATED_ALLOCATED_AREA",
+    "type": ["StandardVariable"],
+    "label": ["land_crop__simulated_allocated_area"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#%28land_allocation%29%40medium_crop__simulated_allocated_area"
+    ],
+    "description": [
+      "                    land_crop__simulated_allocated_area\n                        \nThis variable has the recorded  phenomenon:(land_allocation)@medium_cropcrop\nThis variable has the recorded  role crop\nThis variable has the recorded medium phenomenon land_allocation\nThis variable has the recorded medium body land\nThis variable has the recorded medium process allocation\nThis variable has the recorded units L^2.\nThis variable has the recorded property simulated_allocated_area                                                "
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/LAND_CROP__SIMULATED_MASS-PER-AREA_YIELD",
+    "type": ["StandardVariable"],
+    "label": ["land_crop__simulated_mass-per-area_yield"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#land%40medium_%28crop_production%29__simulated_mass-per-area_yield"
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/LAND_FERTILIZER__APPLIED_MASS",
+    "type": ["StandardVariable"],
+    "label": ["land_fertilizer__applied_mass"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#land%40role%7Esink_fertilizer%40role%7Emain_application__applied_mass"
+    ],
+    "description": [
+      "                    land_fertilizer__applied_mass\n                        \nThis variable has the recorded  phenomenon land@role~sink_fertilizer@role~main_application\nThis variable has the recorded  process application\nThis variable has the recorded participant phenomenon:landfertilizer\nThis variable has the recorded units M.\nThis variable has the recorded property applied_mass                                                "
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/LAND_SURFACE_SNOW__SUBLIMATION_VOLUME_FLUX",
+    "type": ["StandardVariable"],
+    "label": ["land_surface_snow__sublimation_volume_flux"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#%28land_surface%29%40context%7Eon_%28snow_sublimation%29__sublimation_volume_flux"
+    ],
+    "description": [
+      "                    land_surface_snow__sublimation_volume_flux\n                        \nThis variable contains the  attribute snow                                                \n                        \nThis variable has the recorded  phenomenon:(land_surface)@context~on_(snow_sublimation)snow_sublimation\nThis variable has the recorded  matter snow\nThis variable has the recorded  process sublimation\nThis variable has the recorded context phenomenon land_surface\nThis variable has the recorded context body land\nThis variable has the recorded context abstraction surface\nThis variable has the recorded units L T^-1.\nThis variable has the recorded property sublimation_volume_flux                                                "
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/LAND_SURFACE_WATER__USDANRCS_RUNOFF_CURVE_NUMBER",
+    "type": ["StandardVariable"],
+    "label": ["land_surface_water__usdanrcs_runoff_curve_number"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#%28land_surface%29%40context%7Eon_%28water_runoff%29__usdanrcs_runoff_curve_number"
+    ],
+    "description": [
+      "                    land_surface_water__usdanrcs_runoff_curve_number\n                        \nThis variable has the recorded  phenomenon:(land_surface)@context~on_(water_runoff)water_runoff\nThis variable has the recorded  matter water\nThis variable has the recorded  process runoff\nThis variable has the recorded context phenomenon land_surface\nThis variable has the recorded context body land\nThis variable has the recorded context abstraction surface\nThis variable has the recorded property usdanrcs_runoff_curve_number                                                "
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/LAND_SURFACE_WIND__SPEED",
+    "type": ["StandardVariable"],
+    "label": ["land_surface_wind__speed"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#%28land_surface%29%40context%7Eabove_wind__linear_speed"
+    ],
+    "description": [
+      "                    land_surface_wind__speed\n                        \nThis variable has the recorded  phenomenon:(land_surface)@context~above_windwind\nThis variable has the recorded context phenomenon land_surface\nThis variable has the recorded context body land\nThis variable has the recorded context abstraction surface\nThis variable has the recorded units L T^-1.\nThis variable has the recorded property linear_speed                                                "
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/LAND_SURFACE__SLOPE",
+    "type": ["StandardVariable"],
+    "label": ["land_surface__slope"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#land_surface__slope"
+    ],
+    "description": [
+      "                    land_surface__slope\n                        \nThis variable has the recorded  phenomenon land_surface\nThis variable has the recorded  body land\nThis variable has the recorded  abstraction surface\nThis variable has the recorded property slope                                                "
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/LAND_SURFACE~HORIZONTAL_RADIATION~INCOMING~SHORTWAVE__ENERGY_FLUX",
+    "type": ["StandardVariable"],
+    "label": [
+      "land_surface~horizontal_radiation~incoming~shortwave__energy_flux"
+    ],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#%28land_surface%7Ehorizontal%29%40context%7Esink_radiation%7Eincoming%7Eshortwave__energy_flux"
+    ],
+    "description": [
+      "                    land_surface~horizontal_radiation~incoming~shortwave__energy_flux\n                        \nThis variable contains the  attribute:horizontalshortwave                                                \n                        \nThis variable has the recorded  phenomenon:(land_surface~horizontal)@context~sink_radiation~incoming~shortwaveradiation~incoming~shortwaveradiation~shortwave\nThis variable has the recorded  trajectory direction incoming\nThis variable has the recorded context phenomenon land_surface~horizontal\nThis variable has the recorded context body land\nThis variable has the recorded context abstraction surface~horizontal\nThis variable has the recorded units M T^-3.\nThis variable has the recorded property energy_flux                                                "
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/MODEL__SIMULATION_END_TIME",
+    "type": ["StandardVariable"],
+    "label": ["model__simulation_end_time"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#model%40role%7Emain_simulation__simulation_end_time"
+    ],
+    "description": [
+      "                    model__simulation_end_time\n                        \nThis variable has the recorded  phenomenon model@role~main_simulation\nThis variable has the recorded  process simulation\nThis variable has the recorded participant phenomenon model\nThis variable has the recorded units T.\nThis variable has the recorded property simulation_end_time                                                "
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/MODEL__SIMULATION_START_TIME",
+    "type": ["StandardVariable"],
+    "label": ["model__simulation_start_time"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#model%40role%7Emain_simulation__simulation_start_time"
+    ],
+    "description": [
+      "                    model__simulation_start_time\n                        \nThis variable has the recorded  phenomenon model@role~main_simulation\nThis variable has the recorded  process simulation\nThis variable has the recorded participant phenomenon model\nThis variable has the recorded units T.\nThis variable has the recorded property simulation_start_time                                                "
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/NITRATE-AS-NITROGEN__AVERAGE_OF_MASS_LEACHING_RATE",
+    "type": ["StandardVariable"],
+    "label": ["nitrate-as-nitrogen__average_of_mass_leaching_rate"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#nitrate-as-nitrogen_leaching__average_of_mass_leaching_rate"
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/NITROGEN__AVERAGE_OF_GROSS_MASS_IMMOBILIZATION_RATE",
+    "type": ["StandardVariable"],
+    "label": ["nitrogen__average_of_gross_mass_immobilization_rate"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#nitrogen_immobilization__average_of_gross_mass_immobilization_rate"
+    ],
+    "description": [
+      "                    nitrogen__average_of_gross_mass_immobilization_rate\n                        \nThis variable has the recorded  phenomenon nitrogen_immobilization\nThis variable has the recorded  matter nitrogen\nThis variable has the recorded  process immobilization\nThis variable has the recorded units M T^-1.\nThis variable has the recorded property average_of_gross_mass_immobilization_rate\nThis variable has the recorded modified property gross_mass_immobilization_rate\nThis variable has the recorded applied operator average                                                "
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/NITROGEN__AVERAGE_OF_GROSS_MASS_MINERALIZATION_RATE",
+    "type": ["StandardVariable"],
+    "label": ["nitrogen__average_of_gross_mass_mineralization_rate"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#nitrogen_mineralization__average_of_gross_mass_mineralization_rate"
+    ],
+    "description": [
+      "                    nitrogen__average_of_gross_mass_mineralization_rate\n                        \nThis variable has the recorded  phenomenon nitrogen_mineralization\nThis variable has the recorded  matter nitrogen\nThis variable has the recorded  process mineralization\nThis variable has the recorded units M T^-1.\nThis variable has the recorded property average_of_gross_mass_mineralization_rate\nThis variable has the recorded modified property gross_mass_mineralization_rate\nThis variable has the recorded applied operator average                                                "
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/NITROGEN__AVERAGE_OF_NET_MASS_MINERALIZATION_RATE",
+    "type": ["StandardVariable"],
+    "label": ["nitrogen__average_of_net_mass_mineralization_rate"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#nitrogen_mineralization__average_of_net_mass_mineralization_rate"
+    ],
+    "description": [
+      "                    nitrogen__average_of_net_mass_mineralization_rate\n                        \nThis variable has the recorded  phenomenon nitrogen_mineralization\nThis variable has the recorded  matter nitrogen\nThis variable has the recorded  process mineralization\nThis variable has the recorded units M T^-1.\nThis variable has the recorded property average_of_net_mass_mineralization_rate\nThis variable has the recorded modified property net_mass_mineralization_rate\nThis variable has the recorded applied operator average                                                "
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/PLANT_AT-GRAIN-OR-FORAGE-HARVEST-OR-DEATH__MASS-PER-AREA_DENSITY",
+    "type": ["StandardVariable"],
+    "label": [
+      "plant_at-grain-or-forage-harvest-or-death__mass-per-area_density"
+    ],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#plant_%28grain_harvest%29%40reference%7Eat_%28grain_death%29%40reference%7Eat_%28forage_harvest%29%40reference%7Eat_%28forage_death%29%40reference%7Eat__mass-per-area_density"
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/PLANT_ROOT_AT-GRAIN-OR-FORAGE-HARVEST-OR-DEATH__MASS-PER-AREA_DENSITY",
+    "type": ["StandardVariable"],
+    "label": [
+      "plant_root_at-grain-or-forage-harvest-or-death__mass-per-area_density"
+    ],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#%28plant%40context%7Epart_root%29_%28grain_harvest%29%40reference%7Eat_%28grain_death%29%40reference%7Eat_%28forage_harvest%29%40reference%7Eat_%28forage_death%29%40reference%7Eat__mass-per-area_density"
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/RECHARGE_VOLUME_FLUX",
+    "type": ["StandardVariable"],
+    "label": ["recharge_volume_flux"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/property#recharge_volume_flux"
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/ROOTS-AND-RHIZODEPOSITS__TIME_INTEGRAL_OF_MASS-PER-AREA_PRODUCTION_RATE",
+    "type": ["StandardVariable"],
+    "label": [
+      "roots-and-rhizodeposits__time_integral_of_mass-per-area_production_rate"
+    ],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#roots-and-rhizodeposits_production__time_integral_of_mass-per-area_production_rate"
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/SOIL_CARBON_POOL~MICROBIAL-AND-STABILIZED_CARBON~DECOMPOSED__MASS_ADDITION_RATE",
+    "type": ["StandardVariable"],
+    "label": [
+      "soil_carbon_pool~microbial-and-stabilized_carbon~decomposed__mass_addition_rate"
+    ],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#%28soil%40context%7Ein_%28carbon_pool%7Estabilized%29%29%40role%7Esink_%28soil%40context%7Ein_%28carbon_pool%7Emicrobial%29%29%40role%7Esink_carbon%7Edecomposed%40role%7Emain_addition__mass_addition_rate"
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/SOIL_CARBON_POOL~STABILIZED_CARBON__CHANGE_OF_MASS",
+    "type": ["StandardVariable"],
+    "label": ["soil_carbon_pool~stabilized_carbon__change_of_mass"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#soil%40context%7Ein_%28%28carbon_pool%7Estabilized%29%40context%7Ein_carbon%29__change_of_mass"
+    ],
+    "description": [
+      "                    soil_carbon_pool~stabilized_carbon__change_of_mass\n                        \nThis variable contains the  attribute stabilized                                                \n                        \nThis variable has the recorded  phenomenon:carbon(carbon_pool~stabilized)@context~in_carbonsoil@context~in_((carbon_pool~stabilized)@context~in_carbon)\nThis variable has the recorded  matter carbon\nThis variable has the recorded context phenomenon:carbon_pool~stabilizedsoil\nThis variable has the recorded units M.\nThis variable has the recorded property change_of_mass\nThis variable has the recorded modified property mass\nThis variable has the recorded applied operator change                                                "
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/SOIL_CARBON_POOL~STABILIZED_CARBON__FINAL_MASS",
+    "type": ["StandardVariable"],
+    "label": ["soil_carbon_pool~stabilized_carbon__final_mass"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#soil%40context%7Ein_%28%28carbon_pool%7Estabilized%29%40context%7Ein_carbon%29__final_mass"
+    ],
+    "description": [
+      "                    soil_carbon_pool~stabilized_carbon__final_mass\n                        \nThis variable contains the  attribute stabilized                                                \n                        \nThis variable has the recorded  phenomenon:carbon(carbon_pool~stabilized)@context~in_carbonsoil@context~in_((carbon_pool~stabilized)@context~in_carbon)\nThis variable has the recorded  matter carbon\nThis variable has the recorded context phenomenon:carbon_pool~stabilizedsoil\nThis variable has the recorded units M.\nThis variable has the recorded property final_mass                                                "
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/SOIL_CARBON_POOL~STABILIZED_CARBON__INITIAL_MASS",
+    "type": ["StandardVariable"],
+    "label": ["soil_carbon_pool~stabilized_carbon__initial_mass"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#soil%40context%7Ein_%28%28carbon_pool%7Estabilized%29%40context%7Ein_carbon%29__initial_mass"
+    ],
+    "description": [
+      "                    soil_carbon_pool~stabilized_carbon__initial_mass\n                        \nThis variable contains the  attribute stabilized                                                \n                        \nThis variable has the recorded  phenomenon:carbon(carbon_pool~stabilized)@context~in_carbonsoil@context~in_((carbon_pool~stabilized)@context~in_carbon)\nThis variable has the recorded  matter carbon\nThis variable has the recorded context phenomenon:carbon_pool~stabilizedsoil\nThis variable has the recorded units M.\nThis variable has the recorded property initial_mass                                                "
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/SOIL_CARBON_POOL~STABILIZED_CARBON__ONE-YEAR_CHANGE_OF_MASS",
+    "type": ["StandardVariable"],
+    "label": ["soil_carbon_pool~stabilized_carbon__one-year_change_of_mass"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#soil%40context%7Ein_%28%28carbon_pool%7Estabilized%29%40context%7Ein_carbon%29__one-year_change_of_mass"
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/SOIL_CARBON_POOL~STABILIZED_CARBON__YEAR-END_MASS",
+    "type": ["StandardVariable"],
+    "label": ["soil_carbon_pool~stabilized_carbon__year-end_mass"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#soil%40context%7Ein_%28%28carbon_pool%7Estabilized%29%40context%7Ein_carbon%29__year-end_mass"
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/SOIL_CARBON_POOL~STABILIZED_CARBON__YEAR-START_MASS",
+    "type": ["StandardVariable"],
+    "label": ["soil_carbon_pool~stabilized_carbon__year-start_mass"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#soil%40context%7Ein_%28%28carbon_pool%7Estabilized%29%40context%7Ein_carbon%29__year-start_mass"
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/SOIL_CLAY_PARTICLE__VOLUME_FRACTION",
+    "type": ["StandardVariable"],
+    "label": ["soil_clay_particle__volume_fraction"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#soil%40medium_%28clay_particle%29__volume_fraction"
+    ],
+    "description": [
+      "                    soil_clay_particle__volume_fraction\n                        \nThis variable has the recorded  phenomenon:clay_particlesoil@medium_(clay_particle)\nThis variable has the recorded  body clay_particle\nThis variable has the recorded  matter clay\nThis variable has the recorded  form particle\nThis variable has the recorded medium phenomenon soil\nThis variable has the recorded property volume_fraction                                                "
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/SOIL_LAYER_MATTER~ORGANIC~STABILIZED_CARBON__MASS_FRACTION",
+    "type": ["StandardVariable"],
+    "label": ["soil_layer_matter~organic~stabilized_carbon__mass_fraction"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#%28soil_layer%29%40context%7Ein_%28matter%7Eorganic%7Estabilized%40medium_carbon%29__mass_fraction"
+    ],
+    "description": [
+      "                    soil_layer_matter~organic~stabilized_carbon__mass_fraction\n                        \nThis variable contains the  attribute:organicstabilized                                                \n                        \nThis variable has the recorded  phenomenon:carbon(soil_layer)@context~in_(matter~organic~stabilized@medium_carbon)matter~organic~stabilized@medium_carbon\nThis variable has the recorded  matter carbon\nThis variable has the recorded medium phenomenon matter~organic~stabilized\nThis variable has the recorded context phenomenon soil_layer\nThis variable has the recorded context matter soil\nThis variable has the recorded context part layer\nThis variable has the recorded property mass_fraction                                                "
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/SOIL_LAYER__BULK_MASS-PER-VOLUME_DENSITY",
+    "type": ["StandardVariable"],
+    "label": ["soil_layer__bulk_mass-per-volume_density"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#soil_layer__bulk_mass-per-volume_density"
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/SOIL_LAYER__THICKNESS",
+    "type": ["StandardVariable"],
+    "label": ["soil_layer__thickness"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#soil_layer__thickness"
+    ],
+    "description": [
+      "                    soil_layer__thickness\n                        \nThis variable has the recorded  phenomenon soil_layer\nThis variable has the recorded  matter soil\nThis variable has the recorded  part layer\nThis variable has the recorded units L.\nThis variable has the recorded property thickness                                                "
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/SOIL_MATTER~ORGANIC__MASS_FRACTION",
+    "type": ["StandardVariable"],
+    "label": ["soil_matter~organic__mass_fraction"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#soil%40medium_matter%7Eorganic__mass_fraction"
+    ],
+    "description": [
+      "                    soil_matter~organic__mass_fraction\n                        \nThis variable contains the  attribute organic                                                \n                        \nThis variable has the recorded  phenomenon:matter~organicsoil@medium_matter~organic\nThis variable has the recorded  matter matter~organic\nThis variable has the recorded medium phenomenon soil\nThis variable has the recorded property mass_fraction                                                "
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/SOIL_NITROGEN__AVERAGE_OF_MASS_DENITRIFICATION_RATE",
+    "type": ["StandardVariable"],
+    "label": ["soil_nitrogen__average_of_mass_denitrification_rate"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#soil%40role%7Emain_nitrogen%40role%7Ein_denitrification__average_of_mass_denitrification_rate"
+    ],
+    "description": [
+      "                    soil_nitrogen__average_of_mass_denitrification_rate\n                        \nThis variable has the recorded  phenomenon soil@role~main_nitrogen@role~in_denitrification\nThis variable has the recorded  process denitrification\nThis variable has the recorded participant phenomenon:nitrogensoil\nThis variable has the recorded units M T^-1.\nThis variable has the recorded property average_of_mass_denitrification_rate\nThis variable has the recorded modified property mass_denitrification_rate\nThis variable has the recorded applied operator average                                                "
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/SOIL_NITROGEN__AVERAGE_OF_MASS_NITRIFICATION_RATE",
+    "type": ["StandardVariable"],
+    "label": ["soil_nitrogen__average_of_mass_nitrification_rate"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#soil%40role%7Emain_nitrogen%40role%7Ein_nitrification__average_of_mass_nitrification_rate"
+    ],
+    "description": [
+      "                    soil_nitrogen__average_of_mass_nitrification_rate\n                        \nThis variable has the recorded  phenomenon soil@role~main_nitrogen@role~in_nitrification\nThis variable has the recorded  process nitrification\nThis variable has the recorded participant phenomenon:nitrogensoil\nThis variable has the recorded units M T^-1.\nThis variable has the recorded property average_of_mass_nitrification_rate\nThis variable has the recorded modified property mass_nitrification_rate\nThis variable has the recorded applied operator average                                                "
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/SOIL_NITROUS-OXIDE-AS-NITROGEN__AVERAGE_OF_DENITRIFICATION_MASS_EMISSION_RATE",
+    "type": ["StandardVariable"],
+    "label": [
+      "soil_nitrous-oxide-as-nitrogen__average_of_denitrification_mass_emission_rate"
+    ],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#%28soil_denitrification%29%40role%7Esource_nitrous-oxide-as-nitrogen%40role%7Emain_emission__average_of_denitrification_mass_emission_rate"
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/SOIL_NITROUS-OXIDE-AS-NITROGEN__AVERAGE_OF_MASS_EMISSION_RATE",
+    "type": ["StandardVariable"],
+    "label": ["soil_nitrous-oxide-as-nitrogen__average_of_mass_emission_rate"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#soil%40role%7Esource_nitrous-oxide-as-nitrogen%40role%7Emain_emission__average_of_mass_emission_rate"
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/SOIL_NITROUS-OXIDE-AS-NITROGEN__AVERAGE_OF_NITRIFICATION_MASS_EMISSION_RATE",
+    "type": ["StandardVariable"],
+    "label": [
+      "soil_nitrous-oxide-as-nitrogen__average_of_nitrification_mass_emission_rate"
+    ],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#%28soil_nitrification%29%40role%7Esource_nitrous-oxide-as-nitrogen%40role%7Emain_emission__average_of_nitrification_mass_emission_rate"
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/SOIL_POOL-AND-POOL~MICROBIAL_CARBON~DECOMPOSED__ADDITION_MASS",
+    "type": ["StandardVariable"],
+    "label": ["soil_pool-and-pool~microbial_carbon~decomposed__addition_mass"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#%28soil_pool%29%40role%7Esink_pool%7Emicrobial%40role%7Esink_carbon%7Edecomposed%40role%7Emain_addition__addition_mass"
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/SOIL_POOL~STABILIZED_CARBON__CHANGE_OF_MASS",
+    "type": ["StandardVariable"],
+    "label": ["soil_pool~stabilized_carbon__change_of_mass"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#%28soil_pool%7Estabilized%29%40context%7Ein_carbon__change_of_mass"
+    ],
+    "description": [
+      "                    soil_pool~stabilized_carbon__change_of_mass\n                        \nThis variable contains the  attribute stabilized                                                \n                        \nThis variable has the recorded  phenomenon:carbon(soil_pool~stabilized)@context~in_carbon\nThis variable has the recorded  matter carbon\nThis variable has the recorded context phenomenon soil_pool~stabilized\nThis variable has the recorded units M.\nThis variable has the recorded property change_of_mass\nThis variable has the recorded modified property mass\nThis variable has the recorded applied operator change                                                "
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/SOIL_PROFILE_BOTTOM_WATER__DRAINAGE_VOLUME_FLUX",
+    "type": ["StandardVariable"],
+    "label": ["soil_profile_bottom_water__drainage_volume_flux"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#%28soil_profile_bottom%29%40role%7Esource_water%40role%7Emain_draining__drainage_volume_flux"
+    ],
+    "description": [
+      "                    soil_profile_bottom_water__drainage_volume_flux\n                        \nThis variable has the recorded  phenomenon (soil_profile_bottom)@role~source_water@role~main_draining\nThis variable has the recorded  process draining\nThis variable has the recorded participant phenomenon:watersoil_profilesoil_profile_bottom\nThis variable has the recorded participant matter soil\nThis variable has the recorded participant part bottom\nThis variable has the recorded participant abstraction profile\nThis variable has the recorded units L T^-1.\nThis variable has the recorded property drainage_volume_flux                                                "
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/SOIL_ROCK__VOLUME_FRACTION",
+    "type": ["StandardVariable"],
+    "label": ["soil_rock__volume_fraction"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#soil%40medium_rock__volume_fraction"
+    ],
+    "description": [
+      "                    soil_rock__volume_fraction\n                        \nThis variable has the recorded  phenomenon:rocksoil@medium_rock\nThis variable has the recorded  matter rock\nThis variable has the recorded medium phenomenon soil\nThis variable has the recorded property volume_fraction                                                "
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/SOIL_SURFACE_RESIDUE~STANDING_CARBON-TO-NITROGEN__MASS_RATIO",
+    "type": ["StandardVariable"],
+    "label": ["soil_surface_residue~standing_carbon-to-nitrogen__mass_ratio"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#%28soil_surface%29%40context%7Eon_%28residue%7Estanding%40context%7Ein_%28carbon%40role%7Enumerator_nitrogen%40role%7Edenominator%29%29__mass_ratio"
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/SOIL_SURFACE_WATER__IRRIGATION_VOLUME_FLUX",
+    "type": ["StandardVariable"],
+    "label": ["soil_surface_water__irrigation_volume_flux"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#%28soil_surface%29%40role%7Esink_water%40role%7Emain_irrigation__irrigation_volume_flux"
+    ],
+    "description": [
+      "                    soil_surface_water__irrigation_volume_flux\n                        \nThis variable has the recorded  phenomenon (soil_surface)@role~sink_water@role~main_irrigation\nThis variable has the recorded  process irrigation\nThis variable has the recorded participant phenomenon:watersoil_surface\nThis variable has the recorded participant matter soil\nThis variable has the recorded participant abstraction surface\nThis variable has the recorded units L T^-1.\nThis variable has the recorded property irrigation_volume_flux                                                "
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/SOIL_SURFACE_WATER__TIME_INTEGRAL_OF_EVAPORATION_VOLUME_FLUX",
+    "type": ["StandardVariable"],
+    "label": ["soil_surface_water__time_integral_of_evaporation_volume_flux"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#%28soil_surface%29%40role%7Esource_water%40role%7Emain_evaporation__time_integral_of_evaporation_volume_flux"
+    ],
+    "description": [
+      "                    soil_surface_water__time_integral_of_evaporation_volume_flux\n                        \nThis variable has the recorded  phenomenon (soil_surface)@role~source_water@role~main_evaporation\nThis variable has the recorded  process evaporation\nThis variable has the recorded participant phenomenon:watersoil_surface\nThis variable has the recorded participant matter soil\nThis variable has the recorded participant abstraction surface\nThis variable has the recorded units L.\nThis variable has the recorded property time_integral_of_evaporation_volume_flux\nThis variable has the recorded modified property evaporation_volume_flux\nThis variable has the recorded applied operator time_integral                                                "
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/SOIL_WATER__INFILTRATION_VOLUME_FLUX",
+    "type": ["StandardVariable"],
+    "label": ["soil_water__infiltration_volume_flux"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#soil%40medium_infiltration_water__infiltration_volume_flux"
+    ],
+    "description": [
+      "                    soil_water__infiltration_volume_flux\n                        \nThis variable has the recorded  phenomenon:watersoil@medium_infiltration_water\nThis variable has the recorded  matter water\nThis variable has the recorded  process infiltration\nThis variable has the recorded medium phenomenon soil\nThis variable has the recorded units L T^-1.\nThis variable has the recorded property infiltration_volume_flux                                                "
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/SOIL_WATER__SATURATED_HYDRAULIC_CONDUCTIVITY",
+    "type": ["StandardVariable"],
+    "label": ["soil_water__saturated_hydraulic_conductivity"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#soil%40medium_saturated_water__saturated_hydraulic_conductivity"
+    ],
+    "description": [
+      "                    soil_water__saturated_hydraulic_conductivity\n                        \nThis variable contains the  attribute saturated                                                \n                        \nThis variable has the recorded  phenomenon:watersoil@medium_saturated_water\nThis variable has the recorded  matter water\nThis variable has the recorded medium phenomenon soil\nThis variable has the recorded units L T^-1.\nThis variable has the recorded property saturated_hydraulic_conductivity                                                "
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/SOIL_WATER__VOLUME_FRACTION",
+    "type": ["StandardVariable"],
+    "label": ["soil_water__volume_fraction"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#soil%40medium_water__volume_fraction"
+    ],
+    "description": [
+      "                    soil_water__volume_fraction\n                        \nThis variable has the recorded  phenomenon:watersoil@medium_water\nThis variable has the recorded  matter water\nThis variable has the recorded medium phenomenon soil\nThis variable has the recorded property volume_fraction                                                "
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/SOIL__RESIDUAL_POROSITY",
+    "type": ["StandardVariable"],
+    "label": ["soil__residual_porosity"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#soil%40medium__residual_porosity"
+    ],
+    "description": [
+      "                    soil__residual_porosity\n                        \nThis variable has the recorded  phenomenon soil@medium\nThis variable has the recorded medium phenomenon soil\nThis variable has the recorded property residual_porosity                                                "
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/SOIL~NO-ROCK_SILT__MASS_FRACTION",
+    "type": ["StandardVariable"],
+    "label": ["soil~no-rock_silt__mass_fraction"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#soil%7Eno-rock%40medium_silt__mass_fraction"
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/SOIL~NO-ROCK~DRY__MASS-PER-VOLUME_DENSITY",
+    "type": ["StandardVariable"],
+    "label": ["soil~no-rock~dry__mass-per-volume_density"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/variable#soil%7Eno-rock%7Edry__mass-per-volume_density"
+    ]
+  },
+  {
+    "id": "https://w3id.org/okn/i/mint/STORAGE_VOLUME",
+    "type": ["StandardVariable"],
+    "label": ["storage_volume"],
+    "sameAs": [
+      "http://www.geoscienceontology.org/svo/svl/property#storage_volume"
+    ]
+  }
+]
