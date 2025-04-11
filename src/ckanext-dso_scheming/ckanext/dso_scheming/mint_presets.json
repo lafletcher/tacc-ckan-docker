@@ -6,7 +6,6 @@
     {
       "preset_name": "mint_variable_string_autocomplete",
       "values": {
-        "validators": "ignore_missing mint_variable_string_convert",
         "classes": ["control-full"],
         "form_attrs": {
           "data-module": "autocomplete",
