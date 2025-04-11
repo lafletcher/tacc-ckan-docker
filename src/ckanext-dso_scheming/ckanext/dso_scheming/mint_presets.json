@@ -10,7 +10,7 @@
         "form_attrs": {
           "data-module": "autocomplete",
           "data-module-tags": "",
-          "data-module-source": "https://gist.githubusercontent.com/mosoriob/598ffc269fd6293c7924b3bbda6c6a28/raw/0b18fd9fd34ed027e4e2f8cbd94a86f9221814c8/mint_sd_formatted_ascii.json?label=?",
+          "data-module-source": "https://api.jsonbin.io/v3/b/67f91ce28561e97a50fd7ec6?label=?",
           "class": ""
         }
       }
