@@ -10,7 +10,7 @@
         "form_attrs": {
           "data-module": "autocomplete",
           "data-module-tags": "",
-          "data-module-source": "https://api.jsonbin.io/v3/b/67f91ce28561e97a50fd7ec6?label=?",
+          "data-module-source": "https://api.jsonbin.io/v3/b/67f91ce28561e97a50fd7ec6?meta=false&label=?",
           "class": ""
         }
       }
