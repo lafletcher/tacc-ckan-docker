@@ -78,7 +78,8 @@ dataset_fields:
 
   - field_name: spatial
     label: Spatial Coverage
-    help: 'Enter the spatial coverage using GeoJSON format'
+    form_placeholder: '{"type": "Polygon", "coordinates": [[[100, 0], [101, 0], [101, 1], [100, 1], [100, 0]]]}'
+    help: 'Enter the spatial coverage using GeoJSON format. You can use <a href="https://geojson.io/" target="_blank">geojson.io</a> to create a GeoJSON object.'
 
 resource_fields:
   - field_name: url
