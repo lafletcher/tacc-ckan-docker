@@ -76,6 +76,10 @@ dataset_fields:
     label: Temporal Coverage End
     preset: date
 
+  - field_name: spatial
+    label: Spatial Coverage
+    help: 'Enter the spatial coverage using GeoJSON format'
+
 resource_fields:
   - field_name: url
     label: URL
