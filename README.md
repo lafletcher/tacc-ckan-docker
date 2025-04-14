@@ -27,7 +27,7 @@ cp .env.secrets.example .env.dev.secrets
 
 ```bash
 # Copy the production secrets template and edit with your values
-cp .env.secrets.example .env.secrets
+cp .env.secrets.example .env.prod.secrets
 ```
 
 > [!IMPORTANT]

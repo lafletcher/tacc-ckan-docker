@@ -1,0 +1,20 @@
+{
+  "scheming_presets_version": 1,
+  "about": "these are the default scheming field presets",
+  "about_url": "http://github.com/ckan/ckanext-scheming#preset",
+  "presets": [
+    {
+      "preset_name": "mint_variable_string_autocomplete",
+      "values": {
+        "classes": ["control-full"],
+        "form_attrs": {
+          "data-module": "autocomplete",
+          "data-module-tags": "",
+          "data-module-createtags": "false",
+          "data-module-source": "https://api.models.mint.tacc.utexas.edu/v1.8.0/standardvariables?username=mint@isi.edu&enable_ckan=true&label=?",
+          "class": ""
+        }
+      }
+    }
+  ]
+}
