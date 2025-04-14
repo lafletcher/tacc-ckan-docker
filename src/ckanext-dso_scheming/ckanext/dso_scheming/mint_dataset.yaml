@@ -76,12 +76,6 @@ dataset_fields:
     label: Temporal Coverage End
     preset: date
 
-  - field_name: mint_standard_variables
-    label: MINT Standard Variables
-    help_allow_html: true
-    help_text: List of MINT Standard Variables https://api.models.mint.tacc.utexas.edu/v1.8.0/standardvariables?username=mint@isi.edu
-    preset: multiple_text
-
 resource_fields:
   - field_name: url
     label: URL
@@ -100,16 +94,10 @@ resource_fields:
     label: Format
     preset: resource_format_autocomplete
 
-  - field_name: temporal_coverage_start
-    label: Temporal Coverage Start
-    preset: date
-
-  - field_name: temporal_coverage_end
-    label: Temporal Coverage End
-    preset: date
-
   - field_name: mint_standard_variables
     label: MINT Standard Variables
+    preset: mint_variable_string_autocomplete
+    form_placeholder: 'e.g., air__daily_max_of_temperature'
     help_allow_html: true
-    help_text: List of MINT Standard Variables https://api.models.mint.tacc.utexas.edu/v1.8.0/standardvariables?username=mint@isi.edu
-    preset: multiple_text
+    help_text: "Enter standardized variable names used in this dataset. See the <a href='https://api.models.mint.tacc.utexas.edu/v1.8.0/standardvariables?username=mint@isi.edu' target='_blank'>list of standard variables</a>."
+    required: false
