@@ -79,7 +79,8 @@ dataset_fields:
   - field_name: spatial
     label: Spatial Coverage
     form_placeholder: '{"type": "Polygon", "coordinates": [[[100, 0], [101, 0], [101, 1], [100, 1], [100, 0]]]}'
-    help: 'Enter the spatial coverage using GeoJSON format. You can use <a href="https://geojson.io/" target="_blank">geojson.io</a> to create a GeoJSON object.'
+    help_text: 'Enter the spatial coverage using GeoJSON format. You can use <a href="https://geojson.io/" target="_blank">geojson.io</a> to create a GeoJSON object.'
+    help_allow_html: true
 
 resource_fields:
   - field_name: url
@@ -104,5 +105,5 @@ resource_fields:
     preset: mint_variable_string_autocomplete
     form_placeholder: 'e.g., air__daily_max_of_temperature'
     help_allow_html: true
-    help_text: "Enter standardized variable names used in this dataset. See the <a href='https://api.models.mint.tacc.utexas.edu/v1.8.0/standardvariables?username=mint@isi.edu' target='_blank'>list of standard variables</a>."
+    help_text: 'Enter standardized variable names used in this dataset'
     required: false
