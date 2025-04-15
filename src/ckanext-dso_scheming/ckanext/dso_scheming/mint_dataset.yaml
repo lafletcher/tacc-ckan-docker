@@ -99,5 +99,5 @@ resource_fields:
     preset: mint_variable_string_autocomplete
     form_placeholder: 'e.g., air__daily_max_of_temperature'
     help_allow_html: true
-    help_text: "Enter standardized variable names used in this dataset. See the <a href='https://api.models.mint.tacc.utexas.edu/v1.8.0/standardvariables?username=mint@isi.edu' target='_blank'>list of standard variables</a>."
+    help_text: "Enter standardized variable names used in this dataset. See the <a href='https://mint.tacc.utexas.edu/variables' target='_blank'>list of standard variables</a>."
     required: false
