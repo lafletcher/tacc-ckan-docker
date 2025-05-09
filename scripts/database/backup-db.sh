@@ -17,6 +17,7 @@ echo "Using container name from docker-compose: ckan-docker-db-1"
 
 # Get the PostgreSQL connection details from the environment
 source ./.env.prod.secrets
+source ./.env.prod.config
 POSTGRES_USER=${POSTGRES_USER:-ckan}
 POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-ckan}
 CKAN_DB=${CKAN_DB:-ckan}
