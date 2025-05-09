@@ -16,7 +16,7 @@ echo "Starting database backup process..."
 echo "Using container name from docker-compose: ckan-docker-db-1"
 
 # Get the PostgreSQL connection details from the environment
-source ./.env
+source ./.env.prod.secrets
 POSTGRES_USER=${POSTGRES_USER:-ckan}
 POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-ckan}
 CKAN_DB=${CKAN_DB:-ckan}
