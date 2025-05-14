@@ -17,7 +17,7 @@ services:
     build:
       dockerfile: ckan/Dockerfile
       args:
-        - TZ=${TZ}
+        - TZ=UTC
     networks:
       - ckannet
       - dbnet
