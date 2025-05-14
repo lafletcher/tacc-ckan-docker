@@ -59,8 +59,7 @@ services:
       - pg_data:/var/lib/postgresql/data
     restart: unless-stopped
     healthcheck:
-      test:
-        ['CMD', 'pg_isready', '-U', '${POSTGRES_USER}', '-d', '${POSTGRES_DB}']
+      test: ['CMD', 'pg_isready', '-U', 'postgres', '-d', 'postgres']
 
   solr:
     image: ckan/ckan-solr:2.9-solr9-spatial
