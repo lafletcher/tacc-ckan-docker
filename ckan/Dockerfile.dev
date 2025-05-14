@@ -13,6 +13,7 @@ USER ckan
 RUN pip3 install ckanext-geoview
 ADD requirements/ckanext-spatial.txt /tmp/
 RUN pip3 install ckanext-pdfview
+
 RUN pip3 install -r /tmp/ckanext-spatial.txt
 RUN pip3 install "git+https://github.com/ckan/ckanext-spatial.git#egg=ckanext-spatial"
 RUN pip3 install "git+https://github.com/ckan/ckanext-showcase.git#egg=ckanext-showcase"
@@ -20,6 +21,8 @@ RUN pip3 install "git+https://github.com/ckan/ckanext-scheming.git#egg=ckanext-s
 RUN pip3 install -e "git+https://github.com/ckan/ckanext-pages.git#egg=ckanext-pages"
 COPY docker-entrypoint.d/* /docker-entrypoint.d/
 
+COPY --chown=ckan:ckan-sys src/ckanext-dso_scheming ${APP_DIR}/src/ckanext-dso_scheming
+RUN cd ${APP_DIR}/src/ckanext-dso_scheming && python3 setup.py develop --user
 # Apply any patches needed to CKAN core or any of the built extensions (not the
 # runtime mounted ones)
 COPY patches ${APP_DIR}/patches
