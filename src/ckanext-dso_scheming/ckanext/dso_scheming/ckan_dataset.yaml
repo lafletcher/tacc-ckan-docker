@@ -82,7 +82,7 @@ dataset_fields:
     label: 'Spatial Coverage'
     form_snippet: textarea.html
     display_snippet: text.html
-    validators: 'ignore_missing spatial_validator convert_to_extras'
+    validators: 'ignore_missing convert_to_extras'
     output_validators: 'convert_from_extras ignore_missing'
     form_attrs:
       rows: 6
