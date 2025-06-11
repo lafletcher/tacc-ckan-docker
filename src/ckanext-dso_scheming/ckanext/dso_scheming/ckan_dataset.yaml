@@ -80,16 +80,10 @@ dataset_fields:
 
   - field_name: spatial
     label: 'Spatial Coverage'
-    form_snippet: textarea.html
-    display_snippet: text.html
-    validators: 'ignore_missing convert_to_extras'
-    output_validators: 'convert_from_extras ignore_missing'
-    form_attrs:
-      rows: 6
-      class: form-control
-      data-module: spatial-field
+    form_snippet: forms_snippets/spatial.html
+    display_snippet: display_snippets/spatial.html
     help_text: 'Define the geographic coverage as GeoJSON geometry'
-    form_placeholder: '{"type": "Point", "coordinates": [-74.006, 40.7128]}'
+    form_placeholder: 'Paste a valid GeoJSON geometry'
 
 resource_fields:
   - field_name: url

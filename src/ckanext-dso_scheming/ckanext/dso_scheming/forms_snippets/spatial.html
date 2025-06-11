@@ -1,30 +1,16 @@
 {% import 'macros/form.html' as form %}
 
-{# Get spatial value from data or extras #}
 {% set spatial_value = data.get(field.field_name, '') %}
-{% if not spatial_value and data.extras %}
-  {% for extra in data.extras %}
-    {% if extra.key == field.field_name %}
-      {% set spatial_value = extra.value %}
-    {% endif %}
-  {% endfor %}
-{% endif %}
 
 <div class="control-group">
-  {{ form.label(field.field_name, field.label or field.field_name|title, id="field-" + field.field_name) }}
+  {{ form.label(field.field_name, field.label, id="field-" + field.field_name) }}
   <div class="controls">
     <textarea
       id="field-{{ field.field_name }}"
       name="{{ field.field_name }}"
-      cols="20"
-      rows="5"
+      rows="6"
+      class="form-control"
       placeholder="{{ field.form_placeholder or '' }}"
-      class="{{ field.form_attrs.class or 'form-control' }}"
-      {% if field.form_attrs %}
-        {% for key, value in field.form_attrs.items() %}
-          {% if key != 'class' %}{{ key }}="{{ value }}"{% endif %}
-        {% endfor %}
-      {% endif %}
     >{{ spatial_value }}</textarea>
 
     {% if field.help_text %}
@@ -39,10 +25,3 @@
     {% endif %}
   </div>
 </div>
-
-{# Include spatial JavaScript resources if available #}
-{% try %}
-  {% resource 'ckanext-spatial/spatial-form' %}
-{% except %}
-  {# Spatial resources not available #}
-{% endtry %}

@@ -1,19 +1,10 @@
-{% if data.spatial or (data.extras and data.extras|selectattr("key", "equalto", "spatial")|list) %}
-  <div class="spatial-info">
-    <h3>{{ _('Spatial Coverage') }}</h3>
-    {% set spatial_value = data.spatial %}
-    {% if not spatial_value and data.extras %}
-      {% for extra in data.extras %}
-        {% if extra.key == 'spatial' %}
-          {% set spatial_value = extra.value %}
-        {% endif %}
-      {% endfor %}
-    {% endif %}
+{% set spatial_value = data.get(field.field_name, '') %}
 
-    {% if spatial_value %}
-      <div class="spatial-extent" data-module="dataset-map" data-extent="{{ spatial_value }}">
-        <p>{{ _('Geographic coverage defined') }}</p>
-      </div>
-    {% endif %}
+{% if spatial_value %}
+<div class="spatial-coverage">
+  <h3>{{ field.label }}</h3>
+  <div class="spatial-text">
+    <pre>{{ spatial_value }}</pre>
   </div>
+</div>
 {% endif %}
