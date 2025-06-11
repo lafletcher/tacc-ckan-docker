@@ -88,10 +88,6 @@ dataset_fields:
     help_text: 'Enter the spatial coverage using GeoJSON format. You can use <a href="https://geojson.io/" target="_blank">geojson.io</a> to create a GeoJSON object.'
     help_allow_html: true
     required: false
-    form_attrs:
-      rows: 6
-      class: form-control
-      data-module: spatial-field
 
 resource_fields:
   - field_name: url
