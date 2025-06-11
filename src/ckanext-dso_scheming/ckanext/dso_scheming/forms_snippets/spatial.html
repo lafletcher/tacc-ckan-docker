@@ -11,7 +11,7 @@
 {% endif %}
 
 <div class="control-group">
-  {{ form.label(field.field_name, field.label, id="field-" + field.field_name) }}
+  {{ form.label(field.field_name, field.label or field.field_name|title, id="field-" + field.field_name) }}
   <div class="controls">
     <textarea
       id="field-{{ field.field_name }}"
@@ -33,5 +33,16 @@
         {{ field.help_text }}
       </span>
     {% endif %}
+
+    {% if errors and errors[field.field_name] %}
+      <span class="error-block">{{ errors[field.field_name]|join(', ') }}</span>
+    {% endif %}
   </div>
 </div>
+
+{# Include spatial JavaScript resources if available #}
+{% try %}
+  {% resource 'ckanext-spatial/spatial-form' %}
+{% except %}
+  {# Spatial resources not available #}
+{% endtry %}
