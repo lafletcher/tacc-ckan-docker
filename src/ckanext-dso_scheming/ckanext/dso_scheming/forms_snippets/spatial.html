@@ -1,36 +1,37 @@
 {% import 'macros/form.html' as form %}
 
-{# Get spatial value from extras if it exists #}
-{% set spatial_value = '' %}
-{% if data.extras %}
+{# Get spatial value from data or extras #}
+{% set spatial_value = data.get(field.field_name, '') %}
+{% if not spatial_value and data.extras %}
   {% for extra in data.extras %}
-    {% if extra.key == 'spatial' %}
+    {% if extra.key == field.field_name %}
       {% set spatial_value = extra.value %}
     {% endif %}
   {% endfor %}
 {% endif %}
 
-{% if data.spatial %}
-  {% set spatial_value = data.spatial %}
-{% endif %}
-
 <div class="control-group">
-  {{ form.label('spatial', _('Spatial Coverage'), id='field-spatial') }}
+  {{ form.label(field.field_name, field.label, id="field-" + field.field_name) }}
   <div class="controls">
     <textarea
-      id="field-spatial"
-      name="spatial"
+      id="field-{{ field.field_name }}"
+      name="{{ field.field_name }}"
       cols="20"
       rows="5"
-      placeholder="Enter GeoJSON geometry"
-      data-module="spatial-field"
+      placeholder="{{ field.form_placeholder or '' }}"
+      class="{{ field.form_attrs.class or 'form-control' }}"
+      {% if field.form_attrs %}
+        {% for key, value in field.form_attrs.items() %}
+          {% if key != 'class' %}{{ key }}="{{ value }}"{% endif %}
+        {% endfor %}
+      {% endif %}
     >{{ spatial_value }}</textarea>
-    <span class="info-block">
-      <i class="fa fa-info-circle"></i>
-      Define the geographic coverage as GeoJSON geometry
-    </span>
+
+    {% if field.help_text %}
+      <span class="info-block">
+        <i class="fa fa-info-circle"></i>
+        {{ field.help_text }}
+      </span>
+    {% endif %}
   </div>
 </div>
-
-{# Include spatial resources #}
-{% resource 'ckanext-spatial/spatial-form' %}
