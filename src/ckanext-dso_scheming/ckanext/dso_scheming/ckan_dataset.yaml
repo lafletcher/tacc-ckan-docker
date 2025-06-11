@@ -80,8 +80,8 @@ dataset_fields:
 
   - field_name: spatial
     label: 'Spatial Coverage'
-    form_snippet: ckanext/dso_scheming/forms_snippets/spatial.html
-    display_snippet: ckanext/dso_scheming/display_snippets/spatial.html
+    form_snippet: dso_scheming/forms_snippets/spatial.html
+    display_snippet: dso_scheming/display_snippets/spatial.html
     validators: 'ignore_missing spatial_validator'
     form_attrs:
       data-module: spatial-field
