@@ -78,6 +78,17 @@ dataset_fields:
     preset: date
     required: false
 
+  - field_name: spatial
+    label: 'Spatial Coverage'
+    form_snippet: forms_snippets/spatial.html
+    display_snippet: display_snippets/spatial.html
+    validators: 'ignore_missing spatial_validator'
+    form_attrs:
+      data-module: spatial-field
+      class: form-control
+    help_text: 'Define the geographic coverage as GeoJSON geometry'
+    form_placeholder: 'Paste a valid GeoJSON geometry'
+
 resource_fields:
   - field_name: url
     label: URL

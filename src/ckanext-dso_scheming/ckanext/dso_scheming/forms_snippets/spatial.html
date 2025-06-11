@@ -1,0 +1,36 @@
+{% import 'macros/form.html' as form %}
+
+{# Get spatial value from extras if it exists #}
+{% set spatial_value = '' %}
+{% if data.extras %}
+  {% for extra in data.extras %}
+    {% if extra.key == 'spatial' %}
+      {% set spatial_value = extra.value %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
+
+{% if data.spatial %}
+  {% set spatial_value = data.spatial %}
+{% endif %}
+
+<div class="control-group">
+  {{ form.label('spatial', _('Spatial Coverage'), id='field-spatial') }}
+  <div class="controls">
+    <textarea
+      id="field-spatial"
+      name="spatial"
+      cols="20"
+      rows="5"
+      placeholder="Enter GeoJSON geometry"
+      data-module="spatial-field"
+    >{{ spatial_value }}</textarea>
+    <span class="info-block">
+      <i class="fa fa-info-circle"></i>
+      Define the geographic coverage as GeoJSON geometry
+    </span>
+  </div>
+</div>
+
+{# Include spatial resources #}
+{% resource 'ckanext-spatial/spatial-form' %}
