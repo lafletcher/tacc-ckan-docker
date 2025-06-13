@@ -1,4 +1,4 @@
-Metadata-Version: 2.4
+Metadata-Version: 2.2
 Name: ckanext-tacc_theme
 Version: 0.0.1
 Summary: A CKAN theme for TACC
@@ -20,7 +20,6 @@ Dynamic: description-content-type
 Dynamic: home-page
 Dynamic: keywords
 Dynamic: license
-Dynamic: license-file
 Dynamic: summary
 
 [![Tests](https://github.com/mosoriob/ckanext-tacc_theme/workflows/Tests/badge.svg?branch=main)](https://github.com/mosoriob/ckanext-tacc_theme/actions)
