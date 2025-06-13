@@ -19,7 +19,7 @@
 
   .spatial-modal-content {
       position: relative;
-      background-color: var(--background-color);
+      background-color: #F4F4F4;
       margin: 2% auto;
       padding: 0;
       width: 90%;
@@ -59,7 +59,7 @@
   .spatial-map {
       height: 100%;
       width: 100%;
-      border: 2px solid var(--primary);
+      border: 2px solid #784fe8;
       border-radius: 4px;
       flex: 1;
   }
@@ -83,7 +83,7 @@
   }
 
   .btn-spatial {
-      background-color: var(--primary);
+      background-color: #784fe8;
       color: white;
       border: none;
       padding: 8px 16px;
@@ -94,7 +94,7 @@
   }
 
   .btn-spatial:hover {
-      background-color: var(--primary-dark);
+      background-color: #6039cc;
   }
 
   .btn-spatial:disabled {
@@ -103,7 +103,7 @@
   }
 
   .btn-secondary {
-      background-color: var(--primary-darker);
+      background-color: #3d189b;
       color: white;
       border: none;
       padding: 8px 16px;
@@ -114,16 +114,16 @@
   }
 
   .btn-secondary:hover {
-      background-color: var(--primary-darker);
+      background-color: #3d189b;
       opacity: 0.9;
   }
 
   .spatial-instructions {
       margin-bottom: 15px;
       padding: 15px;
-      background-color: var(--primary-lightest);
+      background-color: #6039cc40;
       border-radius: 4px;
-      border-left: 4px solid var(--primary);
+      border-left: 4px solid #784fe8;
       font-size: 14px;
   }
 
@@ -301,7 +301,7 @@
           const bounds = L.latLngBounds(latLngs);
 
           currentRectangle = L.rectangle(bounds, {
-              color: var(--primary),
+              color: '#784fe8',
               weight: 2,
               fillOpacity: 0.2
           }).addTo(map);
@@ -352,7 +352,7 @@
           }
 
           currentRectangle = L.rectangle(bounds, {
-              color: 'var(--primary)',
+              color: '#784fe8',
               weight: 2,
               fillOpacity: 0.2
           }).addTo(map);
@@ -374,7 +374,7 @@
           }
 
           currentRectangle = L.rectangle(bounds, {
-              color: 'var(--primary)',
+              color: '#784fe8',
               weight: 2,
               fillOpacity: 0.2
           }).addTo(map);
