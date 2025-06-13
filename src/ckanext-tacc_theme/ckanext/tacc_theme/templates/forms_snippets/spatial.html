@@ -1,3 +1,8 @@
+{#
+  forms_snippets/spatial.html
+  CKAN scheming form snippet for spatial coverage with map modal
+  #}
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" />
 
   <style>
@@ -19,9 +24,12 @@
       padding: 0;
       width: 90%;
       max-width: 1000px;
-      height: 90%;
+      height: 90vh;
+      max-height: 90vh;
       border-radius: 8px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      display: flex;
+      flex-direction: column;
   }
 
   .spatial-modal-header {
@@ -30,18 +38,22 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-shrink: 0;
   }
 
   .spatial-modal-body {
       padding: 20px;
-      height: calc(100% - 140px);
+      flex: 1;
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
   }
 
   .spatial-modal-footer {
       padding: 20px;
       border-top: 1px solid #ddd;
       text-align: right;
+      flex-shrink: 0;
   }
 
   .spatial-map {
@@ -49,6 +61,13 @@
       width: 100%;
       border: 2px solid #ccc;
       border-radius: 4px;
+      flex: 1;
+  }
+
+  .spatial-controls {
+      margin-bottom: 15px;
+      text-align: center;
+      flex-shrink: 0;
   }
 
   .close-modal {
@@ -186,7 +205,7 @@
                   </ol>
               </div>
 
-              <div style="margin-bottom: 15px; text-align: center;">
+              <div class="spatial-controls">
                   <button type="button" class="btn-spatial" id="start-drawing-{{ field.field_name }}">Start Drawing</button>
                   <button type="button" class="btn-spatial" id="clear-area-{{ field.field_name }}" disabled>Clear</button>
               </div>
