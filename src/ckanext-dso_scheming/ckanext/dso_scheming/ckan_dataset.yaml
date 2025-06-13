@@ -79,11 +79,10 @@ dataset_fields:
     required: false
 
   - field_name: spatial
-    label: Spatial Coverage
-    form_placeholder: '{"type": "Polygon", "coordinates": [[[100, 0], [101, 0], [101, 1], [100, 1], [100, 0]]]}'
-    validators: 'ignore_missing convert_to_extras'
-    output_validators: 'convert_from_extras ignore_missing'
-    help_text: 'Enter the spatial coverage using GeoJSON format. You can use <a href="https://geojson.io/" target="_blank">geojson.io</a> to create a GeoJSON object.'
+    label: 'Spatial Coverage'
+    form_snippet: forms_snippets/spatial.html
+    help_text: 'Define the geographic coverage as GeoJSON geometry'
+    form_placeholder: 'Paste a valid GeoJSON geometry'
     help_allow_html: true
     required: false
 

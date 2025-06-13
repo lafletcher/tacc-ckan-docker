@@ -1,0 +1,449 @@
+{#
+  forms_snippets/spatial.html
+  CKAN scheming form snippet for spatial coverage with map modal
+  #}
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" />
+
+  <style>
+  .spatial-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 9999;
+  }
+
+  .spatial-modal-content {
+      position: relative;
+      background-color: #F4F4F4;
+      margin: 2% auto;
+      padding: 0;
+      width: 90%;
+      max-width: 1000px;
+      height: 90vh;
+      max-height: 90vh;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      display: flex;
+      flex-direction: column;
+  }
+
+  .spatial-modal-header {
+      padding: 20px;
+      border-bottom: 1px solid #ddd;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-shrink: 0;
+  }
+
+  .spatial-modal-body {
+      padding: 20px;
+      flex: 1;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+  }
+
+  .spatial-modal-footer {
+      padding: 20px;
+      border-top: 1px solid #ddd;
+      text-align: right;
+      flex-shrink: 0;
+  }
+
+  .spatial-map {
+      height: 100%;
+      width: 100%;
+      border: 2px solid #784fe8;
+      border-radius: 4px;
+      flex: 1;
+  }
+
+  .spatial-controls {
+      margin-bottom: 15px;
+      text-align: center;
+      flex-shrink: 0;
+  }
+
+  .close-modal {
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: #666;
+  }
+
+  .close-modal:hover {
+      color: #000;
+  }
+
+  .btn-spatial {
+      background-color: #784fe8;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      margin-left: 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+  }
+
+  .btn-spatial:hover {
+      background-color: #6039cc;
+  }
+
+  .btn-spatial:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+  }
+
+  .btn-secondary {
+      background-color: #3d189b;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      margin-right: 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+  }
+
+  .btn-secondary:hover {
+      background-color: #3d189b;
+      opacity: 0.9;
+  }
+
+  .spatial-instructions {
+      margin-bottom: 15px;
+      padding: 15px;
+      background-color: #6039cc40;
+      border-radius: 4px;
+      border-left: 4px solid #784fe8;
+      font-size: 14px;
+  }
+
+  .form-group {
+      position: relative;
+  }
+
+  .input-group {
+      display: flex;
+  }
+
+  .input-group input {
+      flex: 1;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+  }
+
+  .input-group-append {
+      display: flex;
+  }
+
+  .input-group-append .btn-spatial {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      margin-left: 0;
+  }
+  </style>
+
+  <div class="form-group">
+      <label class="control-label" for="{{ field.field_name }}">
+          {{ field.label or field.field_name }}
+          {% if field.required %}
+              <span class="control-required">*</span>
+          {% endif %}
+      </label>
+
+      <div class="input-group">
+          <input
+              id="{{ field.field_name }}"
+              type="text"
+              name="{{ field.field_name }}"
+              value="{{ data.get(field.field_name, '') }}"
+              placeholder="{{ field.form_placeholder or 'Paste a valid GeoJSON geometry' }}"
+              class="form-control"
+              {% if field.required %}required{% endif %}
+          />
+          <div class="input-group-append">
+              <button type="button" class="btn-spatial" id="draw-area-btn-{{ field.field_name }}">
+                  Draw Area
+              </button>
+          </div>
+      </div>
+
+      {% if field.help_text %}
+          <div class="help-block">{{ field.help_text }}</div>
+      {% endif %}
+
+      {% if errors and field.field_name in errors %}
+          <div class="error-block">
+              {{ errors[field.field_name]|join(', ') }}
+          </div>
+      {% endif %}
+  </div>
+
+  <!-- Spatial Modal -->
+  <div id="spatial-modal-{{ field.field_name }}" class="spatial-modal">
+      <div class="spatial-modal-content">
+          <div class="spatial-modal-header">
+              <h3>Draw Spatial Coverage Area</h3>
+              <button type="button" class="close-modal" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="spatial-modal-body">
+              <div class="spatial-instructions">
+                  <strong>Instructions:</strong>
+                  <ol>
+                      <li>Click "Start Drawing" to enable drawing mode</li>
+                      <li>Click and drag on the map to create a rectangular bounding box</li>
+                      <li>Use "Clear" to remove the current area and start over</li>
+                      <li>Click "Confirm Selection" to save the area</li>
+                  </ol>
+              </div>
+
+              <div class="spatial-controls">
+                  <button type="button" class="btn-spatial" id="start-drawing-{{ field.field_name }}">Start Drawing</button>
+                  <button type="button" class="btn-spatial" id="clear-area-{{ field.field_name }}" disabled>Clear</button>
+              </div>
+
+              <div id="spatial-map-{{ field.field_name }}" class="spatial-map"></div>
+          </div>
+          <div class="spatial-modal-footer">
+              <button type="button" class="btn-secondary" data-dismiss="modal">Cancel</button>
+              <button type="button" class="btn-spatial" id="confirm-selection-{{ field.field_name }}" disabled>Confirm Selection</button>
+          </div>
+      </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+  <script>
+  (function() {
+      const fieldName = '{{ field.field_name }}';
+      const drawAreaBtn = document.getElementById('draw-area-btn-' + fieldName);
+      const modal = document.getElementById('spatial-modal-' + fieldName);
+      const spatialInput = document.getElementById(fieldName);
+      const mapContainer = document.getElementById('spatial-map-' + fieldName);
+      const startDrawingBtn = document.getElementById('start-drawing-' + fieldName);
+      const clearAreaBtn = document.getElementById('clear-area-' + fieldName);
+      const confirmBtn = document.getElementById('confirm-selection-' + fieldName);
+
+      let map = null;
+      let currentRectangle = null;
+      let isDrawing = false;
+      let startPoint = null;
+      let currentGeoJSON = null;
+
+      // Function to convert bounds to GeoJSON Polygon format
+      function boundsToGeoJSON(bounds) {
+          const sw = bounds.getSouthWest();
+          const ne = bounds.getNorthEast();
+          const nw = L.latLng(ne.lat, sw.lng);
+          const se = L.latLng(sw.lat, ne.lng);
+
+          const coordinates = [[
+              [sw.lng, sw.lat],
+              [nw.lng, nw.lat],
+              [ne.lng, ne.lat],
+              [se.lng, se.lat],
+              [sw.lng, sw.lat]
+          ]];
+
+          return {
+              "type": "Polygon",
+              "coordinates": coordinates
+          };
+      }
+
+      // Function to initialize the map
+      function initializeMap() {
+          if (map) return;
+
+          map = L.map(mapContainer).setView([39.8283, -98.5795], 4);
+
+          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+              attribution: '© OpenStreetMap contributors'
+          }).addTo(map);
+
+          // Load existing GeoJSON if present
+          loadExistingGeoJSON();
+
+          setupMapEvents();
+      }
+
+      // Function to load existing GeoJSON from input
+      function loadExistingGeoJSON() {
+          const existingValue = spatialInput.value.trim();
+          if (existingValue) {
+              try {
+                  const geoJSON = JSON.parse(existingValue);
+                  if (geoJSON.type === 'Polygon' && geoJSON.coordinates && geoJSON.coordinates[0]) {
+                      displayGeoJSONOnMap(geoJSON);
+                  }
+              } catch (e) {
+                  console.log('Invalid GeoJSON in input, ignoring');
+              }
+          }
+      }
+
+      // Function to display GeoJSON on map
+      function displayGeoJSONOnMap(geoJSON) {
+          if (currentRectangle) {
+              map.removeLayer(currentRectangle);
+          }
+
+          const coords = geoJSON.coordinates[0];
+          const latLngs = coords.slice(0, -1).map(coord => [coord[1], coord[0]]);
+          const bounds = L.latLngBounds(latLngs);
+
+          currentRectangle = L.rectangle(bounds, {
+              color: '#784fe8',
+              weight: 2,
+              fillOpacity: 0.2
+          }).addTo(map);
+
+          map.fitBounds(bounds);
+          currentGeoJSON = geoJSON;
+          clearAreaBtn.disabled = false;
+          confirmBtn.disabled = false;
+      }
+
+      // Function to clear the rectangle
+      function clearRectangle() {
+          if (currentRectangle) {
+              map.removeLayer(currentRectangle);
+              currentRectangle = null;
+              currentGeoJSON = null;
+              clearAreaBtn.disabled = true;
+              confirmBtn.disabled = true;
+          }
+      }
+
+      // Function to start drawing mode
+      function startDrawingMode() {
+          startDrawingBtn.textContent = 'Drawing... (click and drag)';
+          startDrawingBtn.disabled = true;
+          mapContainer.style.cursor = 'crosshair';
+          clearRectangle();
+      }
+
+      // Map event handlers
+      function onMouseDown(e) {
+          if (!startDrawingBtn.disabled) return;
+
+          isDrawing = true;
+          startPoint = e.latlng;
+          map.dragging.disable();
+          map.doubleClickZoom.disable();
+      }
+
+      function onMouseMove(e) {
+          if (!isDrawing || !startPoint) return;
+
+          const currentPoint = e.latlng;
+          const bounds = L.latLngBounds(startPoint, currentPoint);
+
+          if (currentRectangle) {
+              map.removeLayer(currentRectangle);
+          }
+
+          currentRectangle = L.rectangle(bounds, {
+              color: '#784fe8',
+              weight: 2,
+              fillOpacity: 0.2
+          }).addTo(map);
+      }
+
+      function onMouseUp(e) {
+          if (!isDrawing || !startPoint) return;
+
+          isDrawing = false;
+          const endPoint = e.latlng;
+
+          map.dragging.enable();
+          map.doubleClickZoom.enable();
+
+          const bounds = L.latLngBounds(startPoint, endPoint);
+
+          if (currentRectangle) {
+              map.removeLayer(currentRectangle);
+          }
+
+          currentRectangle = L.rectangle(bounds, {
+              color: '#784fe8',
+              weight: 2,
+              fillOpacity: 0.2
+          }).addTo(map);
+
+          // Update UI
+          startDrawingBtn.textContent = 'Start Drawing';
+          startDrawingBtn.disabled = false;
+          clearAreaBtn.disabled = false;
+          confirmBtn.disabled = false;
+          mapContainer.style.cursor = '';
+
+          // Store the GeoJSON
+          currentGeoJSON = boundsToGeoJSON(bounds);
+          startPoint = null;
+      }
+
+      // Setup map events
+      function setupMapEvents() {
+          map.on('mousedown', onMouseDown);
+          map.on('mousemove', onMouseMove);
+          map.on('mouseup', onMouseUp);
+
+          mapContainer.addEventListener('mouseleave', function() {
+              if (isDrawing) {
+                  onMouseUp({latlng: startPoint});
+              }
+          });
+      }
+
+      // Event listeners
+      drawAreaBtn.addEventListener('click', function() {
+          modal.style.display = 'block';
+          setTimeout(initializeMap, 100); // Small delay to ensure modal is visible
+          if (map) {
+              map.invalidateSize(); // Refresh map size
+          }
+      });
+
+      // Close modal events
+      modal.querySelectorAll('[data-dismiss="modal"], .close-modal').forEach(function(element) {
+          element.addEventListener('click', function() {
+              modal.style.display = 'none';
+          });
+      });
+
+      // Close modal when clicking outside
+      modal.addEventListener('click', function(e) {
+          if (e.target === modal) {
+              modal.style.display = 'none';
+          }
+      });
+
+      startDrawingBtn.addEventListener('click', startDrawingMode);
+      clearAreaBtn.addEventListener('click', clearRectangle);
+
+      confirmBtn.addEventListener('click', function() {
+          if (currentGeoJSON) {
+              spatialInput.value = JSON.stringify(currentGeoJSON);
+              // Trigger change event for form validation
+              spatialInput.dispatchEvent(new Event('change'));
+          }
+          modal.style.display = 'none';
+      });
+
+      // Close modal with Escape key
+      document.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape' && modal.style.display === 'block') {
+              modal.style.display = 'none';
+          }
+      });
+  })();
+  </script>
