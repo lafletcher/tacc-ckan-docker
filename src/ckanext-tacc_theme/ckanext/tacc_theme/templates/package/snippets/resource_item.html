@@ -278,6 +278,7 @@ let currentTaskId = null;
 let currentSubtaskId = null;
 let currentAnalysisType = null;
 let currentToken = null;
+let currentProblemStatement = null;
 
 // API Configuration
 const MINT_API_BASE = 'http://localhost:3000/v1';
@@ -377,6 +378,7 @@ function closeMintAnalysis() {
     currentSubtaskId = null;
     currentAnalysisType = null;
     currentToken = null;
+    currentProblemStatement = null;
     resetToInitialState();
 }
 
@@ -388,6 +390,7 @@ function resetToInitialState() {
     document.getElementById('analysisResults').style.display = 'none';
     document.getElementById('problemStatementForm').reset();
     currentAnalysisType = null;
+    currentProblemStatement = null;
 }
 
 function showAnalysisTypeSelection() {
@@ -438,6 +441,7 @@ function backToAnalysisTypes() {
     currentProblemStatementId = null;
     currentTaskId = null;
     currentSubtaskId = null;
+    currentProblemStatement = null;
 }
 
 async function loadProblemStatements(token) {
@@ -474,7 +478,7 @@ function displayProblemStatements(problemStatements) {
     }
 
     const html = problemStatements.map(ps => `
-        <div class="problem-statement-card" onclick="selectProblemStatement('${ps.id}', '${ps.name}')">
+        <div class="problem-statement-card" onclick="selectProblemStatement('${ps.id}', '${ps.name}')" data-region="${ps.regionid}" data-start-date="${ps.dates?.start_date}" data-end-date="${ps.dates?.end_date}">
             <h6>${ps.name}</h6>
             <p><strong>Region:</strong> ${ps.regionid}</p>
             <p><strong>Period:</strong> ${formatDate(ps.dates?.start_date)} - ${formatDate(ps.dates?.end_date)}</p>
@@ -493,11 +497,23 @@ function formatDate(dateString) {
 function selectProblemStatement(problemStatementId, problemStatementName) {
     currentProblemStatementId = problemStatementId;
 
+    // Find and store the full problem statement data
+    const problemStatementCard = event.target.closest('.problem-statement-card');
+    currentProblemStatement = {
+        id: problemStatementId,
+        name: problemStatementName,
+        regionid: problemStatementCard.querySelector('[data-region]')?.getAttribute('data-region') || 'texas',
+        dates: {
+            start_date: problemStatementCard.querySelector('[data-start-date]')?.getAttribute('data-start-date') || '',
+            end_date: problemStatementCard.querySelector('[data-end-date]')?.getAttribute('data-end-date') || ''
+        }
+    };
+
     // Highlight selected problem statement
     document.querySelectorAll('.problem-statement-card').forEach(card => {
         card.classList.remove('selected');
     });
-    event.target.closest('.problem-statement-card').classList.add('selected');
+    problemStatementCard.classList.add('selected');
 
     // Show analysis configuration
     document.getElementById('problemStatementSection').style.display = 'none';
@@ -549,6 +565,14 @@ document.getElementById('problemStatementForm').addEventListener('submit', async
         if (response.ok) {
             const result = await response.json();
             currentProblemStatementId = result.id;
+
+            // Store the created problem statement data
+            currentProblemStatement = {
+                id: result.id,
+                name: problemData.name,
+                regionid: problemData.regionid,
+                dates: problemData.dates
+            };
 
             // Show success message and proceed to analysis configuration
             alert('Problem statement created successfully!');
@@ -651,15 +675,30 @@ async function startMintAnalysis() {
 }
 
 async function createTaskAndSubtask(taskName, subtaskName, responseVariables, drivingVariables) {
+    // Get dates and region from stored problem statement or form values
+    let regionId, startDate, endDate;
+
+    if (currentProblemStatement) {
+        // Use stored problem statement data
+        regionId = currentProblemStatement.regionid;
+        startDate = currentProblemStatement.dates.start_date;
+        endDate = currentProblemStatement.dates.end_date;
+    } else {
+        // Use form values for newly created problem statement
+        regionId = document.getElementById('problemRegion').value || 'texas';
+        startDate = document.getElementById('startDate').value + 'T00:00:00Z';
+        endDate = document.getElementById('endDate').value + 'T23:59:59Z';
+    }
+
     const requestData = {
         task: {
             name: taskName,
             response_variables: responseVariables,
             driving_variables: drivingVariables,
-            regionid: document.getElementById('problemRegion').value || 'texas',
+            regionid: regionId,
             dates: {
-                start_date: document.getElementById('startDate').value + 'T00:00:00Z',
-                end_date: document.getElementById('endDate').value + 'T23:59:59Z'
+                start_date: startDate,
+                end_date: endDate
             }
         },
         subtask: {
@@ -667,8 +706,8 @@ async function createTaskAndSubtask(taskName, subtaskName, responseVariables, dr
             driving_variables: drivingVariables,
             response_variables: responseVariables,
             dates: {
-                start_date: document.getElementById('startDate').value + 'T00:00:00Z',
-                end_date: document.getElementById('endDate').value + 'T23:59:59Z'
+                start_date: startDate,
+                end_date: endDate
             }
         }
     };
