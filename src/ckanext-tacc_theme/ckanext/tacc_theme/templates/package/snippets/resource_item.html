@@ -73,7 +73,7 @@
        {% if token %}
       <li class="divider"></li>
       <li>
-        <a href="#" onclick="openMintAnalysis('{{ res.id }}', '{{ res.name }}', '{{ res.format }}', '{{ pkg.name }}', '{{ pkg.title }}'); return false;">
+        <a href="#" onclick="openMintAnalysis('{{ res.id }}', '{{ res.name }}', '{{ res.format }}', '{{ pkg.name }}', '{{ pkg.title }}', '{{ token }}'); return false;">
           <i class="fa fa-flask"></i>
           {{ _('Analyze on CKAN') }}
         </a>
@@ -224,7 +224,7 @@ let currentSubtaskId = null;
 // API Configuration
 const MINT_API_BASE = 'http://localhost:3000/v1';
 
-function openMintAnalysis(resourceId, resourceName, resourceFormat, packageId, packageTitle) {
+function openMintAnalysis(resourceId, resourceName, resourceFormat, packageId, packageTitle, token) {
     currentResourceData = {
         id: resourceId,
         name: resourceName,
@@ -244,7 +244,7 @@ function openMintAnalysis(resourceId, resourceName, resourceFormat, packageId, p
 
     // Show modal and load problem statements
     document.getElementById('mintAnalysisModal').style.display = 'block';
-    loadProblemStatements();
+    loadProblemStatements(token);
 
     // Close any open dropdowns
     $('.dropdown').removeClass('open');
@@ -267,13 +267,13 @@ function resetToInitialState() {
     document.getElementById('problemStatementForm').reset();
 }
 
-async function loadProblemStatements() {
+async function loadProblemStatements(token) {
     try {
         const response = await fetch(`${MINT_API_BASE}/problemStatements`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                "Authorization": "Bearer " + "{{ token.access_token }}"
+                "Authorization": "Bearer " + token
             }
         });
 
