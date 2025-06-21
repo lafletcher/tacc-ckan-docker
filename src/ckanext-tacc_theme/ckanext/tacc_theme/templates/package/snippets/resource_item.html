@@ -461,9 +461,9 @@ function displayProblemStatements(problemStatements) {
     }
 
     const html = problemStatements.map(ps => `
-        <div class="problem-statement-card" onclick="selectProblemStatement('${ps.id}', '${ps.name}')" data-region="${ps.regionid}" data-start-date="${ps.dates?.start_date}" data-end-date="${ps.dates?.end_date}">
+        <div class="problem-statement-card" onclick="selectProblemStatement('${ps.id}', '${ps.name}', '${ps.regionid || 'texas'}', '${ps.dates?.start_date || ''}', '${ps.dates?.end_date || ''}')">
             <h6>${ps.name}</h6>
-            <p><strong>Region:</strong> ${ps.regionid}</p>
+            <p><strong>Region:</strong> ${ps.regionid || 'texas'}</p>
             <p><strong>Period:</strong> ${formatDate(ps.dates?.start_date)} - ${formatDate(ps.dates?.end_date)}</p>
             <p><strong>Tasks:</strong> ${ps.tasks?.length || 0}</p>
         </div>
@@ -477,26 +477,35 @@ function formatDate(dateString) {
     return new Date(dateString).toLocaleDateString();
 }
 
-function selectProblemStatement(problemStatementId, problemStatementName) {
+function selectProblemStatement(problemStatementId, problemStatementName, regionid, start_date, end_date) {
     currentProblemStatementId = problemStatementId;
 
-    // Find and store the full problem statement data
-    const problemStatementCard = event.target.closest('.problem-statement-card');
+    console.log('selectProblemStatement called with:', {
+        problemStatementId,
+        problemStatementName,
+        regionid,
+        start_date,
+        end_date
+    });
+
+    // Store the problem statement data directly from parameters
     currentProblemStatement = {
         id: problemStatementId,
         name: problemStatementName,
-        regionid: problemStatementCard.querySelector('[data-region]')?.getAttribute('data-region') || 'texas',
+        regionid: regionid || 'texas',
         dates: {
-            start_date: problemStatementCard.querySelector('[data-start-date]')?.getAttribute('data-start-date') || '',
-            end_date: problemStatementCard.querySelector('[data-end-date]')?.getAttribute('data-end-date') || ''
+            start_date: start_date || '',
+            end_date: end_date || ''
         }
     };
+
+    console.log('Stored currentProblemStatement:', currentProblemStatement);
 
     // Highlight selected problem statement
     document.querySelectorAll('.problem-statement-card').forEach(card => {
         card.classList.remove('selected');
     });
-    problemStatementCard.classList.add('selected');
+    event.target.closest('.problem-statement-card').classList.add('selected');
 
     // Show analysis configuration
     document.getElementById('problemStatementSection').style.display = 'none';
@@ -666,11 +675,32 @@ async function createTaskAndSubtask(taskName, subtaskName, responseVariables, dr
         regionId = currentProblemStatement.regionid;
         startDate = currentProblemStatement.dates.start_date;
         endDate = currentProblemStatement.dates.end_date;
+
+        console.log('Using stored problem statement data:', {
+            regionId,
+            startDate,
+            endDate,
+            currentProblemStatement
+        });
     } else {
         // Use form values for newly created problem statement
         regionId = document.getElementById('problemRegion').value || 'texas';
         startDate = document.getElementById('startDate').value + 'T00:00:00Z';
         endDate = document.getElementById('endDate').value + 'T23:59:59Z';
+
+        console.log('Using form values:', {
+            regionId,
+            startDate,
+            endDate
+        });
+    }
+
+    // Ensure dates are not empty
+    if (!startDate || startDate === '') {
+        startDate = new Date().toISOString().split('T')[0] + 'T00:00:00Z';
+    }
+    if (!endDate || endDate === '') {
+        endDate = new Date().toISOString().split('T')[0] + 'T23:59:59Z';
     }
 
     const requestData = {
@@ -694,6 +724,8 @@ async function createTaskAndSubtask(taskName, subtaskName, responseVariables, dr
             }
         }
     };
+
+    console.log('Request data for createTaskAndSubtask:', requestData);
 
     const response = await fetch(`${MINT_API_BASE}/problemStatements/${currentProblemStatementId}/taskAndSubtask`, {
         method: 'POST',
