@@ -284,54 +284,62 @@ const MINT_API_BASE = 'http://localhost:3000/v1';
 
 // Analysis type configurations
 const ANALYSIS_TYPES = {
-    bibliometric: {
-        name: 'Bibliometric Analysis',
-        icon: '📚',
-        description: 'Analyze citation patterns, co-authorship networks, and research trends',
-        modelId: 'https://w3id.org/okn/i/mint/bibliometric-analysis-model',
-        responseVariables: ['citation_count', 'co_authorship_network', 'research_trends'],
-        drivingVariables: ['publication_date', 'author_network', 'journal_impact']
+    audioTranscription: {
+        name: 'Audio Transcription',
+        icon: '🎤',
+        description: 'Transcribe audio files into text',
+        modelId: 'https://w3id.org/okn/i/mint/cdff00ed-df9d-4d32-b74f-907c50fbeb2f',
+        responseVariables: ['transcription'],
+        drivingVariables: ['audio_file']
     },
-    textmining: {
-        name: 'Text Mining',
-        icon: '🔤',
-        description: 'Extract keywords, topics, and semantic analysis',
-        modelId: 'https://w3id.org/okn/i/mint/text-mining-model',
-        responseVariables: ['keywords', 'topics', 'semantic_clusters'],
-        drivingVariables: ['text_content', 'document_metadata', 'language_model']
-    },
-    network: {
-        name: 'Network Analysis',
-        icon: '🕸️',
-        description: 'Visualize relationships and connections in data',
-        modelId: 'https://w3id.org/okn/i/mint/network-analysis-model',
-        responseVariables: ['network_graph', 'centrality_measures', 'community_detection'],
-        drivingVariables: ['node_data', 'edge_data', 'network_parameters']
-    },
-    temporal: {
-        name: 'Temporal Analysis',
-        icon: '📈',
-        description: 'Analyze trends and patterns over time',
-        modelId: 'https://w3id.org/okn/i/mint/temporal-analysis-model',
-        responseVariables: ['trend_analysis', 'seasonal_patterns', 'forecasting'],
-        drivingVariables: ['time_series_data', 'temporal_parameters', 'forecast_horizon']
-    },
-    workflow: {
-        name: 'MINT Workflow',
-        icon: '🔗',
-        description: 'Integrate with MINT modeling workflows',
-        modelId: 'https://w3id.org/okn/i/mint/workflow-integration-model',
-        responseVariables: ['workflow_output', 'model_results', 'integration_status'],
-        drivingVariables: ['workflow_parameters', 'model_configuration', 'data_inputs']
-    },
-    export: {
-        name: 'Export & Visualize',
-        icon: '📊',
-        description: 'Export processed data and create visualizations',
-        modelId: 'https://w3id.org/okn/i/mint/export-visualization-model',
-        responseVariables: ['exported_data', 'visualization_charts', 'report_summary'],
-        drivingVariables: ['data_format', 'visualization_type', 'export_parameters']
-    }
+    // bibliometric: {
+    //     name: 'Bibliometric Analysis',
+    //     icon: '📚',
+    //     description: 'Analyze citation patterns, co-authorship networks, and research trends',
+    //     modelId: 'https://w3id.org/okn/i/mint/bibliometric-analysis-model',
+    //     responseVariables: ['citation_count', 'co_authorship_network', 'research_trends'],
+    //     drivingVariables: ['publication_date', 'author_network', 'journal_impact']
+    // },
+    // textmining: {
+    //     name: 'Text Mining',
+    //     icon: '🔤',
+    //     description: 'Extract keywords, topics, and semantic analysis',
+    //     modelId: 'https://w3id.org/okn/i/mint/text-mining-model',
+    //     responseVariables: ['keywords', 'topics', 'semantic_clusters'],
+    //     drivingVariables: ['text_content', 'document_metadata', 'language_model']
+    // },
+    // network: {
+    //     name: 'Network Analysis',
+    //     icon: '🕸️',
+    //     description: 'Visualize relationships and connections in data',
+    //     modelId: 'https://w3id.org/okn/i/mint/network-analysis-model',
+    //     responseVariables: ['network_graph', 'centrality_measures', 'community_detection'],
+    //     drivingVariables: ['node_data', 'edge_data', 'network_parameters']
+    // },
+    // temporal: {
+    //     name: 'Temporal Analysis',
+    //     icon: '📈',
+    //     description: 'Analyze trends and patterns over time',
+    //     modelId: 'https://w3id.org/okn/i/mint/temporal-analysis-model',
+    //     responseVariables: ['trend_analysis', 'seasonal_patterns', 'forecasting'],
+    //     drivingVariables: ['time_series_data', 'temporal_parameters', 'forecast_horizon']
+    // },
+    // workflow: {
+    //     name: 'MINT Workflow',
+    //     icon: '🔗',
+    //     description: 'Integrate with MINT modeling workflows',
+    //     modelId: 'https://w3id.org/okn/i/mint/workflow-integration-model',
+    //     responseVariables: ['workflow_output', 'model_results', 'integration_status'],
+    //     drivingVariables: ['workflow_parameters', 'model_configuration', 'data_inputs']
+    // },
+    // export: {
+    //     name: 'Export & Visualize',
+    //     icon: '📊',
+    //     description: 'Export processed data and create visualizations',
+    //     modelId: 'https://w3id.org/okn/i/mint/export-visualization-model',
+    //     responseVariables: ['exported_data', 'visualization_charts', 'report_summary'],
+    //     drivingVariables: ['data_format', 'visualization_type', 'export_parameters']
+    // }
 };
 
 function openMintAnalysis(resourceId, resourceName, resourceFormat, packageId, packageTitle, token) {
