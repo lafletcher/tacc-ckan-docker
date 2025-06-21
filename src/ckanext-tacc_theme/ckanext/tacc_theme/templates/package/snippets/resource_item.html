@@ -188,6 +188,23 @@ function closeMintAnalysis() {
 function performMintAnalysis(analysisType) {
     if (!currentResourceData) return;
 
+    const analysis = [{
+        model_id: "https://w3id.org/okn/i/mint/bd33998b-a37e-4184-b017-2893fa5a30f3",
+        name: 'Audio Transcription Service',
+        description: 'Advanced AI-powered transcription service that converts audio files to text with high accuracy. Supports multiple audio formats including MP3, WAV, M4A, and FLAC. Features include speaker identification, timestamp markers, and confidence scoring.',
+        icon: '🎤',
+        capabilities: [
+            'Multi-format audio support',
+            'Speaker identification',
+            'Timestamp markers',
+            'Confidence scoring',
+            'Noise reduction'
+        ],
+        supported_formats: ['mp3', 'wav', 'm4a', 'flac', 'aac'],
+        max_file_size: '100MB',
+        processing_time: 'Real-time to 2x speed'
+    }]
+
     const optionsContainer = document.getElementById('analysisOptions');
     let message = '';
     let action = '';
