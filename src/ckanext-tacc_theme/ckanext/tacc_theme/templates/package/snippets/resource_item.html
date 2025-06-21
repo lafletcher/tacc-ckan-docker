@@ -15,6 +15,8 @@
 
 {% set url_action = pkg.type ~ ('_resource.edit' if url_is_edit and can_edit else '_resource.read') %}
 {% set url = h.url_for(url_action, id=pkg.id if is_activity_archive else pkg.name, resource_id=res.id, **({'activity_id': request.args['activity_id']} if 'activity_id' in request.args else {})) %}
+{% set token = h.oauth2_get_stored_token() %}
+
 
 <li class="resource-item" data-id="{{ res.id }}">
   {% block resource_item_title %}
@@ -68,6 +70,7 @@
       {% endif %}
 
       <!-- NEW: MINT Analysis Option -->
+       {% if token %}
       <li class="divider"></li>
       <li>
         <a href="#" onclick="openMintAnalysis('{{ res.id }}', '{{ res.name }}', '{{ res.format }}', '{{ pkg.name }}', '{{ pkg.title }}'); return false;">
@@ -75,6 +78,7 @@
           {{ _('Analyze on CKAN') }}
         </a>
       </li>
+      {% endif %}
 
       {% if can_edit %}
       <li class="divider"></li>
@@ -269,7 +273,7 @@ async function loadProblemStatements() {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                // Add authentication headers as needed
+                "Authorization": "Bearer " + "{{ token.access_token }}"
             }
         });
 
