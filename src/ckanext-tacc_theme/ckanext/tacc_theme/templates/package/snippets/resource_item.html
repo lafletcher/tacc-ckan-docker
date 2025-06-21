@@ -109,9 +109,56 @@
                 <!-- Resource information will be populated here -->
             </div>
 
+            <!-- Analysis Type Selection -->
+            <div id="analysisTypeSection">
+                <h4 style="margin-bottom: 20px; color: #333;">Choose Analysis Type:</h4>
+
+                <div id="analysisOptions" class="analysis-grid">
+                    <div class="analysis-card" onclick="selectAnalysisType('bibliometric')">
+                        <div class="analysis-icon">📚</div>
+                        <h5>Bibliometric Analysis</h5>
+                        <p>Analyze citation patterns, co-authorship networks, and research trends</p>
+                    </div>
+
+                    <div class="analysis-card" onclick="selectAnalysisType('textmining')">
+                        <div class="analysis-icon">🔤</div>
+                        <h5>Text Mining</h5>
+                        <p>Extract keywords, topics, and semantic analysis</p>
+                    </div>
+
+                    <div class="analysis-card" onclick="selectAnalysisType('network')">
+                        <div class="analysis-icon">🕸️</div>
+                        <h5>Network Analysis</h5>
+                        <p>Visualize relationships and connections in data</p>
+                    </div>
+
+                    <div class="analysis-card" onclick="selectAnalysisType('temporal')">
+                        <div class="analysis-icon">📈</div>
+                        <h5>Temporal Analysis</h5>
+                        <p>Analyze trends and patterns over time</p>
+                    </div>
+
+                    <div class="analysis-card" onclick="selectAnalysisType('workflow')">
+                        <div class="analysis-icon">🔗</div>
+                        <h5>MINT Workflow</h5>
+                        <p>Integrate with MINT modeling workflows</p>
+                    </div>
+
+                    <div class="analysis-card" onclick="selectAnalysisType('export')">
+                        <div class="analysis-icon">📊</div>
+                        <h5>Export & Visualize</h5>
+                        <p>Export processed data and create visualizations</p>
+                    </div>
+                </div>
+            </div>
+
             <!-- Problem Statement Selection/Creation -->
-            <div id="problemStatementSection">
+            <div id="problemStatementSection" style="display: none;">
                 <h4 style="margin-bottom: 20px; color: #333;">Problem Statement:</h4>
+
+                <div id="selectedAnalysisInfo" class="selected-analysis-info">
+                    <!-- Selected analysis type info will be shown here -->
+                </div>
 
                 <div id="existingProblemStatements" class="problem-statements-list">
                     <h5>Existing Problem Statements:</h5>
@@ -152,11 +199,19 @@
                         <button type="submit" class="mint-btn">Create Problem Statement</button>
                     </form>
                 </div>
+
+                <div style="text-align: center; margin-top: 20px;">
+                    <button onclick="backToAnalysisTypes()" class="mint-btn" style="background: #95a5a6;">← Back to Analysis Types</button>
+                </div>
             </div>
 
             <!-- Analysis Configuration -->
             <div id="analysisConfiguration" style="display: none;">
                 <h4 style="margin-bottom: 20px; color: #333;">Analysis Configuration:</h4>
+
+                <div id="selectedAnalysisInfo2" class="selected-analysis-info">
+                    <!-- Selected analysis type info will be shown here -->
+                </div>
 
                 <div class="form-group">
                     <label for="taskName">Task Name:</label>
@@ -221,9 +276,63 @@ let currentResourceData = null;
 let currentProblemStatementId = null;
 let currentTaskId = null;
 let currentSubtaskId = null;
+let currentAnalysisType = null;
+let currentToken = null;
 
 // API Configuration
 const MINT_API_BASE = 'http://localhost:3000/v1';
+
+// Analysis type configurations
+const ANALYSIS_TYPES = {
+    bibliometric: {
+        name: 'Bibliometric Analysis',
+        icon: '📚',
+        description: 'Analyze citation patterns, co-authorship networks, and research trends',
+        modelId: 'https://w3id.org/okn/i/mint/bibliometric-analysis-model',
+        responseVariables: ['citation_count', 'co_authorship_network', 'research_trends'],
+        drivingVariables: ['publication_date', 'author_network', 'journal_impact']
+    },
+    textmining: {
+        name: 'Text Mining',
+        icon: '🔤',
+        description: 'Extract keywords, topics, and semantic analysis',
+        modelId: 'https://w3id.org/okn/i/mint/text-mining-model',
+        responseVariables: ['keywords', 'topics', 'semantic_clusters'],
+        drivingVariables: ['text_content', 'document_metadata', 'language_model']
+    },
+    network: {
+        name: 'Network Analysis',
+        icon: '🕸️',
+        description: 'Visualize relationships and connections in data',
+        modelId: 'https://w3id.org/okn/i/mint/network-analysis-model',
+        responseVariables: ['network_graph', 'centrality_measures', 'community_detection'],
+        drivingVariables: ['node_data', 'edge_data', 'network_parameters']
+    },
+    temporal: {
+        name: 'Temporal Analysis',
+        icon: '📈',
+        description: 'Analyze trends and patterns over time',
+        modelId: 'https://w3id.org/okn/i/mint/temporal-analysis-model',
+        responseVariables: ['trend_analysis', 'seasonal_patterns', 'forecasting'],
+        drivingVariables: ['time_series_data', 'temporal_parameters', 'forecast_horizon']
+    },
+    workflow: {
+        name: 'MINT Workflow',
+        icon: '🔗',
+        description: 'Integrate with MINT modeling workflows',
+        modelId: 'https://w3id.org/okn/i/mint/workflow-integration-model',
+        responseVariables: ['workflow_output', 'model_results', 'integration_status'],
+        drivingVariables: ['workflow_parameters', 'model_configuration', 'data_inputs']
+    },
+    export: {
+        name: 'Export & Visualize',
+        icon: '📊',
+        description: 'Export processed data and create visualizations',
+        modelId: 'https://w3id.org/okn/i/mint/export-visualization-model',
+        responseVariables: ['exported_data', 'visualization_charts', 'report_summary'],
+        drivingVariables: ['data_format', 'visualization_type', 'export_parameters']
+    }
+};
 
 function openMintAnalysis(resourceId, resourceName, resourceFormat, packageId, packageTitle, token) {
     currentResourceData = {
@@ -233,6 +342,7 @@ function openMintAnalysis(resourceId, resourceName, resourceFormat, packageId, p
         package: packageId,
         packageTitle: packageTitle
     };
+    currentToken = token;
 
     // Update resource info in modal
     document.getElementById('resourceInfo').innerHTML = `
@@ -243,9 +353,9 @@ function openMintAnalysis(resourceId, resourceName, resourceFormat, packageId, p
         <p><strong>Resource ID:</strong> ${resourceId}</p>
     `;
 
-    // Show modal and load problem statements
+    // Show modal and start with analysis type selection
     document.getElementById('mintAnalysisModal').style.display = 'block';
-    loadProblemStatements(token);
+    showAnalysisTypeSelection();
 
     // Close any open dropdowns
     $('.dropdown').removeClass('open');
@@ -257,15 +367,69 @@ function closeMintAnalysis() {
     currentProblemStatementId = null;
     currentTaskId = null;
     currentSubtaskId = null;
+    currentAnalysisType = null;
+    currentToken = null;
     resetToInitialState();
 }
 
 function resetToInitialState() {
-    document.getElementById('problemStatementSection').style.display = 'block';
+    document.getElementById('analysisTypeSection').style.display = 'block';
+    document.getElementById('problemStatementSection').style.display = 'none';
     document.getElementById('analysisConfiguration').style.display = 'none';
     document.getElementById('analysisProgress').style.display = 'none';
     document.getElementById('analysisResults').style.display = 'none';
     document.getElementById('problemStatementForm').reset();
+    currentAnalysisType = null;
+}
+
+function showAnalysisTypeSelection() {
+    document.getElementById('analysisTypeSection').style.display = 'block';
+    document.getElementById('problemStatementSection').style.display = 'none';
+    document.getElementById('analysisConfiguration').style.display = 'none';
+    document.getElementById('analysisProgress').style.display = 'none';
+    document.getElementById('analysisResults').style.display = 'none';
+}
+
+function selectAnalysisType(analysisType) {
+    currentAnalysisType = analysisType;
+    const analysisConfig = ANALYSIS_TYPES[analysisType];
+
+    if (!analysisConfig) {
+        alert('Invalid analysis type selected.');
+        return;
+    }
+
+    // Show selected analysis info
+    const selectedAnalysisInfo = `
+        <div class="selected-analysis-banner">
+            <div class="analysis-icon">${analysisConfig.icon}</div>
+            <div class="analysis-details">
+                <h5>${analysisConfig.name}</h5>
+                <p>${analysisConfig.description}</p>
+            </div>
+        </div>
+    `;
+
+    document.getElementById('selectedAnalysisInfo').innerHTML = selectedAnalysisInfo;
+    document.getElementById('selectedAnalysisInfo2').innerHTML = selectedAnalysisInfo;
+
+    // Hide analysis type selection and show problem statement section
+    document.getElementById('analysisTypeSection').style.display = 'none';
+    document.getElementById('problemStatementSection').style.display = 'block';
+
+    // Load problem statements
+    loadProblemStatements(currentToken);
+}
+
+function backToAnalysisTypes() {
+    document.getElementById('problemStatementSection').style.display = 'none';
+    document.getElementById('analysisConfiguration').style.display = 'none';
+    document.getElementById('analysisProgress').style.display = 'none';
+    document.getElementById('analysisResults').style.display = 'none';
+    showAnalysisTypeSelection();
+    currentProblemStatementId = null;
+    currentTaskId = null;
+    currentSubtaskId = null;
 }
 
 async function loadProblemStatements(token) {
@@ -331,9 +495,23 @@ function selectProblemStatement(problemStatementId, problemStatementName) {
     document.getElementById('problemStatementSection').style.display = 'none';
     document.getElementById('analysisConfiguration').style.display = 'block';
 
-    // Pre-fill task name with resource info
-    document.getElementById('taskName').value = `Analysis of ${currentResourceData.name}`;
-    document.getElementById('subtaskName').value = `Processing ${currentResourceData.name}`;
+    // Pre-fill configuration based on analysis type
+    prefillAnalysisConfiguration();
+}
+
+function prefillAnalysisConfiguration() {
+    const analysisConfig = ANALYSIS_TYPES[currentAnalysisType];
+
+    // Pre-fill task and subtask names
+    document.getElementById('taskName').value = `${analysisConfig.name} - ${currentResourceData.name}`;
+    document.getElementById('subtaskName').value = `${analysisConfig.name} Processing - ${currentResourceData.name}`;
+
+    // Pre-fill response and driving variables
+    document.getElementById('responseVariables').value = analysisConfig.responseVariables ? analysisConfig.responseVariables.join(', ') : '';
+    document.getElementById('drivingVariables').value = analysisConfig.drivingVariables ? analysisConfig.drivingVariables.join(', ') : '';
+
+    // Pre-fill model ID
+    document.getElementById('modelId').value = analysisConfig.modelId;
 }
 
 // Handle problem statement form submission
@@ -355,7 +533,7 @@ document.getElementById('problemStatementForm').addEventListener('submit', async
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                // Add authentication headers as needed
+                "Authorization": "Bearer " + currentToken
             },
             body: JSON.stringify(problemData)
         });
@@ -369,9 +547,8 @@ document.getElementById('problemStatementForm').addEventListener('submit', async
             document.getElementById('problemStatementSection').style.display = 'none';
             document.getElementById('analysisConfiguration').style.display = 'block';
 
-            // Pre-fill task name
-            document.getElementById('taskName').value = `Analysis of ${currentResourceData.name}`;
-            document.getElementById('subtaskName').value = `Processing ${currentResourceData.name}`;
+            // Pre-fill configuration
+            prefillAnalysisConfiguration();
         } else {
             alert('Failed to create problem statement. Please try again.');
         }
@@ -390,6 +567,11 @@ function backToProblemStatements() {
 async function startMintAnalysis() {
     if (!currentProblemStatementId) {
         alert('Please select or create a problem statement first.');
+        return;
+    }
+
+    if (!currentAnalysisType) {
+        alert('Please select an analysis type first.');
         return;
     }
 
@@ -487,7 +669,7 @@ async function createTaskAndSubtask(taskName, subtaskName, responseVariables, dr
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            // Add authentication headers as needed
+            "Authorization": "Bearer " + currentToken
         },
         body: JSON.stringify(requestData)
     });
@@ -519,7 +701,7 @@ async function setupModelConfiguration(modelId) {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            // Add authentication headers as needed
+            "Authorization": "Bearer " + currentToken
         },
         body: JSON.stringify(requestData)
     });
@@ -540,7 +722,7 @@ async function submitSubtask(modelId) {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            // Add authentication headers as needed
+            "Authorization": "Bearer " + currentToken
         },
         body: JSON.stringify(requestData)
     });
@@ -562,18 +744,21 @@ function showAnalysisResults() {
     document.getElementById('analysisProgress').style.display = 'none';
     document.getElementById('analysisResults').style.display = 'block';
 
+    const analysisConfig = ANALYSIS_TYPES[currentAnalysisType];
+
     document.getElementById('analysisResults').innerHTML = `
-        <div class="mint-success">✅ Analysis Successfully Submitted!</div>
+        <div class="mint-success">✅ ${analysisConfig.name} Successfully Submitted!</div>
         <div style="background: white; padding: 20px; border-radius: 10px; margin: 15px 0;">
             <h4>Analysis Details:</h4>
             <ul style="margin: 15px 0; padding-left: 20px; color: #666;">
+                <li><strong>Analysis Type:</strong> ${analysisConfig.name}</li>
                 <li><strong>Problem Statement ID:</strong> ${currentProblemStatementId}</li>
                 <li><strong>Task ID:</strong> ${currentTaskId}</li>
                 <li><strong>Subtask ID:</strong> ${currentSubtaskId}</li>
                 <li><strong>Resource:</strong> ${currentResourceData.name}</li>
                 <li><strong>Model ID:</strong> ${document.getElementById('modelId').value}</li>
             </ul>
-            <p>Your analysis has been submitted to the MINT Ensemble Manager and is now being processed.</p>
+            <p>Your ${analysisConfig.name.toLowerCase()} has been submitted to the MINT Ensemble Manager and is now being processed.</p>
             <a href="#" class="mint-btn" onclick="alert('Redirecting to MINT dashboard...')">📊 View in MINT Dashboard</a>
             <a href="#" class="mint-btn" onclick="alert('Opening execution logs...')">📋 View Execution Logs</a>
         </div>
@@ -832,5 +1017,88 @@ window.onclick = function(event) {
     background: #ffebee;
     border-left-color: #f44336;
     color: #c62828;
+}
+
+/* Analysis grid and cards */
+.analysis-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.analysis-card {
+    background: white;
+    border: 2px solid #e9ecef;
+    border-radius: 15px;
+    padding: 25px 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.analysis-card:hover {
+    border-color: #667eea;
+    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.2);
+    transform: translateY(-5px);
+}
+
+.analysis-card:active {
+    transform: translateY(-2px);
+}
+
+.analysis-icon {
+    font-size: 3em;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.analysis-card h5 {
+    margin: 0 0 10px 0;
+    color: #333;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.analysis-card p {
+    margin: 0;
+    color: #666;
+    font-size: 0.9em;
+    line-height: 1.4;
+}
+
+/* Selected analysis banner */
+.selected-analysis-info {
+    margin-bottom: 25px;
+}
+
+.selected-analysis-banner {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+}
+
+.selected-analysis-banner .analysis-icon {
+    font-size: 2.5em;
+    margin: 0;
+}
+
+.selected-analysis-banner .analysis-details h5 {
+    margin: 0 0 5px 0;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.selected-analysis-banner .analysis-details p {
+    margin: 0;
+    opacity: 0.9;
+    font-size: 0.9em;
 }
 </style>
