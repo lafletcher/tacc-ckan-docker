@@ -114,41 +114,7 @@
                 <h4 style="margin-bottom: 20px; color: #333;">Choose Analysis Type:</h4>
 
                 <div id="analysisOptions" class="analysis-grid">
-                    <div class="analysis-card" onclick="selectAnalysisType('bibliometric')">
-                        <div class="analysis-icon">📚</div>
-                        <h5>Bibliometric Analysis</h5>
-                        <p>Analyze citation patterns, co-authorship networks, and research trends</p>
-                    </div>
-
-                    <div class="analysis-card" onclick="selectAnalysisType('textmining')">
-                        <div class="analysis-icon">🔤</div>
-                        <h5>Text Mining</h5>
-                        <p>Extract keywords, topics, and semantic analysis</p>
-                    </div>
-
-                    <div class="analysis-card" onclick="selectAnalysisType('network')">
-                        <div class="analysis-icon">🕸️</div>
-                        <h5>Network Analysis</h5>
-                        <p>Visualize relationships and connections in data</p>
-                    </div>
-
-                    <div class="analysis-card" onclick="selectAnalysisType('temporal')">
-                        <div class="analysis-icon">📈</div>
-                        <h5>Temporal Analysis</h5>
-                        <p>Analyze trends and patterns over time</p>
-                    </div>
-
-                    <div class="analysis-card" onclick="selectAnalysisType('workflow')">
-                        <div class="analysis-icon">🔗</div>
-                        <h5>MINT Workflow</h5>
-                        <p>Integrate with MINT modeling workflows</p>
-                    </div>
-
-                    <div class="analysis-card" onclick="selectAnalysisType('export')">
-                        <div class="analysis-icon">📊</div>
-                        <h5>Export & Visualize</h5>
-                        <p>Export processed data and create visualizations</p>
-                    </div>
+                    <!-- Analysis options will be dynamically generated here -->
                 </div>
             </div>
 
@@ -362,12 +328,29 @@ function openMintAnalysis(resourceId, resourceName, resourceFormat, packageId, p
         <p><strong>Resource ID:</strong> ${resourceId}</p>
     `;
 
+    // Generate analysis options dynamically
+    generateAnalysisOptions();
+
     // Show modal and start with analysis type selection
     document.getElementById('mintAnalysisModal').style.display = 'block';
     showAnalysisTypeSelection();
 
     // Close any open dropdowns
     $('.dropdown').removeClass('open');
+}
+
+function generateAnalysisOptions() {
+    const analysisOptionsContainer = document.getElementById('analysisOptions');
+
+    const optionsHTML = Object.entries(ANALYSIS_TYPES).map(([key, config]) => `
+        <div class="analysis-card" onclick="selectAnalysisType('${key}')">
+            <div class="analysis-icon">${config.icon}</div>
+            <h5>${config.name}</h5>
+            <p>${config.description}</p>
+        </div>
+    `).join('');
+
+    analysisOptionsContainer.innerHTML = optionsHTML;
 }
 
 function closeMintAnalysis() {
