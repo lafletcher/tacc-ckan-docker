@@ -70,7 +70,7 @@
       <!-- NEW: MINT Analysis Option -->
       <li class="divider"></li>
       <li>
-        <a href="#" onclick="openMintAnalysis('{{ res.id }}', '{{ res.name }}', '{{ res.format }}', '{{ pkg.name }}'); return false;">
+        <a href="#" onclick="openMintAnalysis('{{ res.id }}', '{{ res.name }}', '{{ res.format }}', '{{ pkg.name }} {{ pkg.title }}'); return false;">
           <i class="fa fa-flask"></i>
           {{ _('Analyze on CKAN') }}
         </a>
@@ -154,19 +154,21 @@
 <script>
 let currentResourceData = null;
 
-function openMintAnalysis(resourceId, resourceName, resourceFormat, packageName) {
+function openMintAnalysis(resourceId, resourceName, resourceFormat, packageId, packageTitle) {
     currentResourceData = {
         id: resourceId,
         name: resourceName,
         format: resourceFormat,
-        package: packageName
+        package: packageId,
+        packageTitle: packageTitle
     };
 
     // Update resource info in modal
     document.getElementById('resourceInfo').innerHTML = `
         <h5 style="margin-bottom: 10px; color: #333;">📄 Resource: ${resourceName}</h5>
         <p><strong>Format:</strong> ${resourceFormat}</p>
-        <p><strong>Package:</strong> ${packageName}</p>
+        <p><strong>Package Id:</strong> ${packageId}</p>
+        <p><strong>Package Title:</strong> ${packageTitle}</p>
         <p><strong>Resource ID:</strong> ${resourceId}</p>
     `;
 
