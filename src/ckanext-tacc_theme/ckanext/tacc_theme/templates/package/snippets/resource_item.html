@@ -16,6 +16,7 @@
 {% set url_action = pkg.type ~ ('_resource.edit' if url_is_edit and can_edit else '_resource.read') %}
 {% set url = h.url_for(url_action, id=pkg.id if is_activity_archive else pkg.name, resource_id=res.id, **({'activity_id': request.args['activity_id']} if 'activity_id' in request.args else {})) %}
 {% set token = h.oauth2_get_stored_token() %}
+{% set token_access_token = token.access_token if token else None %}
 
 
 <li class="resource-item" data-id="{{ res.id }}">
@@ -70,10 +71,10 @@
       {% endif %}
 
       <!-- NEW: MINT Analysis Option -->
-       {% if token %}
+        {% if token %}
       <li class="divider"></li>
       <li>
-        <a href="#" onclick="openMintAnalysis('{{ res.id }}', '{{ res.name }}', '{{ res.format }}', '{{ pkg.name }}', '{{ pkg.title }}', '{{ token }}'); return false;">
+        <a href="#" onclick="openMintAnalysis('{{ res.id }}', '{{ res.name }}', '{{ res.format }}', '{{ pkg.name }}', '{{ pkg.title }}', '{{ token_access_token }}'); return false;">
           <i class="fa fa-flask"></i>
           {{ _('Analyze on CKAN') }}
         </a>
