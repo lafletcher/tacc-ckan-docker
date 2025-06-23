@@ -749,7 +749,7 @@ async function setupModelConfiguration(modelId, inputDataId) {
             'Content-Type': 'application/json',
             "Authorization": "Bearer " + currentToken
         },
-        body: JSON.stringify(requestData)
+        body: JSON.stringify(setupRequest)
     });
 
     if (response.ok) {
