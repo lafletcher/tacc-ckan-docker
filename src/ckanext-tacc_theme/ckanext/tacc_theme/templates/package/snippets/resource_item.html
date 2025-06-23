@@ -74,7 +74,7 @@
         {% if token %}
       <li class="divider"></li>
       <li>
-        <a href="#" onclick="openMintAnalysis('{{ res.id }}', '{{ res.name }}', '{{ res.format }}', '{{ pkg.name }}', '{{ pkg.title }}', '{{ token_access_token }}'); return false;">
+        <a href="#" onclick="openMintAnalysis('{{ res.id }}', '{{ res.name }}', '{{ res.format }}', '{{ pkg.name }}', '{{ pkg.title }}', '{{ res.url }}', '{{ token_access_token }}'); return false;">
           <i class="fa fa-flask"></i>
           {{ _('Analyze on CKAN') }}
         </a>
@@ -278,7 +278,7 @@ const ANALYSIS_TYPES = {
     },
 };
 
-function openMintAnalysis(resourceId, resourceName, resourceFormat, packageId, packageTitle, token) {
+function openMintAnalysis(resourceId, resourceName, resourceFormat, packageId, packageTitle, resourceUrl, token) {
     currentResourceData = {
         id: resourceId,
         name: resourceName,
@@ -295,6 +295,7 @@ function openMintAnalysis(resourceId, resourceName, resourceFormat, packageId, p
         <p><strong>Package Id:</strong> ${packageId}</p>
         <p><strong>Package Title:</strong> ${packageTitle}</p>
         <p><strong>Resource ID:</strong> ${resourceId}</p>
+        <p><strong>Resource URL:</strong> ${resourceUrl}</p>
     `;
 
     // Generate analysis options dynamically
