@@ -727,7 +727,7 @@ async function setupModelConfiguration(inputDataId) {
                 id: currentResourceData.package,
                 resources: [{
                     id: currentResourceData.id,
-                    url: `${window.location.origin}/dataset/${currentResourceData.package}/resource/${currentResourceData.id}/download`
+                    url: currentResourceData.url
                 }]
             }
         } else {
