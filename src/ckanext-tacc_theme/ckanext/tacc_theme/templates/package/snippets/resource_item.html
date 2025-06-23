@@ -256,57 +256,10 @@ const ANALYSIS_TYPES = {
         icon: '🎤',
         description: 'Transcribe audio files into text',
         modelId: 'https://w3id.org/okn/i/mint/cdff00ed-df9d-4d32-b74f-907c50fbeb2f',
-        responseVariables: ['transcription'],
-        drivingVariables: ['audio_file']
+        responseVariables: [''],
+        drivingVariables: [''],
+        inputDataId: 'https://w3id.org/okn/i/mint/79265aaf-f3db-4fbe-93c4-4134158f2907',
     },
-    // bibliometric: {
-    //     name: 'Bibliometric Analysis',
-    //     icon: '📚',
-    //     description: 'Analyze citation patterns, co-authorship networks, and research trends',
-    //     modelId: 'https://w3id.org/okn/i/mint/bibliometric-analysis-model',
-    //     responseVariables: ['citation_count', 'co_authorship_network', 'research_trends'],
-    //     drivingVariables: ['publication_date', 'author_network', 'journal_impact']
-    // },
-    // textmining: {
-    //     name: 'Text Mining',
-    //     icon: '🔤',
-    //     description: 'Extract keywords, topics, and semantic analysis',
-    //     modelId: 'https://w3id.org/okn/i/mint/text-mining-model',
-    //     responseVariables: ['keywords', 'topics', 'semantic_clusters'],
-    //     drivingVariables: ['text_content', 'document_metadata', 'language_model']
-    // },
-    // network: {
-    //     name: 'Network Analysis',
-    //     icon: '🕸️',
-    //     description: 'Visualize relationships and connections in data',
-    //     modelId: 'https://w3id.org/okn/i/mint/network-analysis-model',
-    //     responseVariables: ['network_graph', 'centrality_measures', 'community_detection'],
-    //     drivingVariables: ['node_data', 'edge_data', 'network_parameters']
-    // },
-    // temporal: {
-    //     name: 'Temporal Analysis',
-    //     icon: '📈',
-    //     description: 'Analyze trends and patterns over time',
-    //     modelId: 'https://w3id.org/okn/i/mint/temporal-analysis-model',
-    //     responseVariables: ['trend_analysis', 'seasonal_patterns', 'forecasting'],
-    //     drivingVariables: ['time_series_data', 'temporal_parameters', 'forecast_horizon']
-    // },
-    // workflow: {
-    //     name: 'MINT Workflow',
-    //     icon: '🔗',
-    //     description: 'Integrate with MINT modeling workflows',
-    //     modelId: 'https://w3id.org/okn/i/mint/workflow-integration-model',
-    //     responseVariables: ['workflow_output', 'model_results', 'integration_status'],
-    //     drivingVariables: ['workflow_parameters', 'model_configuration', 'data_inputs']
-    // },
-    // export: {
-    //     name: 'Export & Visualize',
-    //     icon: '📊',
-    //     description: 'Export processed data and create visualizations',
-    //     modelId: 'https://w3id.org/okn/i/mint/export-visualization-model',
-    //     responseVariables: ['exported_data', 'visualization_charts', 'report_summary'],
-    //     drivingVariables: ['data_format', 'visualization_type', 'export_parameters']
-    // }
 };
 
 function openMintAnalysis(resourceId, resourceName, resourceFormat, packageId, packageTitle, token) {
@@ -528,6 +481,7 @@ function prefillAnalysisConfiguration() {
 
     // Pre-fill model ID
     document.getElementById('modelId').value = analysisConfig.modelId;
+    document.getElementById('inputDataId').value = analysisConfig.inputDataId;
 }
 
 // Handle problem statement form submission
@@ -604,6 +558,7 @@ async function startMintAnalysis() {
     const responseVariables = document.getElementById('responseVariables').value.split(',').map(v => v.trim()).filter(v => v);
     const drivingVariables = document.getElementById('drivingVariables').value.split(',').map(v => v.trim()).filter(v => v);
     const modelId = document.getElementById('modelId').value;
+    const inputDataId = document.getElementById('inputDataId').value;
 
     if (!taskName || !subtaskName || !modelId) {
         alert('Please fill in all required fields.');
@@ -636,7 +591,7 @@ async function startMintAnalysis() {
 
         // Step 2: Setup model configuration
         updateProgress('step2', 'Setting up model configuration...', 'active');
-        const setupResult = await setupModelConfiguration(modelId);
+        const setupResult = await setupModelConfiguration(modelId, inputDataId);
 
         if (!setupResult.success) {
             throw new Error('Failed to setup model configuration');
@@ -744,11 +699,11 @@ async function createTaskAndSubtask(taskName, subtaskName, responseVariables, dr
     }
 }
 
-async function setupModelConfiguration(modelId) {
+async function setupModelConfiguration(modelId, inputDataId) {
     const requestData = {
         model_id: modelId,
         data: [{
-            id: "https://w3id.org/okn/i/mint/input_data",
+            id: inputDataId,
             dataset: {
                 id: currentResourceData.package,
                 resources: [{
