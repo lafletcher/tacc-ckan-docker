@@ -268,30 +268,15 @@ const ANALYSIS_TYPES = {
             parameters:
                 [
                     {
-                    id: 'https://w3id.org/okn/i/mint/start_planting_day',
-                    value: [
-                        100,
-                        107,
-                        114
-                    ]
+                    id: 'https://w3id.org/okn/i/mint/b5b3ba9b-a765-416f-a71d-3b2a32d8e91f',
+                    value: '100'
                     },
-                    {
-                    id: 'https://w3id.org/okn/i/mint/nitrogen_application_rate',
-                    value: '150'
-                    }
             ],
             data:
                 [
                     {
                     id: 'https://w3id.org/okn/i/mint/79265aaf-f3db-4fbe-93c4-4134158f290',
-                    dataset: {
-                        id: '18400624-423c-42b5-ad56-6c73322584bd',
-                        resources: [
-                            {
-                                id: '9c7b25c4-8cea-4965-a07a-d9b3867f18a9',
-                            }
-                        ]
-                    }
+                    dataset: {}
                     }
                 ]
             }
@@ -738,19 +723,25 @@ async function createTaskAndSubtask(taskName, subtaskName, responseVariables, dr
 }
 
 async function setupModelConfiguration(modelId, inputDataId) {
-    const requestData = {
-        model_id: modelId,
-        data: [{
-            id: inputDataId,
-            dataset: {
+    const analysisConfig = ANALYSIS_TYPES[currentAnalysisType];
+    const setupRequest = analysisConfig.setupRequest;
+
+    // Update the dataset and resource information with current resource data
+    if (setupRequest && setupRequest.data && setupRequest.data.length > 0) {
+        const data = setupRequest.data.find(data => data.id === inputDataId);
+        if (data) {
+            data.dataset = {
                 id: currentResourceData.package,
                 resources: [{
                     id: currentResourceData.id,
                     url: `${window.location.origin}/dataset/${currentResourceData.package}/resource/${currentResourceData.id}/download`
                 }]
             }
-        }]
-    };
+        } else {
+            console.error('Input data ID not found in setup request:', inputDataId);
+            return { success: false, error: 'Input data ID not found in setup request' };
+        }
+    }
 
     const response = await fetch(`${MINT_API_BASE}/problemStatements/${currentProblemStatementId}/tasks/${currentTaskId}/subtasks/${currentSubtaskId}/setup`, {
         method: 'POST',
