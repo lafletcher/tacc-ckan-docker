@@ -206,12 +206,6 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="modelId">Model ID:</label>
-                    <input type="text" id="modelId" name="modelId" required
-                           placeholder="https://w3id.org/okn/i/mint/..." class="form-control">
-                </div>
-
-                <div class="form-group">
                     <input type="hidden" id="inputDataId" name="inputDataId" required>
                 </div>
 
@@ -264,7 +258,7 @@ const ANALYSIS_TYPES = {
         drivingVariables: [''],
         inputDataId: 'https://w3id.org/okn/i/mint/79265aaf-f3db-4fbe-93c4-4134158f2907',
         setupRequest: {
-            model_id: 'http://api.models.mint.local/v1.8.0/modelconfigurationsetups/c07a6f98-6339-4033-84b0-6cd7daca6284?username=mint%40isi.edu',
+            model_id: 'http://api.models.mint.local/v1.8.0/modelconfigurationsetups/cdff00ed-df9d-4d32-b74f-907c50fbeb2f?username=mint@isi.edu',
             parameters:
                 [
                     {
@@ -492,7 +486,6 @@ function selectProblemStatement(problemStatementId, problemStatementName, region
 
 function prefillAnalysisConfiguration() {
     const analysisConfig = ANALYSIS_TYPES[currentAnalysisType];
-    console.log('analysisConfig', analysisConfig);
 
     // Pre-fill task and subtask names
     document.getElementById('taskName').value = `${analysisConfig.name} - ${currentResourceData.name}`;
@@ -502,8 +495,6 @@ function prefillAnalysisConfiguration() {
     document.getElementById('responseVariables').value = analysisConfig.responseVariables ? analysisConfig.responseVariables.join(', ') : '';
     document.getElementById('drivingVariables').value = analysisConfig.drivingVariables ? analysisConfig.drivingVariables.join(', ') : '';
 
-    // Pre-fill model ID
-    document.getElementById('modelId').value = analysisConfig.modelId;
     document.getElementById('inputDataId').value = analysisConfig.inputDataId;
 }
 
@@ -580,10 +571,9 @@ async function startMintAnalysis() {
     const subtaskName = document.getElementById('subtaskName').value;
     const responseVariables = document.getElementById('responseVariables').value.split(',').map(v => v.trim()).filter(v => v);
     const drivingVariables = document.getElementById('drivingVariables').value.split(',').map(v => v.trim()).filter(v => v);
-    const modelId = document.getElementById('modelId').value;
     const inputDataId = document.getElementById('inputDataId').value;
 
-    if (!taskName || !subtaskName || !modelId) {
+    if (!taskName || !subtaskName) {
         alert('Please fill in all required fields.');
         return;
     }
@@ -598,6 +588,9 @@ async function startMintAnalysis() {
         <div class="progress-step" id="step2">2. Setting up model configuration...</div>
         <div class="progress-step" id="step3">3. Submitting analysis...</div>
     `;
+
+    const analysisConfig = ANALYSIS_TYPES[currentAnalysisType];
+    const model_id = analysisConfig.model_id;
 
     try {
         // Step 1: Create task and subtask
@@ -614,7 +607,7 @@ async function startMintAnalysis() {
 
         // Step 2: Setup model configuration
         updateProgress('step2', 'Setting up model configuration...', 'active');
-        const setupResult = await setupModelConfiguration(modelId, inputDataId);
+        const setupResult = await setupModelConfiguration(inputDataId);
 
         if (!setupResult.success) {
             throw new Error('Failed to setup model configuration');
@@ -624,7 +617,7 @@ async function startMintAnalysis() {
 
         // Step 3: Submit subtask
         updateProgress('step3', 'Submitting analysis...', 'active');
-        const submitResult = await submitSubtask(modelId);
+        const submitResult = await submitSubtask(model_id);
 
         if (!submitResult.success) {
             throw new Error('Failed to submit subtask');
@@ -722,7 +715,7 @@ async function createTaskAndSubtask(taskName, subtaskName, responseVariables, dr
     }
 }
 
-async function setupModelConfiguration(modelId, inputDataId) {
+async function setupModelConfiguration(inputDataId) {
     const analysisConfig = ANALYSIS_TYPES[currentAnalysisType];
     const setupRequest = analysisConfig.setupRequest;
 
@@ -759,9 +752,9 @@ async function setupModelConfiguration(modelId, inputDataId) {
     }
 }
 
-async function submitSubtask(modelId) {
+async function submitSubtask(model_id) {
     const requestData = {
-        model_id: modelId
+        model_id: model_id
     };
 
     const response = await fetch(`${MINT_API_BASE}/problemStatements/${currentProblemStatementId}/tasks/${currentTaskId}/subtasks/${currentSubtaskId}/submit`, {
@@ -802,7 +795,6 @@ function showAnalysisResults() {
                 <li><strong>Task ID:</strong> ${currentTaskId}</li>
                 <li><strong>Subtask ID:</strong> ${currentSubtaskId}</li>
                 <li><strong>Resource:</strong> ${currentResourceData.name}</li>
-                <li><strong>Model ID:</strong> ${document.getElementById('modelId').value}</li>
             </ul>
             <p>Your ${analysisConfig.name.toLowerCase()} has been submitted to the MINT Ensemble Manager and is now being processed.</p>
             <a href="#" class="mint-btn" onclick="alert('Redirecting to MINT dashboard...')">📊 View in MINT Dashboard</a>
