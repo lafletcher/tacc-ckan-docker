@@ -263,6 +263,39 @@ const ANALYSIS_TYPES = {
         responseVariables: [''],
         drivingVariables: [''],
         inputDataId: 'https://w3id.org/okn/i/mint/79265aaf-f3db-4fbe-93c4-4134158f2907',
+        setupRequest: {
+            model_id: 'http://api.models.mint.local/v1.8.0/modelconfigurationsetups/c07a6f98-6339-4033-84b0-6cd7daca6284?username=mint%40isi.edu',
+            parameters:
+                [
+                    {
+                    id: 'https://w3id.org/okn/i/mint/start_planting_day',
+                    value: [
+                        100,
+                        107,
+                        114
+                    ]
+                    },
+                    {
+                    id: 'https://w3id.org/okn/i/mint/nitrogen_application_rate',
+                    value: '150'
+                    }
+            ],
+            data:
+                [
+                    {
+                    id: 'https://w3id.org/okn/i/mint/79265aaf-f3db-4fbe-93c4-4134158f290',
+                    dataset: {
+                        id: '18400624-423c-42b5-ad56-6c73322584bd',
+                        resources: [
+                            {
+                                id: '9c7b25c4-8cea-4965-a07a-d9b3867f18a9',
+                            }
+                        ]
+                    }
+                    }
+                ]
+            }
+
     },
 };
 
