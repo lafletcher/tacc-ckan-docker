@@ -259,7 +259,7 @@ const ANALYSIS_TYPES = {
         name: 'Audio Transcription',
         icon: '🎤',
         description: 'Transcribe audio files into text',
-        modelId: 'https://w3id.org/okn/i/mint/cdff00ed-df9d-4d32-b74f-907c50fbeb2f',
+        modelId: 'http://api.models.mint.local/v1.8.0/modelconfigurationsetups/cdff00ed-df9d-4d32-b74f-907c50fbeb2f?username=mint@isi.edu',
         responseVariables: [''],
         drivingVariables: [''],
         inputDataId: 'https://w3id.org/okn/i/mint/79265aaf-f3db-4fbe-93c4-4134158f2907',
@@ -275,7 +275,7 @@ const ANALYSIS_TYPES = {
             data:
                 [
                     {
-                    id: 'https://w3id.org/okn/i/mint/79265aaf-f3db-4fbe-93c4-4134158f290',
+                    id: 'https://w3id.org/okn/i/mint/79265aaf-f3db-4fbe-93c4-4134158f2907',
                     dataset: {}
                     }
                 ]
@@ -728,7 +728,7 @@ async function setupModelConfiguration(modelId, inputDataId) {
 
     // Update the dataset and resource information with current resource data
     if (setupRequest && setupRequest.data && setupRequest.data.length > 0) {
-        const data = setupRequest.data.find(data => data.id === inputDataId);
+        const data = setupRequest.data.find(item => item.id === inputDataId);
         if (data) {
             data.dataset = {
                 id: currentResourceData.package,
