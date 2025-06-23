@@ -130,3 +130,32 @@ Set the correct permissions for the ckan user:
 ```bash
 sudo chown -R 503:502 ckan_storage
 ```
+
+## API Authentication
+
+CKAN uses Tapis OAuth2 for authentication. The Tapis OAuth2 service is configured to use the Tapis OAuth2 service at `https://portals.tapis.io/v3/oauth2/tokens`.
+
+To get a JWT token, you can use the `scripts/tapis-oauth/get-jwt.sh` script.
+
+```bash
+JWT=$(./scripts/tapis-oauth/get-jwt.sh myuser mypassword)
+```
+
+You can then use the JWT token to authenticate your requests to the CKAN API.
+
+```
+curl --location 'https://ckan.tacc.utexas.edu/api/action/package_create' \
+--header 'Content-Type: application/json' \
+--header "Authorization: Bearer $JWT" \
+--data '{
+  "name": "my-dataset-name",
+  "title": "My Dataset Title",
+  "notes": "A description of the dataset",
+  "owner_org": "org",
+  "private": false,
+  "tags": [
+    {"name": "tag1"},
+    {"name": "tag2"}
+  ]
+}'
+```
