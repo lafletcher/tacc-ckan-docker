@@ -470,6 +470,7 @@ function selectProblemStatement(problemStatementId, problemStatementName, region
 
 function prefillAnalysisConfiguration() {
     const analysisConfig = ANALYSIS_TYPES[currentAnalysisType];
+    console.log('analysisConfig', analysisConfig);
 
     // Pre-fill task and subtask names
     document.getElementById('taskName').value = `${analysisConfig.name} - ${currentResourceData.name}`;
