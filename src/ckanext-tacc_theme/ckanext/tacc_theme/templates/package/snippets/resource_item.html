@@ -835,6 +835,19 @@ function showAnalysisResults() {
 function backToAnalysisConfiguration() {
     document.getElementById('analysisProgress').style.display = 'none';
     document.getElementById('analysisConfiguration').style.display = 'block';
+
+    // Clear any previous error messages
+    document.getElementById('progressMessage').innerHTML = 'Initializing analysis...';
+
+    // Reset progress steps
+    const progressSteps = document.getElementById('progressSteps');
+    if (progressSteps) {
+        progressSteps.innerHTML = `
+            <div class="progress-step" id="step1">1. Creating task and subtask...</div>
+            <div class="progress-step" id="step2">2. Setting up model configuration...</div>
+            <div class="progress-step" id="step3">3. Submitting analysis...</div>
+        `;
+    }
 }
 
 // Close modal when clicking outside
