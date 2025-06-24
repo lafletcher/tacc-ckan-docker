@@ -675,7 +675,7 @@ async function createSubtaskOnly(subtaskName, inputDataId) {
 
     if (response.ok) {
         const result = await response.json();
-        return { success: true, subtaskId: result.subtaskId };
+        return { success: true, subtaskId: result.id };
     } else {
         return { success: false, error: await response.text() };
     }
@@ -708,8 +708,6 @@ async function createNewTaskAndSubtask(taskName, subtaskName, inputDataId) {
     }
 
     const taskResult = await taskResponse.json();
-    const taskId = taskResult.taskId || taskResult.id;
-
     // Then, create the subtask under the new task
     const subtaskData = {
         name: subtaskName,
@@ -721,7 +719,7 @@ async function createNewTaskAndSubtask(taskName, subtaskName, inputDataId) {
         }
     };
 
-    const subtaskResponse = await fetch(`${MINT_API_BASE}/problemStatements/${currentProblemStatementId}/tasks/${taskId}/subtasks`, {
+    const subtaskResponse = await fetch(`${MINT_API_BASE}/problemStatements/${currentProblemStatementId}/tasks/${taskResult.id}/subtasks`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -735,9 +733,7 @@ async function createNewTaskAndSubtask(taskName, subtaskName, inputDataId) {
     }
 
     const subtaskResult = await subtaskResponse.json();
-    const subtaskId = subtaskResult.subtaskId || subtaskResult.id;
-
-    return { success: true, taskId: taskId, subtaskId: subtaskId };
+    return { success: true, taskId: taskResult.id, subtaskId: subtaskResult.id };
 }
 
 async function setupModelConfiguration(inputDataId) {
