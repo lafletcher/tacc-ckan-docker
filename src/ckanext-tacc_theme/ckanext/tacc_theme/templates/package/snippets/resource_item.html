@@ -682,11 +682,62 @@ async function createSubtaskOnly(subtaskName, inputDataId) {
 }
 
 async function createNewTaskAndSubtask(taskName, subtaskName, inputDataId) {
-    // Original createTaskAndSubtask logic for new tasks
+    // Create new task and subtask
     const analysisConfig = ANALYSIS_TYPES[currentAnalysisType];
 
-    // ... existing logic for creating task and subtask ...
-    // (keep the existing implementation)
+    // First, create the task
+    const taskData = {
+        name: taskName,
+        dates: {
+            start_date: currentProblemStatement.dates.start_date,
+            end_date: currentProblemStatement.dates.end_date
+        }
+    };
+
+    const taskResponse = await fetch(`${MINT_API_BASE}/problemStatements/${currentProblemStatementId}/tasks`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            "Authorization": "Bearer " + currentToken
+        },
+        body: JSON.stringify(taskData)
+    });
+
+    if (!taskResponse.ok) {
+        return { success: false, error: await taskResponse.text() };
+    }
+
+    const taskResult = await taskResponse.json();
+    const taskId = taskResult.taskId || taskResult.id;
+
+    // Then, create the subtask under the new task
+    const subtaskData = {
+        name: subtaskName,
+        driving_variables: analysisConfig.drivingVariables || [],
+        response_variables: analysisConfig.responseVariables || [],
+        dates: {
+            start_date: currentProblemStatement.dates.start_date,
+            end_date: currentProblemStatement.dates.end_date
+        }
+    };
+
+    const subtaskResponse = await fetch(`${MINT_API_BASE}/problemStatements/${currentProblemStatementId}/tasks/${taskId}/subtasks`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            "Authorization": "Bearer " + currentToken
+        },
+        body: JSON.stringify(subtaskData)
+    });
+
+    if (!subtaskResponse.ok) {
+        return { success: false, error: await subtaskResponse.text() };
+    }
+
+    const subtaskResult = await subtaskResponse.json();
+    const subtaskId = subtaskResult.subtaskId || subtaskResult.id;
+
+    return { success: true, taskId: taskId, subtaskId: subtaskId };
 }
 
 async function setupModelConfiguration(inputDataId) {
