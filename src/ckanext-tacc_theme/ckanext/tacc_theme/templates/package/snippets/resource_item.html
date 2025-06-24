@@ -192,20 +192,6 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="responseVariables">Response Variables:</label>
-                    <input type="text" id="responseVariables" name="responseVariables"
-                           placeholder="e.g., crop__potential_transpiration_volume_flux" class="form-control">
-                    <small class="form-text text-muted">Comma-separated list of response variables</small>
-                </div>
-
-                <div class="form-group">
-                    <label for="drivingVariables">Driving Variables:</label>
-                    <input type="text" id="drivingVariables" name="drivingVariables"
-                           placeholder="e.g., nitrogen__average_of_net_mass_mineralization_rate" class="form-control">
-                    <small class="form-text text-muted">Comma-separated list of driving variables</small>
-                </div>
-
-                <div class="form-group">
                     <input type="hidden" id="inputDataId" name="inputDataId" required>
                 </div>
 
@@ -512,10 +498,6 @@ function prefillAnalysisConfiguration() {
     document.getElementById('taskName').value = `${analysisConfig.name} - ${currentResourceData.name}`;
     document.getElementById('subtaskName').value = `${analysisConfig.name} Processing - ${currentResourceData.name}`;
 
-    // Pre-fill response and driving variables
-    document.getElementById('responseVariables').value = analysisConfig.responseVariables ? analysisConfig.responseVariables.join(', ') : '';
-    document.getElementById('drivingVariables').value = analysisConfig.drivingVariables ? analysisConfig.drivingVariables.join(', ') : '';
-
     document.getElementById('inputDataId').value = analysisConfig.inputDataId;
 }
 
@@ -590,8 +572,6 @@ async function startMintAnalysis() {
 
     const taskName = document.getElementById('taskName').value;
     const subtaskName = document.getElementById('subtaskName').value;
-    const responseVariables = document.getElementById('responseVariables').value.split(',').map(v => v.trim()).filter(v => v);
-    const drivingVariables = document.getElementById('drivingVariables').value.split(',').map(v => v.trim()).filter(v => v);
     const inputDataId = document.getElementById('inputDataId').value;
 
     if (!taskName || !subtaskName) {
@@ -616,7 +596,7 @@ async function startMintAnalysis() {
     try {
         // Step 1: Create task and subtask
         updateProgress('step1', 'Creating task and subtask...', 'active');
-        const taskSubtaskResult = await createTaskAndSubtask(taskName, subtaskName, responseVariables, drivingVariables);
+        const taskSubtaskResult = await createTaskAndSubtask(taskName, subtaskName, inputDataId);
 
         if (!taskSubtaskResult.success) {
             throw new Error('Failed to create task and subtask');
@@ -658,7 +638,10 @@ async function startMintAnalysis() {
     }
 }
 
-async function createTaskAndSubtask(taskName, subtaskName, responseVariables, drivingVariables) {
+async function createTaskAndSubtask(taskName, subtaskName, inputDataId) {
+    // Get analysis configuration
+    const analysisConfig = ANALYSIS_TYPES[currentAnalysisType];
+
     // Get dates and region from stored problem statement or form values
     let regionId, startDate, endDate;
 
@@ -698,8 +681,8 @@ async function createTaskAndSubtask(taskName, subtaskName, responseVariables, dr
     const requestData = {
         task: {
             name: taskName,
-            response_variables: responseVariables,
-            driving_variables: drivingVariables,
+            response_variables: analysisConfig.responseVariables || [],
+            driving_variables: analysisConfig.drivingVariables || [],
             regionid: regionId,
             dates: {
                 start_date: startDate,
@@ -708,8 +691,8 @@ async function createTaskAndSubtask(taskName, subtaskName, responseVariables, dr
         },
         subtask: {
             name: subtaskName,
-            driving_variables: drivingVariables,
-            response_variables: responseVariables,
+            driving_variables: analysisConfig.drivingVariables || [],
+            response_variables: analysisConfig.responseVariables || [],
             dates: {
                 start_date: startDate,
                 end_date: endDate
