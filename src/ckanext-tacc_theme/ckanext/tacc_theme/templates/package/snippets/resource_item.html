@@ -105,10 +105,6 @@
             <span class="mint-close" onclick="closeMintAnalysis()">&times;</span>
         </div>
         <div class="mint-modal-body">
-            <div id="resourceInfo" class="resource-info">
-                <!-- Resource information will be populated here -->
-            </div>
-
             <!-- Analysis Type Selection -->
             <div id="analysisTypeSection">
                 <h4 style="margin-bottom: 20px; color: #333;">Choose Analysis Type:</h4>
@@ -240,8 +236,8 @@ const ANALYSIS_TYPES = {
         icon: '🎤',
         description: 'Transcribe audio files into text',
         modelId: 'http://api.models.mint.local/v1.8.0/modelconfigurationsetups/cdff00ed-df9d-4d32-b74f-907c50fbeb2f?username=mint@isi.edu',
-        responseVariables: [''],
-        drivingVariables: [''],
+        responseVariables: ['audio_transcription'],
+        drivingVariables: ['audio_file'],
         inputDataId: 'https://w3id.org/okn/i/mint/79265aaf-f3db-4fbe-93c4-4134158f2907',
         setupRequest: {
             model_id: 'http://api.models.mint.local/v1.8.0/modelconfigurationsetups/cdff00ed-df9d-4d32-b74f-907c50fbeb2f?username=mint@isi.edu',
@@ -274,19 +270,6 @@ function openMintAnalysis(resourceId, resourceName, resourceFormat, packageId, p
         url: resourceUrl
     };
     currentToken = token;
-
-    // Update resource info in modal
-    document.getElementById('resourceInfo').innerHTML = `
-        <h5 style="margin-bottom: 10px; color: #333;">📄 Resource: ${resourceName}</h5>
-        <p><strong>Format:</strong> ${resourceFormat}</p>
-        <p><strong>Package Id:</strong> ${packageId}</p>
-        <p><strong>Package Title:</strong> ${packageTitle}</p>
-        <p><strong>Resource ID:</strong> ${resourceId}</p>
-        <p><strong>Resource URL:</strong> ${resourceUrl}</p>
-    `;
-
-    // Ensure resource info is visible
-    document.getElementById('resourceInfo').style.display = 'block';
 
     // Generate analysis options dynamically
     generateAnalysisOptions();
@@ -371,9 +354,6 @@ function selectAnalysisType(analysisType) {
     document.getElementById('analysisTypeSection').style.display = 'none';
     document.getElementById('problemStatementSection').style.display = 'block';
 
-    // Hide resource info when showing problem statement section
-    document.getElementById('resourceInfo').style.display = 'none';
-
     // Load problem statements
     loadProblemStatements(currentToken);
 }
@@ -384,9 +364,6 @@ function backToAnalysisTypes() {
     document.getElementById('analysisProgress').style.display = 'none';
     document.getElementById('analysisResults').style.display = 'none';
     showAnalysisTypeSelection();
-
-    // Show resource info again when going back to analysis type selection
-    document.getElementById('resourceInfo').style.display = 'block';
 
     currentProblemStatementId = null;
     currentTaskId = null;
@@ -883,14 +860,6 @@ window.onclick = function(event) {
 
 .mint-modal-body {
     padding: 30px;
-}
-
-.resource-info {
-    background: #f8f9fa;
-    padding: 15px;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    border-left: 4px solid #667eea;
 }
 
 .mint-btn {
