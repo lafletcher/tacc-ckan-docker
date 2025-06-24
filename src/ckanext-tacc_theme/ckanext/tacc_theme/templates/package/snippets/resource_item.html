@@ -787,6 +787,12 @@ function showAnalysisResults() {
 
     const analysisConfig = ANALYSIS_TYPES[currentAnalysisType];
 
+    // Get region from current problem statement, default to 'texas' if not available
+    const region = currentProblemStatement?.regionid || 'texas';
+
+    // Generate MINT Dashboard URL
+    const mintDashboardUrl = `http://mint.local/${region}/modeling/problem_statement/${currentProblemStatementId}/${currentTaskId}/${currentSubtaskId}/runs`;
+
     document.getElementById('analysisResults').innerHTML = `
         <div class="mint-success">✅ ${analysisConfig.name} Successfully Submitted!</div>
         <div style="background: white; padding: 20px; border-radius: 10px; margin: 15px 0;">
@@ -797,9 +803,10 @@ function showAnalysisResults() {
                 <li><strong>Task ID:</strong> ${currentTaskId}</li>
                 <li><strong>Subtask ID:</strong> ${currentSubtaskId}</li>
                 <li><strong>Resource:</strong> ${currentResourceData.name}</li>
+                <li><strong>Region:</strong> ${region}</li>
             </ul>
             <p>Your ${analysisConfig.name.toLowerCase()} has been submitted to the MINT Ensemble Manager and is now being processed.</p>
-            <a href="#" class="mint-btn" onclick="alert('Redirecting to MINT dashboard...')">📊 View in MINT Dashboard</a>
+            <a href="${mintDashboardUrl}" target="_blank" class="mint-btn">📊 View in MINT Dashboard</a>
             <a href="#" class="mint-btn" onclick="alert('Opening execution logs...')">📋 View Execution Logs</a>
         </div>
     `;
