@@ -629,7 +629,7 @@ async function createTaskAndSubtask(taskName, subtaskName, inputDataId) {
     } else {
         // Create new task and subtask
         const taskSubtaskResult = await createNewTaskAndSubtask(taskName, subtaskName, inputDataId);
-        return taskSubtaskResult;
+        return { success: true, taskId: taskSubtaskResult.taskId, subtaskId: taskSubtaskResult.subtaskId };
     }
 }
 
