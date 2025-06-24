@@ -790,8 +790,9 @@ function showAnalysisResults() {
     // Get region from current problem statement, default to 'texas' if not available
     const region = currentProblemStatement?.regionid || 'texas';
 
-    // Generate DYNAMO Dashboard URL
-    const mintDashboardUrl = `http://mint.local/${region}/modeling/problem_statement/${currentProblemStatementId}/${currentTaskId}/${currentSubtaskId}/runs`;
+    // Generate DYNAMO Dashboard URL using CKAN configuration
+    const dynamoDashboardUrl = '{{ h.get_dynamo_dashboard_url() }}';
+    const mintDashboardUrl = `${dynamoDashboardUrl}/${region}/modeling/problem_statement/${currentProblemStatementId}/${currentTaskId}/${currentSubtaskId}/runs`;
 
     document.getElementById('analysisResults').innerHTML = `
         <div class="mint-success">✅ ${analysisConfig.name} Successfully Submitted!</div>
