@@ -70,7 +70,7 @@
       </li>
       {% endif %}
 
-      <!-- NEW: MINT Analysis Option -->
+      <!-- NEW: DYNAMO Analysis Option -->
         {% if token %}
       <li class="divider"></li>
       <li>
@@ -97,11 +97,11 @@
   {% endblock %}
 </li>
 
-<!-- MINT Analysis Modal -->
+<!-- DYNAMO Analysis Modal -->
 <div id="mintAnalysisModal" class="mint-modal">
     <div class="mint-modal-content">
         <div class="mint-modal-header">
-            <div class="mint-modal-title">🔬 MINT Analysis</div>
+            <div class="mint-modal-title">🔬 DYNAMO Analysis</div>
             <span class="mint-close" onclick="closeMintAnalysis()">&times;</span>
         </div>
         <div class="mint-modal-body">
@@ -790,7 +790,7 @@ function showAnalysisResults() {
     // Get region from current problem statement, default to 'texas' if not available
     const region = currentProblemStatement?.regionid || 'texas';
 
-    // Generate MINT Dashboard URL
+    // Generate DYNAMO Dashboard URL
     const mintDashboardUrl = `http://mint.local/${region}/modeling/problem_statement/${currentProblemStatementId}/${currentTaskId}/${currentSubtaskId}/runs`;
 
     document.getElementById('analysisResults').innerHTML = `
@@ -805,8 +805,8 @@ function showAnalysisResults() {
                 <li><strong>Resource:</strong> ${currentResourceData.name}</li>
                 <li><strong>Region:</strong> ${region}</li>
             </ul>
-            <p>Your ${analysisConfig.name.toLowerCase()} has been submitted to the MINT Ensemble Manager and is now being processed.</p>
-            <a href="${mintDashboardUrl}" target="_blank" class="mint-btn">📊 View in MINT Dashboard</a>
+            <p>Your ${analysisConfig.name.toLowerCase()} has been submitted to the DYNAMO and is now being processed.</p>
+            <a href="${mintDashboardUrl}" target="_blank" class="mint-btn">📊 View in DYNAMO Dashboard</a>
             <a href="#" class="mint-btn" onclick="alert('Opening execution logs...')">📋 View Execution Logs</a>
         </div>
     `;
