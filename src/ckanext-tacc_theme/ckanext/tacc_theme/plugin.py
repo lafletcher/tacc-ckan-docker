@@ -24,11 +24,16 @@ class TaccThemePlugin(plugins.SingletonPlugin):
     def get_helpers(self):
         return {
             'get_dynamo_dashboard_url': self.get_dynamo_dashboard_url,
+            'get_ensemble_manager_api_url': self.get_ensemble_manager_api_url,
         }
 
     def get_dynamo_dashboard_url(self):
         """Get the DYNAMO Dashboard URL from CKAN configuration"""
         return toolkit.config.get('ckanext.tacc_theme.dynamo_dashboard_url', 'https://mint.tacc.utexas.edu')
+
+    def get_ensemble_manager_api_url(self):
+        """Get the Ensemble Manager API URL from CKAN configuration"""
+        return toolkit.config.get('ckanext.tacc_theme.ensemble_manager_api_url', 'https://ensemble-manager.mint.tacc.utexas.edu/v1')
 
     def markdown_extract_paragraphs(text: str, extract_length: int = 190) -> Union[str, Markup]:
         ''' return the plain text representation of markdown (ie: text without any html tags)

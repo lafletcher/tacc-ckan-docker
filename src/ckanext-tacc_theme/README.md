@@ -61,20 +61,32 @@ To install ckanext-tacc_theme:
 The extension supports configuring the DYNAMO Dashboard URL through CKAN configuration:
 
 ```ini
-# DYNAMO Dashboard base URL (optional, default: http://mint.local)
-ckanext.tacc_theme.dynamo_dashboard_url = http://your-dynamo-instance.com
+# DYNAMO Dashboard base URL (optional, default: https://mint.tacc.utexas.edu)
+ckanext.tacc_theme.dynamo_dashboard_url = https://mint.tacc.utexas.edu
 ```
 
 This setting is used to generate links to the DYNAMO Dashboard for analysis results. The URL will be constructed as:
 `{dynamo_dashboard_url}/{region}/modeling/problem_statement/{problem_statement_id}/{task_id}/{subtask_id}/runs`
 
+### Ensemble Manager API URL
+
+The extension supports configuring the Ensemble Manager API URL through CKAN configuration:
+
+```ini
+# Ensemble Manager API base URL (optional, default: https://ensemble-manager.mint.tacc.utexas.edu/v1)
+ckanext.tacc_theme.ensemble_manager_api_url = https://ensemble-manager.mint.tacc.utexas.edu/v1
+```
+
+This setting is used for API calls to the Ensemble Manager service for creating problem statements, tasks, and subtasks.
+
 **Environment Variable Setup:**
 
-For Docker deployments, you can set this via environment variable in your `.env` files:
+For Docker deployments, you can set these via environment variables in your `.env` files:
 
 ```bash
 # In .env.dev.config or .env.prod.config
-CKANEXT__TACC_THEME__DYNAMO_DASHBOARD_URL=http://your-dynamo-instance.com
+CKANEXT__TACC_THEME__DYNAMO_DASHBOARD_URL=https://mint.tacc.utexas.edu
+CKANEXT__TACC_THEME__ENSEMBLE_MANAGER_API_URL=https://ensemble-manager.mint.tacc.utexas.edu/v1
 ```
 
 **TODO:** Document any additional optional config settings here. For example:

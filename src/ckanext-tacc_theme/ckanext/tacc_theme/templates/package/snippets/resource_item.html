@@ -245,7 +245,7 @@ let currentToken = null;
 let currentProblemStatement = null;
 
 // API Configuration
-const MINT_API_BASE = 'http://localhost:3000/v1';
+const MINT_API_BASE = '{{ h.get_ensemble_manager_api_url() }}';
 
 // Analysis type configurations
 const ANALYSIS_TYPES = {
