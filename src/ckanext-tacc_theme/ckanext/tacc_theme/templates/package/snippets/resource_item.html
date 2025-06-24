@@ -299,6 +299,9 @@ function openMintAnalysis(resourceId, resourceName, resourceFormat, packageId, p
         <p><strong>Resource URL:</strong> ${resourceUrl}</p>
     `;
 
+    // Ensure resource info is visible
+    document.getElementById('resourceInfo').style.display = 'block';
+
     // Generate analysis options dynamically
     generateAnalysisOptions();
 
@@ -382,6 +385,9 @@ function selectAnalysisType(analysisType) {
     document.getElementById('analysisTypeSection').style.display = 'none';
     document.getElementById('problemStatementSection').style.display = 'block';
 
+    // Hide resource info when showing problem statement section
+    document.getElementById('resourceInfo').style.display = 'none';
+
     // Load problem statements
     loadProblemStatements(currentToken);
 }
@@ -392,6 +398,10 @@ function backToAnalysisTypes() {
     document.getElementById('analysisProgress').style.display = 'none';
     document.getElementById('analysisResults').style.display = 'none';
     showAnalysisTypeSelection();
+
+    // Show resource info again when going back to analysis type selection
+    document.getElementById('resourceInfo').style.display = 'block';
+
     currentProblemStatementId = null;
     currentTaskId = null;
     currentSubtaskId = null;
@@ -399,6 +409,15 @@ function backToAnalysisTypes() {
 }
 
 async function loadProblemStatements(token) {
+    // Show loading indicator
+    const container = document.getElementById('problemStatementsList');
+    container.innerHTML = `
+        <div class="mint-loading" style="padding: 20px;">
+            <div class="mint-spinner"></div>
+            <p>Loading problem statements...</p>
+        </div>
+    `;
+
     try {
         const response = await fetch(`${MINT_API_BASE}/problemStatements`, {
             method: 'GET',
@@ -413,12 +432,12 @@ async function loadProblemStatements(token) {
             displayProblemStatements(problemStatements);
         } else {
             console.error('Failed to load problem statements');
-            document.getElementById('problemStatementsList').innerHTML =
+            container.innerHTML =
                 '<p style="color: #e74c3c;">Failed to load problem statements. Please try again.</p>';
         }
     } catch (error) {
         console.error('Error loading problem statements:', error);
-        document.getElementById('problemStatementsList').innerHTML =
+        container.innerHTML =
             '<p style="color: #e74c3c;">Error loading problem statements. Please check your connection.</p>';
     }
 }
