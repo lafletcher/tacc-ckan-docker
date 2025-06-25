@@ -14,7 +14,7 @@ RUN chown -R ckan: /srv/app
 USER ckan
 RUN pip3 install ckanext-geoview
 ADD requirements/ckanext-spatial.txt /tmp/
-RUN pip3 install ckanext-pdfview
+RUN pip3 install -r /tmp/ckanext-spatial.txt
 RUN pip3 install "git+https://github.com/ckan/ckanext-spatial.git#egg=ckanext-spatial"
 RUN pip3 install -e "git+https://github.com/In-For-Disaster-Analytics/ckanext-oauth2.git@0.9.2#egg=ckanext-oauth2"
 RUN pip3 install "git+https://github.com/ckan/ckanext-showcase.git#egg=ckanext-showcase"
