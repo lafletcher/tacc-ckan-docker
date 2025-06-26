@@ -7,6 +7,7 @@ Similar to ckanext-s3filestore but for Tapis file system
 File: ckanext/tapisfilestore/plugin.py
 """
 
+from dataclasses import dataclass
 import json
 import logging
 import requests
@@ -20,6 +21,19 @@ from ckan.common import config
 import ckan.lib.helpers as h
 
 log = logging.getLogger(__name__)
+
+@dataclass
+class TapisFileInfo:
+    mime_type: str
+    type: str
+    owner: str
+    group: str
+    native_permissions: str
+    url: str
+    last_modified: str
+    name: str
+    path: str
+    size: int
 
 
 class TapisFilestorePlugin(plugins.SingletonPlugin):
@@ -123,6 +137,40 @@ class TapisFilestorePlugin(plugins.SingletonPlugin):
             log.debug(f"Request headers check failed: {e}")
 
         return None
+
+    def get_file_info(self, file_path, tapis_token):
+        """
+        Get the MIME type for a file
+        """
+
+        file_info_url = f"https://portals.tapis.io/v3/files/ops/{file_path}"
+        file_info_headers = {
+            'x-tapis-token': tapis_token,
+            'Accept': '*/*'
+        }
+        file_info_request = requests.get(file_info_url, headers=file_info_headers)
+        file_info_request.raise_for_status()
+        file_info = file_info_request.json()['result'][0]
+        return TapisFileInfo(**file_info)
+
+    def get_file_content(self, file_path, tapis_token):
+        """
+        Get the content of a file
+        """
+        file_content_url = f"https://portals.tapis.io/v3/files/content/{file_path}"
+        file_content_headers = {
+            'x-tapis-token': tapis_token,
+            'Accept': '*/*'
+        }
+        file_content_request = requests.get(file_content_url, headers=file_content_headers, stream=True)
+        if file_content_request.status_code != 200:
+            log.error(f"Tapis API error: {file_content_request.status_code} for URL: {file_content_url}")
+            return Response(
+                f'Error fetching file from Tapis: {file_content_request.status_code}',
+                status=file_content_request.status_code
+            )
+        return file_content_request
+
     def serve_tapis_file(self, file_path):
         """
         Serve a file from Tapis file system by proxying the request
@@ -144,32 +192,12 @@ class TapisFilestorePlugin(plugins.SingletonPlugin):
                         'Unauthorized: No Tapis token found. Please authenticate with Tapis through the OAuth2 system.',
                         status=401
                     )
-            # Construct the Tapis API URL
-            tapis_url = f"https://portals.tapis.io/v3/files/content/{file_path}"
 
-            # Headers for the Tapis API request
-            headers = {
-                'x-tapis-token': tapis_token,
-                'Accept': '*/*'
-            }
-
-            # Make the request to Tapis API
-            response = requests.get(tapis_url, headers=headers, stream=True)
-
-            if response.status_code != 200:
-                log.error(f"Tapis API error: {response.status_code} for URL: {tapis_url}")
-                return Response(
-                    f'Error fetching file from Tapis: {response.status_code}',
-                    status=response.status_code
-                )
+            file_info = self.get_file_info(file_path, tapis_token)
+            response = self.get_file_content(file_path, tapis_token)
 
             # Determine content type
-            content_type = response.headers.get('content-type')
-            if not content_type:
-                content_type, _ = mimetypes.guess_type(file_path)
-                if not content_type:
-                    content_type = 'application/octet-stream'
-
+            content_type = file_info.mime_type
             # Get filename from path for Content-Disposition header
             filename = file_path.split('/')[-1]
 
