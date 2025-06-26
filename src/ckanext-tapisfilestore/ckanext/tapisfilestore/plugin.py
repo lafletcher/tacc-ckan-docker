@@ -156,7 +156,7 @@ class TapisFilestorePlugin(plugins.SingletonPlugin):
                 log.error("No Tapis token available for user")
                 return Response(
                         'Unauthorized: No Tapis token found. Please authenticate with Tapis through the OAuth2 system.',
-                        status=401
+                        status=200
                     )
 
             file_info = self.get_file_info(file_path, tapis_token)
