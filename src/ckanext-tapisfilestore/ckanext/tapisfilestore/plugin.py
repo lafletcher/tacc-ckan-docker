@@ -47,13 +47,88 @@ class TapisFilestorePlugin(plugins.SingletonPlugin):
 
         return blueprint
 
+    def _get_tapis_token(self):
+        """
+        Get Tapis OAuth2 token using the OAuth2 extension
+        """
+        # Method 1: Try the OAuth2 helper function
+        try:
+            token = h.oauth2_get_stored_token()
+            if token:
+                log.debug(f"Retrieved token via oauth2_get_stored_token: {type(token)}")
+                # The token might be an object with access_token attribute
+                if hasattr(token, 'access_token'):
+                    return token.access_token
+                # Or it might be the token string directly
+                elif isinstance(token, str):
+                    return token
+                # Or it might be a dict
+                elif isinstance(token, dict):
+                    return token.get('access_token')
+        except Exception as e:
+            log.debug(f"oauth2_get_stored_token failed: {e}")
+
+        # Method 2: Try toolkit.g.usertoken (set by OAuth2 plugin)
+        try:
+            if hasattr(toolkit.g, 'usertoken') and toolkit.g.usertoken:
+                token = toolkit.g.usertoken
+                log.debug(f"Retrieved token via toolkit.g.usertoken: {type(token)}")
+                if hasattr(token, 'access_token'):
+                    return token.access_token
+                elif isinstance(token, str):
+                    return token
+                elif isinstance(token, dict):
+                    return token.get('access_token')
+        except Exception as e:
+            log.debug(f"toolkit.g.usertoken failed: {e}")
+
+        # Method 3: Try Flask g.usertoken
+        try:
+            if hasattr(g, 'usertoken') and g.usertoken:
+                token = g.usertoken
+                log.debug(f"Retrieved token via g.usertoken: {type(token)}")
+                if hasattr(token, 'access_token'):
+                    return token.access_token
+                elif isinstance(token, str):
+                    return token
+                elif isinstance(token, dict):
+                    return token.get('access_token')
+        except Exception as e:
+            log.debug(f"g.usertoken failed: {e}")
+
+        # Method 4: Try session storage (fallback)
+        try:
+            for key in ['oauth2_token', 'tapis_token', 'access_token']:
+                if key in session:
+                    token = session[key]
+                    if isinstance(token, dict):
+                        return token.get('access_token')
+                    elif isinstance(token, str):
+                        return token
+        except Exception as e:
+            log.debug(f"Session token check failed: {e}")
+
+        # Method 5: Try request headers
+        try:
+            auth_header = request.headers.get('Authorization', '')
+            if auth_header.startswith('Bearer '):
+                return auth_header[7:]  # Remove 'Bearer ' prefix
+
+            # Check for custom Tapis header
+            tapis_token = request.headers.get('X-Tapis-Token', '')
+            if tapis_token:
+                return tapis_token
+        except Exception as e:
+            log.debug(f"Request headers check failed: {e}")
+
+        return None
     def serve_tapis_file(self, file_path):
         """
         Serve a file from Tapis file system by proxying the request
         """
         try:
             # Get the user's Tapis token
-            token = h.oauth2_get_stored_token()
+            token = self._get_tapis_token()
             if not token or not token.access_token:
                 return Response('Unauthorized: No Tapis token available', status=401)
 
@@ -189,3 +264,5 @@ try:
     h.get_tapis_view_url = get_tapis_view_url
 except:
     pass  # Helpers will be registered when plugin loads
+
+
