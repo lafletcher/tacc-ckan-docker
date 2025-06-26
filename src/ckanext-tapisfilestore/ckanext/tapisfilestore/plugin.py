@@ -176,7 +176,7 @@ class TapisFilestorePlugin(plugins.SingletonPlugin):
                 return response
 
             file_info = self.get_file_info(file_path, tapis_token)
-            if file_info.status != 200:
+            if isinstance(file_info, Response) and hasattr(file_info, 'status') and file_info.status != 200:
                 return file_info
 
             # Determine content type
