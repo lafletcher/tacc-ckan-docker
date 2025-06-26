@@ -177,9 +177,9 @@ class TapisFilestorePlugin(plugins.SingletonPlugin):
             response_file_content = self.request_file_content(file_path, tapis_token)
 
             if response_file_info.status_code != 200:
-                return response_file_info
+                return Response(response_file_info.text, status=200)
             if response_file_content.status_code != 200:
-                return response_file_content
+                return Response(response_file_content.text, status=200)
 
             filename = file_path.split('/')[-1] if len(file_path) > 0 else file_path
             # Create response headers
