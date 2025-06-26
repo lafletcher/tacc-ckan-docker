@@ -141,6 +141,7 @@ class TapisFilestorePlugin(plugins.SingletonPlugin):
             'Accept': '*/*'
         }
         response = requests.get(url, headers=headers)
+        log.debug(f"response: {response.status_code}")
         error = self.intercept_errors(response.status_code, file_path)
         if error:
             return error
@@ -176,10 +177,14 @@ class TapisFilestorePlugin(plugins.SingletonPlugin):
             response_file_info = self.request_file_info(file_path, tapis_token)
             response_file_content = self.request_file_content(file_path, tapis_token)
 
-            if response_file_info.status_code != 200:
-                return Response(response_file_info.text, status=200)
-            if response_file_content.status_code != 200:
-                return Response(response_file_content.text, status=200)
+            if response_file_info.status != 200:
+                return Response(response_file_info.text, status=200, content_type='text/html')
+            if response_file_content.status != 200:
+                return Response(response_file_content.text, status=200, content_type='text/html')
+
+            log.debug(f"everything fine")
+
+
 
             filename = file_path.split('/')[-1] if len(file_path) > 0 else file_path
             # Create response headers
