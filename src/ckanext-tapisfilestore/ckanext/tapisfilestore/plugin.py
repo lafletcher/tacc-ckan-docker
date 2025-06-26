@@ -10,7 +10,6 @@ File: ckanext/tapisfilestore/plugin.py
 from dataclasses import dataclass
 import json
 import logging
-from typing import Union
 import requests
 import mimetypes
 from urllib.parse import quote, unquote
@@ -113,7 +112,7 @@ class TapisFilestorePlugin(plugins.SingletonPlugin):
 
         return None
 
-    def get_file_info(self, file_path, tapis_token) -> Union[TapisFileInfo, Response]:
+    def get_file_info(self, file_path, tapis_token):
         """
         Get the MIME type for a file
         """
@@ -123,24 +122,15 @@ class TapisFilestorePlugin(plugins.SingletonPlugin):
             'x-tapis-token': tapis_token,
             'Accept': '*/*'
         }
-        log.debug(f"Getting file info for {file_path}")
         file_info_request = requests.get(file_info_url, headers=file_info_headers)
-        if file_info_request.status_code != 200:
-            log.error(f"Tapis API error: {file_info_request.status_code} for URL: {file_info_url}")
-            return Response(
-                f'Error fetching file info from Tapis: {file_info_request.status_code}',
-                content_type='text/plain',
-                status=200
-                #status=file_info_request.status_code
-            )
+        file_info_request.raise_for_status()
         file_info = file_info_request.json()['result'][0]
         return TapisFileInfo(**file_info)
 
-    def get_file_content(self, file_path, tapis_token) -> Response:
+    def get_file_content(self, file_path, tapis_token):
         """
         Get the content of a file
         """
-        log.debug(f"Getting file content for {file_path}")
         file_content_url = f"https://portals.tapis.io/v3/files/content/{file_path}"
         file_content_headers = {
             'x-tapis-token': tapis_token,
@@ -151,9 +141,7 @@ class TapisFilestorePlugin(plugins.SingletonPlugin):
             log.error(f"Tapis API error: {file_content_request.status_code} for URL: {file_content_url}")
             return Response(
                 f'Error fetching file from Tapis: {file_content_request.status_code}',
-                content_type='text/plain',
-                status=200
-                #status=file_content_request.status_code
+                status=file_content_request.status_code
             )
         return file_content_request
 
@@ -167,19 +155,12 @@ class TapisFilestorePlugin(plugins.SingletonPlugin):
             if not tapis_token:
                 log.error("No Tapis token available for user")
                 return Response(
-                        'Not authenticated: Please log in to access Tapis files.',
-                        content_type='text/plain',
+                        'Unauthorized: No Tapis token found. Please authenticate with Tapis through the OAuth2 system.',
                         status=200
                     )
 
-
-            response = self.get_file_content(file_path, tapis_token)
-            if isinstance(response, Response) and hasattr(response, 'status') and response.status != 200:
-                return response
-
             file_info = self.get_file_info(file_path, tapis_token)
-            if isinstance(file_info, Response) and hasattr(file_info, 'status') and file_info.status != 200:
-                return file_info
+            response = self.get_file_content(file_path, tapis_token)
 
             # Determine content type
             content_type = file_info.mimeType
