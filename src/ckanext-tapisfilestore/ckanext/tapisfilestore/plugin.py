@@ -97,32 +97,6 @@ class TapisFilestorePlugin(plugins.SingletonPlugin):
         except Exception as e:
             log.debug(f"toolkit.g.usertoken failed: {e}")
 
-        # Method 3: Try Flask g.usertoken
-        try:
-            if hasattr(g, 'usertoken') and g.usertoken:
-                token = g.usertoken
-                log.debug(f"Retrieved token via g.usertoken: {type(token)}")
-                if hasattr(token, 'access_token'):
-                    return token.access_token
-                elif isinstance(token, str):
-                    return token
-                elif isinstance(token, dict):
-                    return token.get('access_token')
-        except Exception as e:
-            log.debug(f"g.usertoken failed: {e}")
-
-        # Method 4: Try session storage (fallback)
-        try:
-            for key in ['oauth2_token', 'tapis_token', 'access_token']:
-                if key in session:
-                    token = session[key]
-                    if isinstance(token, dict):
-                        return token.get('access_token')
-                    elif isinstance(token, str):
-                        return token
-        except Exception as e:
-            log.debug(f"Session token check failed: {e}")
-
         # Method 5: Try request headers
         try:
             auth_header = request.headers.get('Authorization', '')
@@ -180,15 +154,7 @@ class TapisFilestorePlugin(plugins.SingletonPlugin):
             tapis_token = self._get_tapis_token()
             if not tapis_token:
                 log.error("No Tapis token available for user")
-                # Check if user is logged in
-                current_user = getattr(toolkit.g, 'user', None) or getattr(g, 'user', None)
-                if not current_user:
-                    return Response(
-                        'Unauthorized: Please log in to access Tapis files.',
-                        status=401
-                    )
-                else:
-                    return Response(
+                return Response(
                         'Unauthorized: No Tapis token found. Please authenticate with Tapis through the OAuth2 system.',
                         status=401
                     )
