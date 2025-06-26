@@ -155,7 +155,8 @@ class TapisFilestorePlugin(plugins.SingletonPlugin):
             if not tapis_token:
                 log.error("No Tapis token available for user")
                 return Response(
-                        'Unauthorized: No Tapis token found. Please authenticate with Tapis through the OAuth2 system.',
+                        '<h1>Not authenticated: Please log in to access Tapis files.</h1>',
+                        content_type='text/html',
                         status=200
                     )
 
