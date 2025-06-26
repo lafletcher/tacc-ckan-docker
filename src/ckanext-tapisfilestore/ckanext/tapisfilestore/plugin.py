@@ -24,13 +24,13 @@ log = logging.getLogger(__name__)
 
 @dataclass
 class TapisFileInfo:
-    mime_type: str
+    mimeType: str
     type: str
     owner: str
     group: str
-    native_permissions: str
+    nativePermissions: str
     url: str
-    last_modified: str
+    lastModified: str
     name: str
     path: str
     size: int
