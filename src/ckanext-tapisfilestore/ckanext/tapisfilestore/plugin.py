@@ -133,7 +133,7 @@ class TapisFilestorePlugin(plugins.SingletonPlugin):
         file_info = file_info_request.json()['result'][0]
         return TapisFileInfo(**file_info)
 
-    def get_file_content(self, file_path, tapis_token):
+    def get_file_content(self, file_path, tapis_token) -> Response:
         """
         Get the content of a file
         """
@@ -169,6 +169,8 @@ class TapisFilestorePlugin(plugins.SingletonPlugin):
 
             file_info = self.get_file_info(file_path, tapis_token)
             response = self.get_file_content(file_path, tapis_token)
+            if isinstance(response, Response) and response.status_code != 200:
+                return response
 
             # Determine content type
             content_type = file_info.mimeType
