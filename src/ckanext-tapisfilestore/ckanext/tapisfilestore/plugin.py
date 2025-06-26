@@ -74,14 +74,12 @@ class TapisFilestorePlugin(plugins.SingletonPlugin):
             if hasattr(toolkit.g, 'usertoken') and toolkit.g.usertoken:
                 token = toolkit.g.usertoken
                 log.debug(f"Retrieved token via toolkit.g.usertoken: {type(token)}")
-                if hasattr(token, 'access_token'):
-                    log.debug(json.dumps(token))
+                if isinstance(token, dict):
+                    return token.get('access_token')
+                elif hasattr(token, 'access_token'):
                     return token.access_token
                 elif isinstance(token, str):
                     return token
-                elif isinstance(token, dict):
-                    log.debug(json.dumps(token))
-                    return token.get('access_token')
         except Exception as e:
             log.debug(f"toolkit.g.usertoken failed: {e}")
 
