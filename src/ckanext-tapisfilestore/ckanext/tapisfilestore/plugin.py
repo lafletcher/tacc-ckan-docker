@@ -123,6 +123,7 @@ class TapisFilestorePlugin(plugins.SingletonPlugin):
             'x-tapis-token': tapis_token,
             'Accept': '*/*'
         }
+        log.debug(f"Getting file info for {file_path}")
         file_info_request = requests.get(file_info_url, headers=file_info_headers)
         if file_info_request.status_code != 200:
             log.error(f"Tapis API error: {file_info_request.status_code} for URL: {file_info_url}")
@@ -139,6 +140,7 @@ class TapisFilestorePlugin(plugins.SingletonPlugin):
         """
         Get the content of a file
         """
+        log.debug(f"Getting file content for {file_path}")
         file_content_url = f"https://portals.tapis.io/v3/files/content/{file_path}"
         file_content_headers = {
             'x-tapis-token': tapis_token,
@@ -172,7 +174,7 @@ class TapisFilestorePlugin(plugins.SingletonPlugin):
 
 
             response = self.get_file_content(file_path, tapis_token)
-            if response.status != 200:
+            if isinstance(response, Response) and hasattr(response, 'status') and response.status != 200:
                 return response
 
             file_info = self.get_file_info(file_path, tapis_token)
