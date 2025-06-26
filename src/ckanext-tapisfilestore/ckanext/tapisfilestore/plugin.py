@@ -128,8 +128,9 @@ class TapisFilestorePlugin(plugins.SingletonPlugin):
             log.error(f"Tapis API error: {file_info_request.status_code} for URL: {file_info_url}")
             return Response(
                 f'Error fetching file info from Tapis: {file_info_request.status_code}',
-                content_type='text/html',
-                status=file_info_request.status_code
+                content_type='text/plain',
+                status=200
+                #status=file_info_request.status_code
             )
         file_info = file_info_request.json()['result'][0]
         return TapisFileInfo(**file_info)
@@ -148,8 +149,9 @@ class TapisFilestorePlugin(plugins.SingletonPlugin):
             log.error(f"Tapis API error: {file_content_request.status_code} for URL: {file_content_url}")
             return Response(
                 f'Error fetching file from Tapis: {file_content_request.status_code}',
-                content_type='text/html',
-                status=file_content_request.status_code
+                content_type='text/plain',
+                status=200
+                #status=file_content_request.status_code
             )
         return file_content_request
 
@@ -163,8 +165,8 @@ class TapisFilestorePlugin(plugins.SingletonPlugin):
             if not tapis_token:
                 log.error("No Tapis token available for user")
                 return Response(
-                        '<h1>Not authenticated: Please log in to access Tapis files.</h1>',
-                        content_type='text/html',
+                        'Not authenticated: Please log in to access Tapis files.',
+                        content_type='text/plain',
                         status=200
                     )
 
