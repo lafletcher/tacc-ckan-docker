@@ -168,49 +168,46 @@ class TapisFilestorePlugin(plugins.SingletonPlugin):
         Serve a file from Tapis file system by proxying the request
         """
 
-        try:
-            tapis_token = self._get_tapis_token()
-            if not tapis_token:
-                toolkit.abort(401, 'You must be logged in to access this resource. Please log in and try again.')
-                return Response('You must be logged in to access this resource. Please log in and try again.', status=401)
+        tapis_token = self._get_tapis_token()
+        if not tapis_token:
+            toolkit.abort(401, 'You must be logged in to access this resource. Please log in and try again.')
+            return Response('You must be logged in to access this resource. Please log in and try again.', status=401)
 
-            response_file_info = self.request_file_info(file_path, tapis_token)
-            response_file_content = self.request_file_content(file_path, tapis_token)
+        response_file_info = self.request_file_info(file_path, tapis_token)
+        response_file_content = self.request_file_content(file_path, tapis_token)
 
-            if response_file_info.status != 200:
-                return Response(response_file_info.text, status=200, content_type='text/html')
-            if response_file_content.status != 200:
-                return Response(response_file_content.text, status=200, content_type='text/html')
+        if response_file_info.status != 200:
+            return Response(response_file_info.text, status=200, content_type='text/html')
+        if response_file_content.status != 200:
+            return Response(response_file_content.text, status=200, content_type='text/html')
 
-            log.debug(f"everything fine")
-
+        log.debug(f"everything fine")
 
 
-            filename = file_path.split('/')[-1] if len(file_path) > 0 else file_path
-            # Create response headers
-            response_headers = {
-                'Content-Type': response_file_info.mimeType,
-                'Content-Disposition': f'inline; filename="{filename}"'
-            }
 
-            # Add content length if available
-            if 'content-length' in response_file_content.headers:
-                response_headers['Content-Length'] = response_file_content.headers['content-length']
+        filename = file_path.split('/')[-1] if len(file_path) > 0 else file_path
+        # Create response headers
+        response_headers = {
+            'Content-Type': response_file_info.mimeType,
+            'Content-Disposition': f'inline; filename="{filename}"'
+        }
 
-            # Stream the response
-            def generate():
-                for chunk in response_file_content.iter_content(chunk_size=8192):
-                    if chunk:
-                        yield chunk
+        # Add content length if available
+        if 'content-length' in response_file_content.headers:
+            response_headers['Content-Length'] = response_file_content.headers['content-length']
 
-            return Response(
-                stream_with_context(generate()),
-                headers=response_headers,
-                status=200
-            )
+        # Stream the response
+        def generate():
+            for chunk in response_file_content.iter_content(chunk_size=8192):
+                if chunk:
+                    yield chunk
 
-        except Exception as e:
-            return Response('Internal server error', status=500)
+        return Response(
+            stream_with_context(generate()),
+            headers=response_headers,
+            status=200
+        )
+
 
     # IResourceController
     def before_show(self, resource_dict):
