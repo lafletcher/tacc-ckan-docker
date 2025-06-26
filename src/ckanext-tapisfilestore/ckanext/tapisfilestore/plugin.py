@@ -163,7 +163,7 @@ class TapisFilestorePlugin(plugins.SingletonPlugin):
         try:
             tapis_token = self._get_tapis_token()
             if not tapis_token:
-                toolkit.abort(401, f'You must be logged in to access this resource. Please log in and try again.')
+                toolkit.abort(401, 'You must be logged in to access this resource. Please log in and try again.')
 
             file_info = self.get_file_info(file_path, tapis_token)
             response = self.get_file_content(file_path, tapis_token)
