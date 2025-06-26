@@ -119,17 +119,12 @@ class TapisFilestorePlugin(plugins.SingletonPlugin):
         """
         if status_code == 404:
             toolkit.abort(404, f'The resource is not found. Please check the URL and try again. {file_path}')
-            return Response('The resource is not found. Please check the URL and try again.', status=404)
         elif status_code == 401:
             toolkit.abort(401, 'Unauthorized: No Tapis token found. Please authenticate with Tapis through the OAuth2 system. ')
-            return Response('Unauthorized: No Tapis token found. Please authenticate with Tapis through the OAuth2 system. ', status=401)
         elif status_code == 403:
             toolkit.abort(403, 'Forbidden: You are not authorized to access this resource. Probably the resource is not public, please contact the owner.')
-            return Response('Forbidden: You are not authorized to access this resource. Probably the resource is not public, please contact the owner.', status=403)
         elif status_code != 200:
             toolkit.abort(status_code, f'Error fetching file from Tapis: {status_code}')
-            return Response(f'Error fetching file from Tapis: {status_code}', status=status_code)
-        return None
 
     def request_file_info(self, file_path, tapis_token) -> Response:
         """
@@ -141,10 +136,7 @@ class TapisFilestorePlugin(plugins.SingletonPlugin):
             'Accept': '*/*'
         }
         response = requests.get(url, headers=headers)
-        log.debug(f"response: {response.status_code}")
-        error = self.intercept_errors(response.status_code, file_path)
-        if error:
-            return error
+        self.intercept_errors(response.status_code, file_path)
         return response
 
 
@@ -158,10 +150,18 @@ class TapisFilestorePlugin(plugins.SingletonPlugin):
             'Accept': '*/*'
         }
         response = requests.get(url, headers=headers, stream=True)
-        error = self.intercept_errors(response.status_code, file_path)
-        if error:
-            return error
+        self.intercept_errors(response.status_code, file_path)
         return response
+
+    def get_mime_type(self, response_file_info) -> str:
+        try:
+            response_info = response_file_info.json()
+            if 'result' in response_info and len(response_info['result']) > 0:
+                return response_info['result'][0]['mimeType']
+            else:
+                return 'application/octet-stream'
+        except:
+            return 'application/octet-stream'
 
     def serve_tapis_file(self, file_path):
         """
@@ -176,17 +176,11 @@ class TapisFilestorePlugin(plugins.SingletonPlugin):
         response_file_info = self.request_file_info(file_path, tapis_token)
         response_file_content = self.request_file_content(file_path, tapis_token)
 
-        # if response_file_info.status_code != 200:
-        #     return Response(response_file_info.text, status=200, content_type='text/html')
-        # if response_file_content.status_code != 200:
-        #     return Response(response_file_content.text, status=200, content_type='text/html')
-
-
-
         filename = file_path.split('/')[-1] if len(file_path) > 0 else file_path
-        # Create response headers
+        mime_type = self.get_mime_type(response_file_info)
+
         response_headers = {
-            'Content-Type': response_file_info.mimeType,
+            'Content-Type': mime_type,
             'Content-Disposition': f'inline; filename="{filename}"'
         }
 
