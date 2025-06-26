@@ -127,6 +127,7 @@ class TapisFilestorePlugin(plugins.SingletonPlugin):
             log.error(f"Tapis API error: {file_info_request.status_code} for URL: {file_info_url}")
             return Response(
                 f'Error fetching file info from Tapis: {file_info_request.status_code}',
+                content_type='text/plain',
                 status=file_info_request.status_code
             )
         file_info = file_info_request.json()['result'][0]
@@ -146,6 +147,7 @@ class TapisFilestorePlugin(plugins.SingletonPlugin):
             log.error(f"Tapis API error: {file_content_request.status_code} for URL: {file_content_url}")
             return Response(
                 f'Error fetching file from Tapis: {file_content_request.status_code}',
+                content_type='text/plain',
                 status=file_content_request.status_code
             )
         return file_content_request
