@@ -127,18 +127,29 @@ class TapisFilestorePlugin(plugins.SingletonPlugin):
         """
         Serve a file from Tapis file system by proxying the request
         """
-        try:
-            # Get the user's Tapis token
-            token = h.oauth2_get_stored_token()
-            if not token or not token.access_token:
-                return Response('Unauthorized: No Tapis token available', status=401)
 
+        try:
+            tapis_token = self._get_tapis_token()
+            if not tapis_token:
+                log.error("No Tapis token available for user")
+                # Check if user is logged in
+                current_user = getattr(toolkit.g, 'user', None) or getattr(g, 'user', None)
+                if not current_user:
+                    return Response(
+                        'Unauthorized: Please log in to access Tapis files.',
+                        status=401
+                    )
+                else:
+                    return Response(
+                        'Unauthorized: No Tapis token found. Please authenticate with Tapis through the OAuth2 system.',
+                        status=401
+                    )
             # Construct the Tapis API URL
             tapis_url = f"https://portals.tapis.io/v3/files/content/{file_path}"
 
             # Headers for the Tapis API request
             headers = {
-                'x-tapis-token': token.access_token,
+                'x-tapis-token': tapis_token,
                 'Accept': '*/*'
             }
 
