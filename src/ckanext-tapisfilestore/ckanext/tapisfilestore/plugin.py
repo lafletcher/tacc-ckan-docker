@@ -197,7 +197,7 @@ class TapisFilestorePlugin(plugins.SingletonPlugin):
             response = self.get_file_content(file_path, tapis_token)
 
             # Determine content type
-            content_type = file_info.mime_type
+            content_type = file_info.mimeType
             # Get filename from path for Content-Disposition header
             filename = file_path.split('/')[-1]
 
