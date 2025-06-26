@@ -7,6 +7,7 @@ Similar to ckanext-s3filestore but for Tapis file system
 File: ckanext/tapisfilestore/plugin.py
 """
 
+import json
 import logging
 import requests
 import mimetypes
@@ -73,8 +74,14 @@ class TapisFilestorePlugin(plugins.SingletonPlugin):
             if hasattr(toolkit.g, 'usertoken') and toolkit.g.usertoken:
                 token = toolkit.g.usertoken
                 log.debug(f"Retrieved token via toolkit.g.usertoken: {type(token)}")
-                print(f"toolkit.g.usertoken: {token}")
-                return token
+                if hasattr(token, 'access_token'):
+                    log.debug(json.dumps(token))
+                    return token.access_token
+                elif isinstance(token, str):
+                    return token
+                elif isinstance(token, dict):
+                    log.debug(json.dumps(token))
+                    return token.get('access_token')
         except Exception as e:
             log.debug(f"toolkit.g.usertoken failed: {e}")
 
@@ -124,7 +131,7 @@ class TapisFilestorePlugin(plugins.SingletonPlugin):
         """
         try:
             # Get the user's Tapis token
-            token = self._get_tapis_token()
+            token = h.oauth2_get_stored_token()
             if not token or not token.access_token:
                 return Response('Unauthorized: No Tapis token available', status=401)
 
