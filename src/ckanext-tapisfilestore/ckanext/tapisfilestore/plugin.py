@@ -118,13 +118,13 @@ class TapisFilestorePlugin(plugins.SingletonPlugin):
         Handle Tapis errors
         """
         if status_code == 404:
-            toolkit.abort(404, f'The resource is not found. Please check the URL and try again. {file_path}')
+            return Response(f'The resource is not found. Please check the URL and try again. {file_path}', status=404, content_type='text/plain')
         elif status_code == 401:
-            toolkit.abort(401, 'Unauthorized: No Tapis token found. Please authenticate with Tapis through the OAuth2 system. ')
+            return Response('Unauthorized: No Tapis token found. Please authenticate with Tapis through the OAuth2 system. ', status=401, content_type='text/plain')
         elif status_code == 403:
-            toolkit.abort(403, 'Forbidden: You are not authorized to access this resource. Probably the resource is not public, please contact the owner.')
+            return Response('Forbidden: You are not authorized to access this resource. Probably the resource is not public, please contact the owner.', status=403, content_type='text/plain')
         elif status_code != 200:
-            toolkit.abort(status_code, f'Error fetching file from Tapis: {status_code}')
+            return Response(f'Error fetching file from Tapis: {status_code}', status=status_code, content_type='text/plain')
 
     def request_file_info(self, file_path, tapis_token) -> Response:
         """
@@ -135,9 +135,7 @@ class TapisFilestorePlugin(plugins.SingletonPlugin):
             'x-tapis-token': tapis_token,
             'Accept': '*/*'
         }
-        response = requests.get(url, headers=headers)
-        self.intercept_errors(response.status_code, file_path)
-        return response
+        return requests.get(url, headers=headers)
 
 
     def request_file_content(self, file_path, tapis_token) -> Response:
@@ -149,9 +147,7 @@ class TapisFilestorePlugin(plugins.SingletonPlugin):
             'x-tapis-token': tapis_token,
             'Accept': '*/*'
         }
-        response = requests.get(url, headers=headers, stream=True)
-        self.intercept_errors(response.status_code, file_path)
-        return response
+        return requests.get(url, headers=headers, stream=True)
 
     def get_mime_type(self, response_file_info) -> str:
         try:
@@ -174,7 +170,11 @@ class TapisFilestorePlugin(plugins.SingletonPlugin):
             return Response('You must be logged in to access this resource. Please log in and try again.', status=401)
 
         response_file_info = self.request_file_info(file_path, tapis_token)
+        if self.intercept_errors(response_file_info.status_code, file_path):
+            return self.intercept_errors(response_file_info.status_code, file_path)
         response_file_content = self.request_file_content(file_path, tapis_token)
+        if self.intercept_errors(response_file_content.status_code, file_path):
+            return self.intercept_errors(response_file_content.status_code, file_path)
 
         filename = file_path.split('/')[-1] if len(file_path) > 0 else file_path
         mime_type = self.get_mime_type(response_file_info)
