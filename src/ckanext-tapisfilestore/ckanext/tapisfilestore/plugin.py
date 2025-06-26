@@ -10,6 +10,7 @@ File: ckanext/tapisfilestore/plugin.py
 from dataclasses import dataclass
 import json
 import logging
+from typing import Union
 import requests
 import mimetypes
 from urllib.parse import quote, unquote
@@ -112,7 +113,7 @@ class TapisFilestorePlugin(plugins.SingletonPlugin):
 
         return None
 
-    def get_file_info(self, file_path, tapis_token):
+    def get_file_info(self, file_path, tapis_token) -> Union[TapisFileInfo, Response]:
         """
         Get the MIME type for a file
         """
@@ -127,7 +128,7 @@ class TapisFilestorePlugin(plugins.SingletonPlugin):
             log.error(f"Tapis API error: {file_info_request.status_code} for URL: {file_info_url}")
             return Response(
                 f'Error fetching file info from Tapis: {file_info_request.status_code}',
-                content_type='text/plain',
+                content_type='text/html',
                 status=file_info_request.status_code
             )
         file_info = file_info_request.json()['result'][0]
@@ -147,7 +148,7 @@ class TapisFilestorePlugin(plugins.SingletonPlugin):
             log.error(f"Tapis API error: {file_content_request.status_code} for URL: {file_content_url}")
             return Response(
                 f'Error fetching file from Tapis: {file_content_request.status_code}',
-                content_type='text/plain',
+                content_type='text/html',
                 status=file_content_request.status_code
             )
         return file_content_request
@@ -167,10 +168,14 @@ class TapisFilestorePlugin(plugins.SingletonPlugin):
                         status=200
                     )
 
-            file_info = self.get_file_info(file_path, tapis_token)
+
             response = self.get_file_content(file_path, tapis_token)
             if isinstance(response, Response) and response.status_code != 200:
                 return response
+
+            file_info = self.get_file_info(file_path, tapis_token)
+            if isinstance(file_info, Response) and file_info.status_code != 200:
+                return file_info
 
             # Determine content type
             content_type = file_info.mimeType
