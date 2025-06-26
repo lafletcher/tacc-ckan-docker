@@ -113,7 +113,7 @@ class TapisFilestorePlugin(plugins.SingletonPlugin):
             return Response('Internal server error', status=500)
 
     # IResourceController
-    def before_show(self, context, resource_dict):
+    def before_show(self, resource_dict):
         """
         Modify resource URLs for tapis:// files before showing them
         """
