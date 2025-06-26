@@ -1,0 +1,18 @@
+{% extends "package/resource_read.html" %}
+
+{% block resource_view %}
+  {% if resource.url.startswith('tapis://') %}
+    <div class="alert alert-info">
+      <i class="fa fa-cloud"></i>
+      This file is stored in Tapis file system.
+      {% if h.oauth2_get_stored_token() %}
+        <a href="{{ h.get_tapis_download_url(resource.url) }}" class="btn btn-primary btn-sm">
+          <i class="fa fa-download"></i> Download
+        </a>
+      {% else %}
+        Please authenticate with Tapis to access this file.
+      {% endif %}
+    </div>
+  {% endif %}
+  {{ super() }}
+{% endblock %}

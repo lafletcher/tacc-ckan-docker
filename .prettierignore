@@ -4,3 +4,4 @@ src/ckanext-tacc_theme/ckanext/tacc_theme/templates/**/*.html
 src/ckanext-dso_scheming/ckanext/dso_scheming/templates/**/*.html
 src/ckanext-dso_scheming/ckanext/dso_scheming/forms_snippets/**/*.html
 src/ckanext-dso_scheming/ckanext/dso_scheming/display_snippets/**/*.html
+src/**/*.html
