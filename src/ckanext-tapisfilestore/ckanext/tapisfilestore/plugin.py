@@ -123,7 +123,12 @@ class TapisFilestorePlugin(plugins.SingletonPlugin):
             'Accept': '*/*'
         }
         file_info_request = requests.get(file_info_url, headers=file_info_headers)
-        file_info_request.raise_for_status()
+        if file_info_request.status_code != 200:
+            log.error(f"Tapis API error: {file_info_request.status_code} for URL: {file_info_url}")
+            return Response(
+                f'Error fetching file info from Tapis: {file_info_request.status_code}',
+                status=file_info_request.status_code
+            )
         file_info = file_info_request.json()['result'][0]
         return TapisFileInfo(**file_info)
 
