@@ -112,6 +112,20 @@ class TapisFilestorePlugin(plugins.SingletonPlugin):
 
         return None
 
+
+    def handle_tapis_error(self, status_code, file_path):
+        """
+        Handle Tapis errors
+        """
+        if status_code == 404:
+            toolkit.abort(404, f'The resource is not found. Please check the URL and try again. {file_path}')
+        elif status_code == 401:
+            toolkit.abort(401, 'Unauthorized: No Tapis token found. Please authenticate with Tapis through the OAuth2 system. ')
+        elif status_code == 403:
+            toolkit.abort(403, 'Forbidden: You are not authorized to access this resource. Probably the resource is not public, please contact the owner.')
+        elif status_code != 200:
+            toolkit.abort(status_code, f'Error fetching file from Tapis: {status_code}')
+
     def get_file_info(self, file_path, tapis_token):
         """
         Get the MIME type for a file
@@ -123,8 +137,7 @@ class TapisFilestorePlugin(plugins.SingletonPlugin):
             'Accept': '*/*'
         }
         file_info_request = requests.get(file_info_url, headers=file_info_headers)
-        if file_info_request.status_code != 200:
-            toolkit.abort(file_info_request.status_code, f'Error fetching file info from Tapis: {file_info_request.status_code}')
+        self.handle_tapis_error(file_info_request.status_code, file_path)
         file_info = file_info_request.json()['result'][0]
         return TapisFileInfo(**file_info)
 
@@ -138,8 +151,7 @@ class TapisFilestorePlugin(plugins.SingletonPlugin):
             'Accept': '*/*'
         }
         file_content_request = requests.get(file_content_url, headers=file_content_headers, stream=True)
-        if file_content_request.status_code != 200:
-            toolkit.abort(file_content_request.status_code, f'Error fetching file from Tapis: {file_content_request.status_code}')
+        self.handle_tapis_error(file_content_request.status_code, file_path)
         file_content_request.raise_for_status()
         return file_content_request
 
@@ -151,7 +163,7 @@ class TapisFilestorePlugin(plugins.SingletonPlugin):
         try:
             tapis_token = self._get_tapis_token()
             if not tapis_token:
-                toolkit.abort(401, 'Unauthorized: No Tapis token found. Please authenticate with Tapis through the OAuth2 system.')
+                toolkit.abort(401, f'You must be logged in to access this resource. Please log in and try again.')
 
             file_info = self.get_file_info(file_path, tapis_token)
             response = self.get_file_content(file_path, tapis_token)
