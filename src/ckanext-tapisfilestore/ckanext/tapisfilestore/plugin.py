@@ -123,7 +123,8 @@ class TapisFilestorePlugin(plugins.SingletonPlugin):
             'Accept': '*/*'
         }
         file_info_request = requests.get(file_info_url, headers=file_info_headers)
-        file_info_request.raise_for_status()
+        if file_info_request.status_code != 200:
+            toolkit.abort(file_info_request.status_code, f'Error fetching file info from Tapis: {file_info_request.status_code}')
         file_info = file_info_request.json()['result'][0]
         return TapisFileInfo(**file_info)
 
@@ -138,11 +139,8 @@ class TapisFilestorePlugin(plugins.SingletonPlugin):
         }
         file_content_request = requests.get(file_content_url, headers=file_content_headers, stream=True)
         if file_content_request.status_code != 200:
-            log.error(f"Tapis API error: {file_content_request.status_code} for URL: {file_content_url}")
-            return Response(
-                f'Error fetching file from Tapis: {file_content_request.status_code}',
-                status=file_content_request.status_code
-            )
+            toolkit.abort(file_content_request.status_code, f'Error fetching file from Tapis: {file_content_request.status_code}')
+        file_content_request.raise_for_status()
         return file_content_request
 
     def serve_tapis_file(self, file_path):
@@ -153,11 +151,7 @@ class TapisFilestorePlugin(plugins.SingletonPlugin):
         try:
             tapis_token = self._get_tapis_token()
             if not tapis_token:
-                log.error("No Tapis token available for user")
-                return Response(
-                        'Unauthorized: No Tapis token found. Please authenticate with Tapis through the OAuth2 system.',
-                        status=200
-                    )
+                toolkit.abort(401, 'Unauthorized: No Tapis token found. Please authenticate with Tapis through the OAuth2 system.')
 
             file_info = self.get_file_info(file_path, tapis_token)
             response = self.get_file_content(file_path, tapis_token)
