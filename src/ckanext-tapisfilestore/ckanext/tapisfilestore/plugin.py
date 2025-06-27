@@ -118,13 +118,25 @@ class TapisFilestorePlugin(plugins.SingletonPlugin):
         Handle Tapis errors
         """
         if status_code == 404:
-            return Response(f'The resource is not found. Please check the URL and try again. {file_path}', status=404, content_type='text/plain')
+            if "text/html" in request.headers.get('Accept'):
+                return Response(f'The resource is not found. Please check the URL and try again. {file_path}', status=200, content_type='text/html')
+            else:
+                return Response(f'The resource is not found. Please check the URL and try again. {file_path}', status=404, content_type='text/plain')
         elif status_code == 401:
-            return Response('Unauthorized: No Tapis token found. Please authenticate with Tapis through the OAuth2 system. ', status=401, content_type='text/plain')
+            if "text/html" in request.headers.get('Accept'):
+                return Response('Unauthorized: No Tapis token found. Please authenticate with Tapis through the OAuth2 system. ', status=200, content_type='text/html')
+            else:
+                return Response('Unauthorized: No Tapis token found. Please authenticate with Tapis through the OAuth2 system. ', status=401, content_type='text/plain')
         elif status_code == 403:
-            return Response('Forbidden: You are not authorized to access this resource. Probably the resource is not public, please contact the owner.', status=403, content_type='text/plain')
+            if "text/html" in request.headers.get('Accept'):
+                return Response('Forbidden: You are not authorized to access this resource. Probably the resource is not public, please contact the owner.', status=200, content_type='text/html')
+            else:
+                return Response('Forbidden: You are not authorized to access this resource. Probably the resource is not public, please contact the owner.', status=403, content_type='text/plain')
         elif status_code != 200:
-            return Response(f'Error fetching file from Tapis: {status_code}', status=status_code, content_type='text/plain')
+            if "text/html" in request.headers.get('Accept'):
+                return Response(f'Error fetching file from Tapis: {status_code}', status=status_code, content_type='text/html')
+            else:
+                return Response(f'Error fetching file from Tapis: {status_code}', status=status_code, content_type='text/plain')
 
     def request_file_info(self, file_path, tapis_token) -> Response:
         """
