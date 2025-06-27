@@ -31,11 +31,15 @@ RUN pip3 install -e "git+https://github.com/ckan/ckanext-showcase.git#egg=ckanex
 RUN pip3 install -e "git+https://github.com/ckan/ckanext-pages.git#egg=ckanext-pages"
 RUN pip3 install -e "git+https://github.com/ckan/ckanext-scheming.git#egg=ckanext-scheming"
 RUN pip3 install ckanext-pdfview
+# TACC Theme
 COPY --chown=ckan:ckan-sys src/ckanext-tacc_theme ${APP_DIR}/src/ckanext-tacc_theme
 RUN cd ${APP_DIR}/src/ckanext-tacc_theme && python3 setup.py develop --user
-
+# DSO Scheming
 COPY --chown=ckan:ckan-sys src/ckanext-dso_scheming ${APP_DIR}/src/ckanext-dso_scheming
 RUN cd ${APP_DIR}/src/ckanext-dso_scheming && python3 setup.py develop --user
+# Tapis Filestore
+COPY --chown=ckan:ckan-sys src/ckanext-tapisfilestore ${APP_DIR}/src/ckanext-tapisfilestore
+RUN cd ${APP_DIR}/src/ckanext-tapisfilestore && python3 setup.py develop --user
 # Copy custom initialization scripts
 #COPY ckan/docker-entrypoint.d/* /docker-entrypoint.d/
 
