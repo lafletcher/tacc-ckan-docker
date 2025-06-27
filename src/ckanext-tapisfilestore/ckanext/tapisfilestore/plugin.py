@@ -166,7 +166,11 @@ class TapisFilestorePlugin(plugins.SingletonPlugin):
 
         tapis_token = self._get_tapis_token()
         if not tapis_token:
-            return Response('You must be logged in to access this resource. Please log in and try again.', status=200, content_type='text/plain')
+            # if accept is html, return a html page
+            if request.headers.get('Accept') == 'text/html':
+                return Response('You must be logged in to access this resource. Please log in and try again.', status=200, content_type='text/html')
+            else:
+                return Response('You must be logged in to access this resource. Please log in and try again.', status=401, content_type='text/plain')
 
         response_file_info = self.request_file_info(file_path, tapis_token)
         if self.intercept_errors(response_file_info.status_code, file_path):
