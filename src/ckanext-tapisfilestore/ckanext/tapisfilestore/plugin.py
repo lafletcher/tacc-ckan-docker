@@ -166,8 +166,7 @@ class TapisFilestorePlugin(plugins.SingletonPlugin):
 
         tapis_token = self._get_tapis_token()
         if not tapis_token:
-            log.debug(f"request.headers.get('Accept'): {request.headers.get('Accept')}")
-            if request.headers.get('Accept') == 'text/html':
+            if "text/html" in request.headers.get('Accept'):
                 return Response('You must be logged in to access this resource. Please log in and try again.', status=200, content_type='text/html')
             else:
                 return Response('You must be logged in to access this resource. Please log in and try again.', status=401)
