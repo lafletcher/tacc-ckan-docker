@@ -1,0 +1,14 @@
+# tapisfilestore-js:
+#   filter: rjsmin
+#   output: ckanext-tapisfilestore/%(version)s-tapisfilestore.js
+#   contents:
+#     - js/tapisfilestore.js
+#   extra:
+#     preload:
+#       - base/main
+
+# tapisfilestore-css:
+#   filter: cssrewrite
+#   output: ckanext-tapisfilestore/%(version)s-tapisfilestore.css
+#   contents:
+#     - css/tapisfilestore.css
