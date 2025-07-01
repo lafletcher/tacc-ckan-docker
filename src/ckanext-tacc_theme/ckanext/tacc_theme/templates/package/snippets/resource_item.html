@@ -660,7 +660,8 @@ async function createSubtaskOnly(subtaskName, inputDataId) {
         dates: {
             start_date: currentProblemStatement.dates.start_date,
             end_date: currentProblemStatement.dates.end_date
-        }
+        },
+        dataset_id: currentResourceData.package
     };
 
     const response = await fetch(`${MINT_API_BASE}/problemStatements/${currentProblemStatementId}/tasks/${currentTaskId}/subtasks`, {
@@ -715,7 +716,8 @@ async function createNewTaskAndSubtask(taskName, subtaskName, inputDataId) {
         dates: {
             start_date: currentProblemStatement.dates.start_date,
             end_date: currentProblemStatement.dates.end_date
-        }
+        },
+        dataset_id: currentResourceData.package
     };
 
     const subtaskResponse = await fetch(`${MINT_API_BASE}/problemStatements/${currentProblemStatementId}/tasks/${taskResult.id}/subtasks`, {
