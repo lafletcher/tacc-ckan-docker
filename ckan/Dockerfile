@@ -22,11 +22,13 @@ RUN find /srv/app -gid 502 ! -type l -exec chgrp 826671 {} \;
 
 USER ckan
 
+ENV CKANEXT_OAUTH2_VERSION=8a07d8637a0dd060bfba64c4450189445a377b7a
+
 RUN pip install ckanext-geoview
 ADD ckan/requirements/ckanext-spatial.txt /tmp/
 RUN pip3 install -r /tmp/ckanext-spatial.txt
 RUN pip3 install -e "git+https://github.com/ckan/ckanext-spatial.git#egg=ckanext-spatial"
-RUN pip3 install -e "git+https://github.com/In-For-Disaster-Analytics/ckanext-oauth2.git@472a42fa88d2bb66a7f954c3bf2b477033735d86#egg=ckanext-oauth2"
+RUN pip3 install -e "git+https://github.com/In-For-Disaster-Analytics/ckanext-oauth2.git@${CKANEXT_OAUTH2_VERSION}#egg=ckanext-oauth2"
 RUN pip3 install -e "git+https://github.com/ckan/ckanext-showcase.git#egg=ckanext-showcase"
 RUN pip3 install -e "git+https://github.com/ckan/ckanext-pages.git#egg=ckanext-pages"
 RUN pip3 install -e "git+https://github.com/ckan/ckanext-scheming.git#egg=ckanext-scheming"
