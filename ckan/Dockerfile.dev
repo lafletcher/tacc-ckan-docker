@@ -17,7 +17,7 @@ USER ckan
 RUN pip3 install ckanext-geoview
 RUN pip3 install "git+https://github.com/ckan/ckanext-spatial.git#egg=ckanext-spatial"
 # OAuth2
-ENV CKANEXT_OAUTH2_VERSION=5b1e0e4c0e168efc9343471ec0596feee69359ec
+ENV CKANEXT_OAUTH2_VERSION=a86989d47dd2502f13d200bcec6d263b991e8d10
 RUN pip3 install -e "git+https://github.com/In-For-Disaster-Analytics/ckanext-oauth2.git@${CKANEXT_OAUTH2_VERSION}#egg=ckanext-oauth2"
 RUN pip3 install "git+https://github.com/ckan/ckanext-showcase.git#egg=ckanext-showcase"
 RUN pip3 install -e "git+https://github.com/ckan/ckanext-pages.git#egg=ckanext-pages"
