@@ -194,3 +194,23 @@ For example, if your hostname is `ckan.tacc.cloud`, use:
 ```bash
 bash -x scripts/tapis-oauth/create-client.sh tacc_username tacc_password ckan-tacc-cloud http://ckan.tacc.cloud:5000/oauth2/callback
 ```
+
+---
+
+### Adding a User as Sysadmin
+
+After authenticating with OAuth2, you may need to grant sysadmin privileges to your user. You can do this using the CKAN CLI inside the running CKAN container:
+
+Production:
+
+```bash
+docker compose exec ckan ckan sysadmin add <your-username>
+```
+
+Development:
+
+```bash
+docker compose -f docker-compose.dev.yml exec ckan-dev ckan sysadmin add <your-username>
+```
+
+Replace `<your-username>` with the username you used for OAuth2 authentication.
