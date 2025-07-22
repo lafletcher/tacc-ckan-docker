@@ -35,7 +35,28 @@ cp .env.secrets.example .env.prod.secrets
 
 ### Running the Application
 
-For development:
+> **Note:** The default CKAN URL is `http://localhost:5000`.
+> If you change this URL, you must also update the following environment variables accordingly:
+>
+> - `CKAN_SITE_URL` (e.g., `CKAN_SITE_URL=http://localhost:5000`)
+> - `CKAN_OAUTH2_CLIENT_ID`
+> - `CKAN_OAUTH2_CLIENT_SECRET`
+
+> **Tip:** If you cannot use `localhost:5000` (for example, due to browser or network restrictions), you can use a custom hostname such as `ckan.tacc.cloud`.
+> To do this, add the following line to your `/etc/hosts` file:
+>
+> ```
+> 127.0.0.1   ckan.tacc.cloud
+> ```
+>
+> Then, access CKAN at `http://ckan.tacc.cloud:5000`.
+> **Remember:** If you use a custom hostname, you must also update the following environment variables to match:
+>
+> - `CKAN_SITE_URL=http://ckan.tacc.cloud:5000`
+
+> See [OAuth2 Client Setup](#oauth2-client-setup) at the end of this document for instructions on creating an OAuth2 client for your CKAN instance.
+
+> For development:
 
 ```bash
 docker compose -f docker-compose.dev.yml build
@@ -158,4 +179,18 @@ curl --location 'https://ckan.tacc.utexas.edu/api/action/package_create' \
     {"name": "tag2"}
   ]
 }'
+```
+
+## OAuth2 Client Setup
+
+You can use the `create-client.sh` script to create an OAuth2 client for your CKAN instance. Run the following command, replacing the placeholders with your actual values:
+
+```bash
+bash -x scripts/tapis-oauth/create-client.sh tacc_username tacc_password client-name http://your_hostname:5000/oauth2/callback
+```
+
+For example, if your hostname is `ckan.tacc.cloud`, use:
+
+```bash
+bash -x scripts/tapis-oauth/create-client.sh tacc_username tacc_password ckan-tacc-cloud http://ckan.tacc.cloud:5000/oauth2/callback
 ```
