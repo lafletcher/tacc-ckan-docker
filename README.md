@@ -1,5 +1,7 @@
 # Docker Compose setup for CKAN
 
+📊 **Architecture**: See the [CKAN Architecture Diagram](architecture-diagram.md) for a visual overview of the system components and their relationships.
+
 ## Configuration Management
 
 The project uses separate files for configuration and secrets to ensure better security and version control:
