@@ -18,6 +18,8 @@ The CKAN deployment follows a multi-layered architecture designed for scalabilit
 
 The architecture ensures data flows efficiently from external users through the application layer to the appropriate storage systems, with OAuth providing secure authentication throughout the process.
 
+> **Deployment Note**: All services (CKAN, DataPusher, PostgreSQL, Solr, and Redis) are containerized and deployed using Docker Compose as defined in [docker-compose.yml](docker-compose.yml). The TACC OAuth Provider and TACC Corral are external services that integrate with the containerized CKAN deployment.
+
 ## Architecture with OAuth
 
 ```mermaid
