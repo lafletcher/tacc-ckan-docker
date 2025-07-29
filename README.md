@@ -183,6 +183,40 @@ curl --location 'https://ckan.tacc.utexas.edu/api/action/package_create' \
 }'
 ```
 
+## Tapis File System Integration
+
+This CKAN instance includes integration with the Tapis file system through the `ckanext-tapisfilestore` extension. This allows CKAN to serve files stored in Tapis file systems seamlessly.
+
+### Features
+
+- **Tapis URL Support**: Handle `tapis://` protocol URLs in CKAN resources
+- **OAuth2 Authentication**: Automatic authentication using Tapis OAuth2 tokens
+- **File Streaming**: Efficient streaming of large files without loading them into memory
+- **MIME Type Detection**: Automatic content-type detection for proper file handling
+
+### Using Tapis Files
+
+When creating or editing a resource in CKAN, you can use Tapis URLs in the following format:
+
+```
+tapis://path/to/file
+```
+
+Examples:
+- `tapis://user/data/sample.csv`
+- `tapis://shared/datasets/analysis.pdf`
+- `tapis://project/results/output.txt`
+
+The extension automatically converts these URLs to CKAN-served URLs that authenticate with Tapis and stream the file content.
+
+### Requirements
+
+- Users must be authenticated with Tapis OAuth2
+- Files must exist in the Tapis file system
+- Users must have appropriate permissions to access the files
+
+For more details about the Tapis integration, see the documentation in `src/ckanext-tapisfilestore/README.md`.
+
 ## OAuth2 Client Setup
 
 You can use the `create-client.sh` script to create an OAuth2 client for your CKAN instance. Run the following command, replacing the placeholders with your actual values:
