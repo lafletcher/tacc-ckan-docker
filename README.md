@@ -156,20 +156,58 @@ sudo chown -R 503:502 ckan_storage
 
 ## API Authentication
 
+CKAN provides two methods for API authentication:
+
+### Method 1: CKAN API Key (Web Interface)
+
+You can create an API key through the CKAN web interface:
+
+1. Log in to your CKAN instance
+2. Go to your user profile
+3. Generate an API key
+4. Use it in your API requests:
+
+```bash
+curl --location 'https://ckan.tacc.utexas.edu/api/action/package_create' \
+--header 'Content-Type: application/json' \
+--header "Authorization: ${API_KEY}" \
+--data '{
+  "name": "my-dataset-name",
+  "title": "My Dataset Title",
+  "notes": "A description of the dataset",
+  "owner_org": "org",
+  "private": false,
+  "tags": [
+    {"name": "tag1"},
+    {"name": "tag2"}
+  ]
+}'
+```
+
+### Method 2: JWT Token (Tapis OAuth2)
+
 CKAN uses Tapis OAuth2 for authentication. The Tapis OAuth2 service is configured to use the Tapis OAuth2 service at `https://portals.tapis.io/v3/oauth2/tokens`.
 
-To get a JWT token, you can use the `scripts/tapis-oauth/get-jwt.sh` script.
+You can obtain a JWT token using either of these methods:
+
+**Option A: Using the web interface**
+
+1. Go to https://portals.tapis.io/v3/oauth2/webapp
+2. Log in with your TACC credentials
+3. Copy the Access Token
+
+**Option B: Using the script**
 
 ```bash
 JWT=$(./scripts/tapis-oauth/get-jwt.sh myuser mypassword)
 ```
 
-You can then use the JWT token to authenticate your requests to the CKAN API.
+You can then use the JWT token to authenticate your requests to the CKAN API:
 
-```
+```bash
 curl --location 'https://ckan.tacc.utexas.edu/api/action/package_create' \
 --header 'Content-Type: application/json' \
---header "Authorization: Bearer $JWT" \
+--header "Authorization: Bearer ${JWT}" \
 --data '{
   "name": "my-dataset-name",
   "title": "My Dataset Title",
@@ -203,6 +241,7 @@ tapis://path/to/file
 ```
 
 Examples:
+
 - `tapis://user/data/sample.csv`
 - `tapis://shared/datasets/analysis.pdf`
 - `tapis://project/results/output.txt`
