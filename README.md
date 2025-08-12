@@ -256,6 +256,35 @@ The extension automatically converts these URLs to CKAN-served URLs that authent
 
 For more details about the Tapis integration, see the documentation in `src/ckanext-tapisfilestore/README.md`.
 
+## Storage Backend
+
+This CKAN instance uses TACC's Corral high-performance file system for dataset storage instead of local storage. The storage is mounted using NFS through `/etc/fstab` configuration:
+
+```
+<corral-server-ip>:/corral/main/utexas/BCS24011/ckan /corral/utexas/BCS24011/ckan nfs rw,nosuid,rsize=1048576,wsize=1048576,intr,nfsvers=3,tcp
+```
+
+### Storage Features
+
+- **High Performance**: TACC Corral provides high-throughput data access
+- **Scalability**: Large storage capacity for datasets
+- **Network Attached**: Accessible across multiple compute nodes
+- **NFS Mount**: Mounted as a standard filesystem at `/corral/utexas/BCS24011/ckan`
+
+### Important Limitations
+
+> [!WARNING]
+> **Known Storage Limitations**: The current storage backend has several important limitations that affect multi-organization deployments:
+>
+> - **Shared Storage Directory**: All CKAN organizations currently use a single storage directory (`/data/ckan`), which creates permission conflicts and security concerns
+> - **Billing Attribution**: Cannot attribute storage usage to individual TACC allocations, making it difficult to track resource consumption per organization
+> - **Resource Management**: No mechanism to limit or track storage usage per organization
+> - **Accountability**: Difficult to determine which organization is consuming storage resources
+>
+> **Impact**: This affects billing accuracy, resource management, and access control for multi-tenant deployments.
+>
+> For detailed technical information and proposed solutions, see [Issue #78](https://github.com/In-For-Disaster-Analytics/ckan-docker/issues/78).
+
 ## OAuth2 Client Setup
 
 You can use the `create-client.sh` script to create an OAuth2 client for your CKAN instance. Run the following command, replacing the placeholders with your actual values:
